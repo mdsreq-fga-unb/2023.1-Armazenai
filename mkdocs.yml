@@ -1,0 +1,36 @@
+site_name: Armazenaí
+theme:
+  palette:
+
+    # Light mode
+    - scheme: default
+      primary: yellow
+      accent: yellow
+      toggle:
+        icon: material/theme-light-dark
+        name: Mudar para o tema escuro
+
+    # Dark mode
+    - scheme: slate
+      primary: deep orange
+      accent: deep orange
+      toggle:
+        icon: material/theme-light-dark
+        name: Mudar para o tema claro
+
+  language: pt
+  name: material
+  features:
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+
+copyright: Copyright &copy; 2023 - 2023 Armazenaí
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mdsreq-fga-unb/2023.1-Armazenai
+  generator: false
+  
+repo_url: https://github.com/mdsreq-fga-unb/2023.1-Armazenai
