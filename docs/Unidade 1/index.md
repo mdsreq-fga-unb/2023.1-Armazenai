@@ -15,4 +15,11 @@
 ![Organização das sprints](https://i.ibb.co/MPvM7hy/1.jpg)
 
 ## Plano de comunicação
- ![Plano de comunicação](https://i.ibb.co/02R67y3/2.jpg)
+  - Comunicação da equipe:
+    - Servidor do Discord
+        - Reuniões internas: Canais de áudio e vídeo
+        - Dailys: Canal de texto dedicado 
+
+  - Comunicação com o cliente:
+    - Reuniões pelo Google Meet
+    - Mensagens pelo WhatsApp
