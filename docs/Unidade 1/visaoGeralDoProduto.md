@@ -1,5 +1,16 @@
 # Visão Geral do Produto
 
+## Problema
+### 5 Porquês
+Problema: Os representantes se queixaram da dificuldade de captação de clientes.
+
+- Porque há dificuldade? Porque o produtor rural não é facilmente convencido dos lucros e benefícios da armazenagem.
+- Porque não é facilmente convencido? Porque a apresentação do produto é confusa.
+- Porque a apresentação é confusa? Porque é realizada a partir um método ultrapassado de planilhas com estimativas complexas.
+- Porque são usadas planilhas confuscomplexasas? Porque os representantes é tem de fazer toda a apresentação desses dados, mesmo sem a melhor técnica para isso.
+
+![Espinha de peixe](/docs/Unidade%201/espinha%20de%20peixe.jpg)
+
 ## Declaração de Posição do Produto	
 |   |   |
 |---|---|
