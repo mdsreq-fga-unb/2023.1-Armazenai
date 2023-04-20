@@ -44,3 +44,4 @@ Durante a fase de desenvolvimento:
 |---|---|---|---|
 | 19/04/2023 | 0.1 | Criação do documento | Kaio Enzo Melo 
 | 20/04/2023 | 0.2 | Conclusão do processo de desenvolvimento | Kaio Enzo Melo 
+| 20/04/2023 | 0.3 | Adição de imagens | Lucas Pereira
