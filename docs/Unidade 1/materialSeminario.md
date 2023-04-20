@@ -9,10 +9,10 @@ Vídeo apresentando o projeto e a documentação do projeto, feita até então</
 
 Apresentação sobre o processo de desenvolvimento Unificado
 
-![Título](capa-seminario.jpg)
-![Título Referências](uniunified-process/10.jpg)
-![Vantagens/Desvantagens Unificado](vantagens.jpg)
-![Refências](bibliografia.jpg)
+![Título](capa-seminario.png)
+![Título Referências](uniunified-process/10.png)
+![Vantagens/Desvantagens Unificado](vantagens.png)
+![Refências](bibliografia.png)
 
 # Material do seminário de processos de desenvolvimento
 
