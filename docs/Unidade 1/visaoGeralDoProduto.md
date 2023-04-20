@@ -37,4 +37,4 @@ Problema: Os representantes se queixaram da dificuldade de captação de cliente
 | Data | Versão | Descrição | Autor |
 |---|---|---|---|
 | 19/04/2023 | 0.1 | Criação do documento | Kaio Enzo Melo |
-| 20/04/2023 | 0.2 | Conclusão da visão geral do produto | Lara Juliana |
+| 20/04/2023 | 0.2 | Conclusão da visão geral do produto | Lara Giuliana |
