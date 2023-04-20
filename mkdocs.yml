@@ -22,7 +22,6 @@ theme:
   name: material
   features:
     - navigation.tabs.sticky
-    - navigation.sections
     - navigation.expand
 
 copyright: Copyright &copy; 2023 - 2023 Armazenaí
@@ -34,3 +33,9 @@ extra:
   generator: false
   
 repo_url: https://github.com/mdsreq-fga-unb/2023.1-Armazenai
+nav :
+  - 'index.md'
+  - Visão geral do produto e projeto:
+    - Visão geral do produto: 'Unidade 1/visaoGeralDoProduto.md'
+    - Visão geral do projeto: 'Unidade 1/visaoGeralDoProjeto.md'
+    - Processo de desenvolvimento de software: 'Unidade 1/processoDeDesenvolvimento.md'
