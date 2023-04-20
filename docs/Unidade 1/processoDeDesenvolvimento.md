@@ -35,7 +35,7 @@ Durante a fase de desenvolvimento:
 
 ## Organização das sprints
 - Ficou definido o tempo de duas semanas para cada sprint.
-![Modelo de sprints](https://www.laboneconsultoria.com.br/wp-content/uploads/2021/07/Tipos-de-Sprints-1-1024x795.png)
+![Modelo de sprints](scrum_sprint.jpg)
 ![Organização das sprints](https://i.ibb.co/MPvM7hy/1.jpg)
 
 ## Histórico de revisões
