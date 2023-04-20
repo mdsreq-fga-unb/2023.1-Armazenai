@@ -5,9 +5,9 @@
 Problema: Os representantes se queixaram da dificuldade de captação de clientes.
 
 - Porque há dificuldade? Porque o produtor rural não é facilmente convencido dos lucros e benefícios da armazenagem.
-- Porque não é facilmente convencido? Porque a apresentação do produto é confusa.
+- Porque não é facilmente convencido? Porque a apresentação do produto é confusa e pouco intuitiva.
 - Porque a apresentação é confusa? Porque é realizada a partir um método ultrapassado de planilhas com estimativas complexas.
-- Porque são usadas planilhas confuscomplexasas? Porque os representantes é tem de fazer toda a apresentação desses dados, mesmo sem a melhor técnica para isso.
+- Porque são usadas planilhas confusas e complexas? Porque os representantes é que tem de fazer toda a apresentação desses dados, mesmo sem a melhor técnica para isso.
 
 ![Espinha de peixe](espinha%20de%20peixe.jpg)
 
