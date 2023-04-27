@@ -8,7 +8,7 @@
 | Desenvolvedor Front-end | Codificar o produto, desenvolver interfaces gráficas para o usuário, integrar a aplicação ao back-end | Jhenifer Castro Ribeiro | Todos |
 | Desenvolvedor Back-end | Codificar o produto, arquitetar o banco de dados, criar API’S REST para alimentar o front-end | Mateus Vinicius Vieira | Todos |
 Desenvolvedor Scrum Master | Garantir a qualidade do produto, garantir o cumprimento do conceito de pronto, atualizar o escopo do produto, organizar o escopo das sprints | Lucas Oliveira Meireles | Todos |
-Product Ownder | Atualizar o escopo do projeto, validar as entregas. | Abel Ferreira e Hugo | Abel Ferreira e Hugo |
+Product Ownder | Atualizar o escopo do projeto, validar as entregas. | Hugo Araújo | Abel Ferreira, Hugo Araújo e George Marsicano Corrêa |
 
 ## Planjeamento das sprints
 | Sprint | Data de início | Data de término | Produto(Entrega) |
@@ -32,7 +32,7 @@ Product Ownder | Atualizar o escopo do projeto, validar as entregas. | Abel Ferr
 | Descrição | Causa | Probabilidade | Mitigação |
 |--- |--- |--- |--- |
 | Falta de comunicação com o cliente | Dificuldade na comunicação com o cliente por indisponibilidade. | Média | <ul><li>Estudo e otimização de técnica de levantamento de requisitos</li></ul> |
-| Falta de comunicação entre a equipe | Falta de comunicação entre os membros da equipe | Alta | <ul><li>Reuniões diárias</li> <li>Reuniões semanais</li> <li>Canal de comunicação rápido e direto</li> <li>Aproveitamento da comunicação assíncrona</li> <li>Promoção da transparência</li> </ul> |
+| Falta de comunicação entre a equipe | Falta de comunicação entre os membros da equipe | Baixa | <ul><li>Reuniões diárias</li> <li>Reuniões semanais</li> <li>Canal de comunicação rápido e direto</li> <li>Aproveitamento da comunicação assíncrona</li> <li>Promoção da transparência</li> </ul> |
 | Redução da equipe | Trancamento da disciplina ou desistência de algum membro da equipe por razões pessoas, que ocasione temporariamente ou permanentemente a realização das tarefas de desenvolvimento | Baixa | <ul><li>Compartilhamento do conhecimento do produto e do código entre os membros</li> <li>Redistribuição de tarefas entre os membros da equipe</li></ul> |
 |Atraso nas entregas| Falta de conhecimento técnico dos membros da equipe. Dimensionamento incorreto do escopo da sprint e do projeto | Média | <ul><li>Estudo e otimização de técnicas de desenvolvimento de software</li> <li>Estudo e otimização de técnicas de gerenciamento de projetos</li><li>Análise e adaptação constante do escopo do projeto e busca pela transparência da equipe no desenvolvimento da atividades</li></ul> |
 
@@ -47,3 +47,4 @@ Product Ownder | Atualizar o escopo do projeto, validar as entregas. | Abel Ferr
 | Data | Versão | Descrição | Autor |
 |---|---|---|---|
 | 19/04/2023 | 0.1 | Criação do documento | Kaio Enzo Melo |
+| 27/04/2023 | 0.2 | Adição de Product Owner e correção no gerenciamento de risco | Lara Giuliana |
