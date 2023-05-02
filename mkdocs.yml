@@ -41,3 +41,5 @@ nav :
     - Processo de desenvolvimento de software: 'Unidade 1/processoDeDesenvolvimento.md'
     - Material do seminário de Processo de desenvolvimento de software: 'Unidade 1/materialSeminario.md'
     - Lições aprendidas: 'Unidade 1/licoes.md'
+  - Sprints:
+    - Sprint I: 'Sprints/sprint_1.md'
