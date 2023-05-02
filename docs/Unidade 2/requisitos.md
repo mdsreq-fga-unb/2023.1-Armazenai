@@ -34,19 +34,21 @@
 - Apresentação do valor atual de sacas de itens específicos (talvez uma parte de seleção de quais a pessoa quer verificar, como um open data de preços?)
 - Aba de notícias recentes de possível interesse ao cliente final e aos representantes
 - Habilidade de comunicação via email/chat pelo app com representantes/clientes?
-- O app deve ser capaz de funcionar de maneira offline para, ao mínimo, ser capaz de mostrar dados para venda (viabilidade, qnt e tamanho de silos etc) e talvez empréstimos
+- O app deve ser capaz de funcionar de maneira offline para, ao mínimo, ser capaz de mostrar dados para venda (viabilidade, quantidade e tamanho de silos etc) e talvez empréstimos
 
 ## Não funcionais:
 - A navegação deve ter passos bem colocados de onde o usuário está e para onde está indo
 - Os gráficos devem possuir cores que façam sentido com os dados apresentados
 - O usuario deve ter em seu aparalho o espaço para o aplicativo, em torno de 350MB
 - Os dados para viabilidade quando inseridos devem gerar respostas em tempo real
-- Suportabilidade? Atualizações?
 - Implementação -> Linguagens fixas de programação, trabalhando em ambiente android
 - Interface até então não se aplica
+- Paleta: 
+![Cores a serem utilizadas no design do projeto](paleta-Armazenai.jpg)
 
 ## Histórico de revisões
 
 | Data | Versão | Descrição | Autor |
 |---|---|---|---|
-| 27/04/2023 | 0.1 | Criação do documento | Kaio Melo, Lucas Pereira, Lucas Meirelles, Lara Giuliana|
+| 27/04/2023 | 0.1 | Criação do documento | Kaio Melo, Lucas Pereira, Lucas Meirelles, Lara Giuliana |
+| 02/05/2023 | 0.1 | Adição de paleta de cores | Lara Giuliana |
