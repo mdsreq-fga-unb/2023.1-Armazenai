@@ -41,4 +41,6 @@ nav :
     - Processo de desenvolvimento de software: 'Unidade 1/processoDeDesenvolvimento.md'
     - Material do seminário de Processo de desenvolvimento de software: 'Unidade 1/materialSeminario.md'
     - Lições aprendidas: 'Unidade 1/licoes.md'
-  - Unidade 2: 'Unidade 2/requisitos.md'
+  - Unidade 2: 
+    - Requisitos: 'Unidade 2/requisitos.md'
+    - DoR e DoD: 'Unidade 2/dor&dod.md'
