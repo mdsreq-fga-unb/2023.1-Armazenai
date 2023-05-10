@@ -35,7 +35,7 @@ extra:
 repo_url: https://github.com/mdsreq-fga-unb/2023.1-Armazenai
 nav :
   - 'index.md'
-  - Visão geral do produto e projeto:
+  - Unidade 1:
     - Visão geral do produto: 'Unidade 1/visaoGeralDoProduto.md'
     - Visão geral do projeto: 'Unidade 1/visaoGeralDoProjeto.md'
     - Processo de desenvolvimento de software: 'Unidade 1/processoDeDesenvolvimento.md'
@@ -44,4 +44,6 @@ nav :
     - Requisitos: 'Unidade 2/requisitos.md'
     - DoR e DoD: 'Unidade 2/dor&dod.md'
   - Sprints:
-    - Sprint I: 'Sprints/sprint_1.md'
+    - Registros das Sprints: 'Sprints/registro-sprints.md'
+  - Sobre nós:
+    - A equipe: 'Sobre/sobre-nos.md'
