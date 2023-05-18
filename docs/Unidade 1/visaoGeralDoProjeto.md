@@ -8,17 +8,17 @@
 | Desenvolvedor Front-end | Codificar o produto, desenvolver interfaces gráficas para o usuário, integrar a aplicação ao back-end | Jhenifer Castro Ribeiro | Todos |
 | Desenvolvedor Back-end | Codificar o produto, arquitetar o banco de dados, criar API’S REST para alimentar o front-end | Mateus Vinicius Vieira | Todos |
 Desenvolvedor Scrum Master | Garantir a qualidade do produto, garantir o cumprimento do conceito de pronto, atualizar o escopo do produto, organizar o escopo das sprints | Lara Giuliana | Todos |
-Product Ownder | Atualizar o escopo do projeto, validar as entregas. | Hugo Araújo | Abel Ferreira, Hugo Araújo e George Marsicano Corrêa |
+Product Owner | Atualizar o escopo do projeto, validar as entregas. | Hugo Araújo | Abel Ferreira, Hugo Araújo e George Marsicano Corrêa |
 
 ## Planjeamento das sprints
 | Sprint | Data de início | Data de término | Produto(Entrega) |
 |--- |--- |--- |--- |
 | Sprint 1 | 24/04/2023 | 07/05/2023 | MVP e Planejamento do projeto |
 | Sprint 2 | 08/05/2023 | 21/05/2023 | Definição de backlog |
-| Sprint 3 | 22/05/2023 | 04/06/2023 | Criação de relatórios e geração de gráficos |
-| Sprint 4 | 05/06/2023 | 18/06/2023 | Criação de relatórios e geração de gráficos |
-| Sprint 5 | 19/06/2023 | 02/07/2023 | Criação de relatórios e geração de gráficos |
-| Sprint 6 | 03/07/2023 | 16/07/2023 | Criação de relatórios e geração de gráficos |
+| Sprint 3 | 22/05/2023 | 04/06/2023 | Progresso no MVP1 |
+| Sprint 4 | 05/06/2023 | 18/06/2023 | Progresso no MVP1 |
+| Sprint 5 | 19/06/2023 | 02/07/2023 | Progresso no MVP2 |
+| Sprint 6 | 03/07/2023 | 16/07/2023 | Progresso no MVP2 |
 
 ## Matriz de comunicação
 | Descrição | Envolvidos | Peridiocidade | Produtos Gerados |
@@ -48,3 +48,4 @@ Product Ownder | Atualizar o escopo do projeto, validar as entregas. | Hugo Ara�
 | 19/04/2023 | 0.1 | Criação do documento | Kaio Enzo Melo |
 | 27/04/2023 | 0.2 | Adição de Product Owner e correção no gerenciamento de risco | Lara Giuliana |
 | 27/04/2023 | 0.3 | Atualização de visão do projeto | Kaio Melo |
+| 18/05/2023 | 0.3 | Atualização do Planejamento | Lucas Meireles |
