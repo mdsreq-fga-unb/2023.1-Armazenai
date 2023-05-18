@@ -14,7 +14,7 @@ Também percebemos a importância de melhor gestão de atividades da equipe em s
 
 ## Vídeo de apresentação
 
-Vídeo apresentando o projeto e a documentação, feita até então ([link](https://youtu.be/-----))
+Vídeo apresentando o projeto e a documentação, feita até então ([link](https://youtu.be/F1XNpiBu20w))
 
 ## Histórico de revisões
 | Data | Versão | Descrição | Autor |
