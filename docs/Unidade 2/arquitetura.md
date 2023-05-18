@@ -48,21 +48,31 @@ Multiplataforma
 Nosso app utilizará o back-end construído com a ferramenta Supabase, que serve como um client back-end de fácil configuração e provêm as ferramentas necessárias para a execução do projeto, como segurança dos dados via login OAtuh2, segurança da base de dados, escalabilidade, ausência de deploy, comunicação via API REST.
 
 
-## Protótipo de interface 
-### Interface
-![Protótipos de interface](prototipos.PNG)
+## Protótipos de interface 
+![Protótipo de interface do Cadastro](Prototype%201.jpg)
+#### Cadastro
+- Menu com o índice de navegação na lateral
+- Cabeçalho superior, com a logo do projeto, barra de pesquisa e link para o perfil do usuário
+- Caixas de digitação no centro
 
+![Protótipo de interface do Dashboard](Prototype%204.jpg)
 #### Dashboard
 - Menu com o índice de navegação na lateral 
 - Cabeçalho superior, com a logo do projeto, barra de pesquisa e link para o perfil do usuário
-- Gráficos no centro
+- Gráficos e dados percentuais no centro
 
-#### Gerenciamento de orçamento e clientes
+![Protótipo de interface do Preço Histórico](Prototype%202.jpg)
+#### Preço Histórico
 - Menu com o índice de navegação na lateral 
 - Cabeçalho superior, com a logo do projeto, barra de pesquisa e link para o perfil do usuário
-- A página será acessada a partir do dashboard
-- A página conterá formulário inicial, tanto para os cálculos de viabilidade quanto para serem recuperados os dados nos orçamentos
- 
+- Gráficos ao centro e levemente à esquerda
+- Valores médios ao centro e à direita
+
+![Protótipo de interface do Preço Histórico](Prototype%203.jpg)
+#### Relatórios
+- Menu com o índice de navegação na lateral 
+- Cabeçalho superior, com a logo do projeto, barra de pesquisa e link para o perfil do usuário
+- Listagem de feedbacks ao centro
 
 ## CI Workflow 
 ![CI WORKFLOW](CI_WORKFLOW.jpg)
@@ -76,3 +86,4 @@ Nosso app utilizará o back-end construído com a ferramenta Supabase, que serve
 | 08/05/2023 | 0.2 | Definição de arquitetura e protótipo de interface | Kaio Melo  |
 | 13/05/2023 | 0.3 | Adição de descrição de interface | Lara Giuliana  |
 | 17/05/2023 | 0.3 | Adição de workflow de CI | Kaio Melo  |
+| 18/05/2023 | 0.3 | Atualização das interfaces | Lucas Meireles, Mateus Vinicius e Jhenifer Castro |
