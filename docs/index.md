@@ -1,3 +1,3 @@
 # Armazenaí 
- Uma solução pro seu negócio.
+ Uma parceria com EGL Serviços.
 
