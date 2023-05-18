@@ -12,7 +12,7 @@ Também percebemos a importância de melhor gestão de atividades da equipe em s
 
  Notamos novamente a necessidade de conhecimento de domínio, para aproximação com os Product Owners e comunicação entre a própria equipe.
 
- ## Vídeo de apresentação
+## Vídeo de apresentação
 
 Vídeo apresentando o projeto e a documentação, feita até então ([link](https://youtu.be/-----))
 
