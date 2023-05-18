@@ -63,7 +63,7 @@ Nosso app utilizará o back-end construído com a ferramenta Supabase, que serve
 - A página será acessada a partir do dashboard
 - A página conterá formulário inicial, tanto para os cálculos de viabilidade quanto para serem recuperados os dados nos orçamentos
  
- ## Histórico de revisões
+## Histórico de revisões
 
 | Data | Versão | Descrição | Autor |
 |---|---|---|---|
