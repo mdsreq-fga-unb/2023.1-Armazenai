@@ -63,6 +63,11 @@ Nosso app utilizará o back-end construído com a ferramenta Supabase, que serve
 - A página será acessada a partir do dashboard
 - A página conterá formulário inicial, tanto para os cálculos de viabilidade quanto para serem recuperados os dados nos orçamentos
  
+
+## CI Workflow 
+![CI WORKFLOW](CI_WORKFLOW.jpg)
+
+ 
  ## Histórico de revisões
 
 | Data | Versão | Descrição | Autor |
@@ -70,3 +75,4 @@ Nosso app utilizará o back-end construído com a ferramenta Supabase, que serve
 | 27/04/2023 | 0.1 | Criação do documento | Lara Giuliana |
 | 08/05/2023 | 0.2 | Definição de arquitetura e protótipo de interface | Kaio Melo  |
 | 13/05/2023 | 0.3 | Adição de descrição de interface | Lara Giuliana  |
+| 17/05/2023 | 0.3 | Adição de workflow de CI | Kaio Melo  |
