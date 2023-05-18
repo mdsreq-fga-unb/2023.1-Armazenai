@@ -89,11 +89,6 @@
 
 - O sistema deve ser implementado em React
 
-### Design
-
-- O Sistema deverá seguir a paleta de cores da empresa EGL:
-  ![Cores a serem utilizadas no design do projeto](paleta-Armazenai.jpg)
-
 ## MVP 1
 
 | US    | Descrição                                                                                                                                                                                                                                  | Critérios de aceitação                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
