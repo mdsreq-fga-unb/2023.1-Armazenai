@@ -78,7 +78,7 @@ Nosso app utilizará o back-end construído com a ferramenta Supabase, que serve
 ![CI WORKFLOW](CI_WORKFLOW.jpg)
 
  
- ## Histórico de revisões
+## Histórico de revisões
 
 | Data | Versão | Descrição | Autor |
 |---|---|---|---|
