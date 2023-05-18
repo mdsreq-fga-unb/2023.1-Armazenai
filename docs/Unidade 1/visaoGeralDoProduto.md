@@ -9,7 +9,7 @@ Problema: Os representantes se queixaram da dificuldade de captação de cliente
 - Porque a apresentação é confusa? Porque é realizada a partir um método ultrapassado de planilhas com estimativas complexas e deslocalizadas.
 - Porque são usadas planilhas nessas configurações? Porque os representantes são os responsáveis por fazer toda a apresentação desses dados, seguindo os padrões prévios do treinamento de vendas.
 
-![Espinha de peixe](espinha%20de%20peixe.jpg)
+![Espinha de peixe](EspinhaDePeixe_v3.png)
 
 ## Declaração de Posição do Produto	
 |   |   |
@@ -40,3 +40,4 @@ Problema: Os representantes se queixaram da dificuldade de captação de cliente
 | 20/04/2023 | 0.2 | Conclusão da visão geral do produto | Lara Giuliana |
 | 20/04/2023 | 0.2 | Atualização da visão geral do produto | Kaio Melo |
 | 17/05/2023 | 0.3 | Atualização da visão geral do produto | Lucas Meireles e Kaio Melo |
+| 17/05/2023 | 0.3 | Atualização da imagem de Espinha de Peixe | Lucas Meireles e Lara Giuliana |
