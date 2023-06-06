@@ -1,6 +1,7 @@
 # Checklist de Revisão
 
-### Adotamos as seguintes métricas para a revisão do código:
+ **Adotamos as seguintes métricas para a revisão do código:**
+
 
 -   Verificar se as variáveis e funções seguem o padrão de clean code adotado:
     -   Português
