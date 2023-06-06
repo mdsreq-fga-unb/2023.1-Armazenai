@@ -45,6 +45,8 @@ nav :
     - Requisitos: 'Unidade 2/requisitos.md'
     - Arquitetura e padrão de UI: 'Unidade 2/arquitetura.md'
     - DoR e DoD: 'Unidade 2/dor&dod.md'
+  - Unidade 3:
+    - Checklist de Revisão: 'Unidade 3/checklistDeRevisao.md'
   - Sprints:
     - Sprint I: 'Sprints/sprintI.md'
     - Sprint II: 'Sprints/sprintII.md'
