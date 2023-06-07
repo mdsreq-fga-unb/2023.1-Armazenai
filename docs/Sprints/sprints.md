@@ -37,17 +37,19 @@ A ser realizada.
 
 
 ## Sprint 3
-<!-->
+
 ## Planjeamento das sprints
- | Sprint | Data de início | Data de término | Produto(Entrega) | 
- |--- |--- |--- |--- |
- | Sprint 1 | 24/04/2023 | 07/05/2023 | MVP e Planejamento do projeto |
- | Sprint 2 | 08/05/2023 | 21/05/2023 | Definição de backlog |
- | Sprint 3 | 22/05/2023 | 04/06/2023 | * Colocar USXX, USXX * | 
- | Sprint 4 | 05/06/2023 | 18/06/2023 | * Colocar USXX, USXX * | 
- | Sprint 5 | 19/06/2023 | 02/07/2023 | * Colocar USXX, USXX * |
- | Sprint 6 | 03/07/2023 | 16/07/2023 | * Colocar USXX, USXX * |
- | Sprint 7 | 11/07/2023 | 17/07/2023 | * Colocar USXX, USXX * | REMOVER ESSA PARTE DE AUXILIO DEPOIS Atualizar sprint 2 <-->
+| Sprint | Data de início | Data de término | Produto(Entrega) | 
+|--- |--- |--- |--- |
+| Sprint 1 | 24/04/2023 | 07/05/2023 | MVP e Planejamento do projeto |
+| Sprint 2 | 08/05/2023 | 21/05/2023 | Definição de backlog |
+| Sprint 3 | 22/05/2023 | 04/06/2023 | * Colocar USXX, USXX * | 
+| Sprint 4 | 05/06/2023 | 18/06/2023 | * Colocar USXX, USXX * | 
+| Sprint 5 | 19/06/2023 | 02/07/2023 | * Colocar USXX, USXX * |
+| Sprint 6 | 03/07/2023 | 16/07/2023 | * Colocar USXX, USXX * |
+| Sprint 7 | 11/07/2023 | 17/07/2023 | * Colocar USXX, USXX * | 
+
+
 
 ## Histórico de revisões
 
