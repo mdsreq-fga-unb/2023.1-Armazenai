@@ -9,6 +9,8 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "../../../public/types/database";
 
 function Copyright() {
   return (
@@ -27,16 +29,25 @@ function Copyright() {
 }
 
 export default function SignUp() {
-  const handleSubmit = (event: {
+  const supabase = createServerComponentClient<Database>();
+  const handleSubmit = async (event: {
     preventDefault: () => void;
     currentTarget: HTMLFormElement | undefined;
   }) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+      email: formData.get("email"),
+      password: formData.get("password")!,
     });
+
+    let { data, error } = await supabase.auth.signUp({
+      email: formData.get("email"),
+      password: formData.get("password"),
+    });
+
+    console.log(data);
+    console.log(error);
   };
 
   return (
@@ -73,9 +84,10 @@ export default function SignUp() {
               <TextField
                 required
                 fullWidth
-                id="lastName"
-                label="Último nome"
-                name="lastName"
+                id="telefone"
+                label="Telefone"
+                name="telefone"
+                type="tel"
                 autoComplete="family-name"
               />
             </Grid>
@@ -111,7 +123,7 @@ export default function SignUp() {
           </Button>
           <Grid container justifyContent="flex-center">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/singin" variant="body2">
                 Já possui uma conta? Entre agora!
               </Link>
             </Grid>

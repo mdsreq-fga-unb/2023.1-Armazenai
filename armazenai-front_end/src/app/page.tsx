@@ -1,10 +1,12 @@
-import Link from "next/link";
+"use client";
+import AuthForm from "./components/auth-form";
 
 export default function Home() {
   return (
     <main>
-      <h1>Armazenaí</h1>
-      <Link href="/login">Login</Link>
+      <div className="col-6 auth-widget">
+        <AuthForm />
+      </div>
     </main>
   );
 }
