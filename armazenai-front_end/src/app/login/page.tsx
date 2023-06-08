@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "../../../public/types/database";
 
 function Copyright() {
@@ -29,7 +29,7 @@ function Copyright() {
 }
 
 export default function SignUp() {
-  const supabase = createServerComponentClient<Database>();
+  const supabase = createClientComponentClient<Database>();
   const handleSubmit = async (event: {
     preventDefault: () => void;
     currentTarget: HTMLFormElement | undefined;
