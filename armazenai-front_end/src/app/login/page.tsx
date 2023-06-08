@@ -41,9 +41,10 @@ export default function SignUp() {
       password: formData.get("password")!,
     });
 
+    // TODO - validate input
     let { data, error } = await supabase.auth.signUp({
-      email: formData.get("email"),
-      password: formData.get("password"),
+      email: formData.get("email")!.toString(),
+      password: formData.get("password")!.toString(),
     });
 
     console.log(data);

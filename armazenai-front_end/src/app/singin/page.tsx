@@ -46,6 +46,8 @@ export default function SignIn() {
       email: formData.get("email"),
       password: formData.get("password"),
     });
+
+    // TODO - validate input
     let { data, error } = await supabase.auth.signInWithPassword({
       email: formData.get("email")!.toString(),
       password: formData.get("password")!.toString(),
