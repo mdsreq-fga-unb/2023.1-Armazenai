@@ -11,14 +11,15 @@ Desenvolvedor Scrum Master | Garantir a qualidade do produto, garantir o cumprim
 Product Owner | Atualizar o escopo do projeto, validar as entregas. | Hugo Araújo | Abel Ferreira, Hugo Araújo e George Marsicano Corrêa |
 
 ## Planjeamento das sprints
-| Sprint | Data de início | Data de término | Produto(Entrega) |
+| Sprint | Data de início | Data de término | Produto(Entrega) | 
 |--- |--- |--- |--- |
 | Sprint 1 | 24/04/2023 | 07/05/2023 | MVP e Planejamento do projeto |
 | Sprint 2 | 08/05/2023 | 21/05/2023 | Definição de backlog |
-| Sprint 3 | 22/05/2023 | 04/06/2023 | Progresso no MVP1 |
-| Sprint 4 | 05/06/2023 | 18/06/2023 | Progresso no MVP1 |
-| Sprint 5 | 19/06/2023 | 02/07/2023 | Progresso no MVP2 |
-| Sprint 6 | 03/07/2023 | 16/07/2023 | Progresso no MVP2 |
+| Sprint 3 | 22/05/2023 | 04/06/2023 | Reajuste do produto e bases front-end e back-end | 
+| Sprint 4 | 05/06/2023 | 18/06/2023 | * Colocar USXX, USXX * | 
+| Sprint 5 | 19/06/2023 | 02/07/2023 | * Colocar USXX, USXX * |
+| Sprint 6 | 03/07/2023 | 16/07/2023 | * Colocar USXX, USXX * |
+| Sprint 7 | 11/07/2023 | 17/07/2023 | * Colocar USXX, USXX * | 
 
 ## Matriz de comunicação
 | Descrição | Envolvidos | Peridiocidade | Produtos Gerados |
@@ -49,3 +50,4 @@ Product Owner | Atualizar o escopo do projeto, validar as entregas. | Hugo Araú
 | 27/04/2023 | 0.2 | Adição de Product Owner e correção no gerenciamento de risco | Lara Giuliana |
 | 27/04/2023 | 0.3 | Atualização de visão do projeto | Kaio Melo |
 | 18/05/2023 | 0.3 | Atualização do Planejamento | Lucas Meireles |
+| 09/06/2023 | 0.3 | Atualização de datas das sprints | Lucas Meireles, Lara Giuliana |
