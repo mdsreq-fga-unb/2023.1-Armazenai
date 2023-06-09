@@ -58,9 +58,9 @@ A equipe se reuniu em sala para discutir sobre a realização de Pair Programmin
 
 | Data | Membros envolvidos | Atividade desempenhada |
 |--- |--- |--- |
-| 25/05 | Kaio Enzo, Lucas Meireles, Jhenifer Castro | Criação e merge da base para desenvolvimento do Front-end |
-| 25/05 | Lara Giuliana, Lucas Pereira | Criação e atualização do Git Projects para tarefas de desenvolvimento |
-| 04/06 | Kaio Enzo, Lara Giuliana | Criação do Back-end pelo Supabase |
+| 25/05/2023 | Kaio Enzo, Lucas Meireles, Jhenifer Castro | Criação e merge da base para desenvolvimento do Front-end |
+| 25/05/2023 | Lara Giuliana, Lucas Pereira | Criação e atualização do Git Projects para tarefas de desenvolvimento |
+| 04/06/2023 | Kaio Enzo, Lara Giuliana | Criação do Back-end pelo Supabase |
 
 
 ## Srint 4
@@ -78,6 +78,11 @@ A ser realizada.
 
 ### Sprint Retrospective
 A ser realizada.
+
+### Pair Programming
+| Data | Membros envolvidos | Atividade desempenhada |
+|--- |--- |--- |
+| 08/06/2023 | Kaio Enzo, Lara Giuliana | Desenvolvimento da US04 |
 
 ## Planjeamento das sprints
 | Sprint | Data de início | Data de término | Produto(Entrega) | 
