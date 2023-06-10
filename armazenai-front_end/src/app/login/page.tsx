@@ -1,11 +1,8 @@
 "use client";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Avatar from "@mui/material/Avatar";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
@@ -13,52 +10,44 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { SnackbarProvider, enqueueSnackbar } from "notistack";
-import * as React from "react";
+import { SnackbarProvider } from "notistack";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 import { Database } from "../../../public/types/database";
+import Copyright from "../components/copyright/copyright";
+import snackBarErro from "../components/snackBar/snackBarError";
+import snackBarSucesso from "../components/snackBar/snackBarSucesso";
+import { errosFormularioMensagem } from "../helpers/validator/mensagensDeErro";
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+const schemaLogin = yup.object({
+  email: yup
+    .string()
+    .required(errosFormularioMensagem.emailObrigatorio)
+    .email(errosFormularioMensagem.emailInvalido),
+  senha: yup.string().required(errosFormularioMensagem.senhaObrigatoria),
+});
 
-export default function SignIn() {
+type FormularioLogin = yup.InferType<typeof schemaLogin>;
+
+export default function Login() {
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    console.log({
-      email: formData.get("email"),
-      password: formData.get("password"),
+  const { register, handleSubmit, formState, control } =
+    useForm<FormularioLogin>({
+      defaultValues: {},
+      resolver: yupResolver(schemaLogin),
     });
+  const { errors } = formState;
 
-    // TODO - validate input
+  const onSubimit = async ({ email, senha }: FormularioLogin) => {
     let { data, error } = await supabase.auth.signInWithPassword({
-      email: formData.get("email")!.toString(),
-      password: formData.get("password")!.toString(),
+      email,
+      password: senha,
     });
 
-    if (error) enqueueSnackbar(`Houve um erro ${error}`);
+    if (error) snackBarErro(`Houve um erro: ${error}`);
     if (data && data.session) {
-      enqueueSnackbar("Logado com sucesso", {
-        variant: "success",
-        anchorOrigin: { vertical: "bottom", horizontal: "center" },
-      });
+      snackBarSucesso("Usuário logado com sucesso");
       router.push("/account");
     }
   };
@@ -95,16 +84,14 @@ export default function SignIn() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
+            <img src="/assets/logo.png" width={225}></img>
+            <Typography component="h1" variant="h5" sx={{ my: 1 }}>
+              Login
             </Typography>
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubimit)}
               sx={{ mt: 1 }}
             >
               <TextField
@@ -113,23 +100,23 @@ export default function SignIn() {
                 fullWidth
                 id="email"
                 label="Endereço de email"
-                name="email"
                 autoComplete="email"
+                {...register("email")}
+                error={!!errors.email}
+                helperText={errors.email?.message}
                 autoFocus
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password"
-                label="Password"
+                label="Senha"
                 type="password"
+                {...register("senha")}
                 id="password"
                 autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                error={!!errors.senha}
+                helperText={errors.senha?.message}
               />
               <Button
                 type="submit"
@@ -137,17 +124,17 @@ export default function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Login
               </Button>
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
-                    Forgot password?
+                    Esqueceu sua senha?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link href="/cadastro" variant="body2">
+                    Não tem conta? Crie uma agora!
                   </Link>
                 </Grid>
               </Grid>

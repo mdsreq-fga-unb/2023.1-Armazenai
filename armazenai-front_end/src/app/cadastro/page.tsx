@@ -19,6 +19,7 @@ import Copyright from "../components/copyright/copyright";
 import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import { chekcCpfDuplicated } from "../helpers/supabase/checkCpfDuplicated";
+import { errosFormularioMensagem } from "../helpers/validator/mensagensDeErro";
 import { phoneRegExp } from "../helpers/validator/phoneRegexValidacao";
 
 const errorsFormularioCadastro = {
@@ -26,11 +27,6 @@ const errorsFormularioCadastro = {
   telefoneRegex: "O telefone informado é inválido!",
   telefoneObrigatorio: "O telefone é obrigatóro!",
   cpfObrigatorio: "O cpf é obrigatório!",
-};
-
-const errosFormularioMensagem = {
-  emailObrigatorio: "O email é obrigatório",
-  emailInvalido: "O email informado é inválido!",
 };
 
 const schemaFormValidacao = yup.object({
