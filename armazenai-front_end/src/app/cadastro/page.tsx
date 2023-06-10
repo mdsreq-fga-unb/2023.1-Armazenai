@@ -2,11 +2,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Alert, Container, Paper } from "@mui/material";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
@@ -16,6 +12,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { Database } from "../../../public/types/database";
 import Copyright from "../components/copyright/copyright";
+import UsuarioForm from "../components/formulario/usuarioForm";
 import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import { chekcCpfDuplicated } from "../helpers/supabase/checkCpfDuplicated";
@@ -43,7 +40,7 @@ const schemaFormValidacao = yup.object({
   password: yup.string().required(),
 });
 
-type FormularioCadastro = yup.InferType<typeof schemaFormValidacao>;
+export type FormularioCadastro = yup.InferType<typeof schemaFormValidacao>;
 
 export default function SignUp() {
   const [CPFError, setCPFError] = useState(false);
@@ -129,90 +126,7 @@ export default function SignUp() {
           >
             CPF Duplicado!
           </Alert>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  required
-                  fullWidth
-                  id="nome"
-                  label="Nome"
-                  autoFocus
-                  {...register("nome")}
-                  error={!!errors.nome}
-                  helperText={errors.nome?.message}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="telefone"
-                  label="Telefone"
-                  type="tel"
-                  autoComplete="family-name"
-                  {...register("telefone")}
-                  error={!!errors.telefone}
-                  helperText={errors.telefone?.message}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="cpf"
-                  label="CPF"
-                  type="text"
-                  autoComplete="cpf"
-                  {...register("cpf")}
-                  error={!!errors.cpf}
-                  helperText={errors.cpf?.message}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Endereço de Email"
-                  autoComplete="email"
-                  {...register("email")}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  label="Senha"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  {...register("password")}
-                  error={!!errors.password}
-                  helperText={errors.password?.message}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              disabled={!formState.isValid}
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Cadastrar
-            </Button>
-            <Grid container justifyContent="flex-center">
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  Já possui uma conta? Entre agora!
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
+          <UsuarioForm onSubmit={onSubmit} />
         </Box>
         <Copyright />
       </Container>
