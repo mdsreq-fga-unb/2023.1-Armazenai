@@ -1,5 +1,12 @@
 "use client";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,6 +18,7 @@ import Typography from "@mui/material/Typography";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { SnackbarProvider } from "notistack";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { Database } from "../../../public/types/database";
@@ -30,11 +38,15 @@ const schemaLogin = yup.object({
 type FormularioLogin = yup.InferType<typeof schemaLogin>;
 
 export default function Login() {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
   const { register, handleSubmit, formState, control } =
     useForm<FormularioLogin>({
-      defaultValues: {},
+      defaultValues: {
+        email: "",
+        senha: "",
+      },
       resolver: yupResolver(schemaLogin),
     });
   const { errors } = formState;
@@ -51,6 +63,9 @@ export default function Login() {
       router.push("/account");
     }
   };
+
+  // TODO - ENVIAR EMAIL DE RECUPERAÇÃO
+  const enviarEmailDeRecuperacao = () => {};
 
   return (
     <>
@@ -128,9 +143,9 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Button onClick={() => setOpen(true)}>
                     Esqueceu sua senha?
-                  </Link>
+                  </Button>
                 </Grid>
                 <Grid item>
                   <Link href="/cadastro" variant="body2">
@@ -143,6 +158,29 @@ export default function Login() {
           </Box>
         </Grid>
       </Grid>
+      <div>
+        <Dialog open={open} onClose={() => setOpen(false)}>
+          <DialogTitle>Recuperar senha</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Insira seu email de recuperação
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Endereço de email"
+              type="email"
+              fullWidth
+              variant="standard"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpen(false)}>Cancelar</Button>
+            <Button onClick={enviarEmailDeRecuperacao}>Enviar</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </>
   );
 }
