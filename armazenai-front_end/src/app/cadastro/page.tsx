@@ -10,13 +10,14 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { SnackbarProvider, enqueueSnackbar } from "notistack";
+import { SnackbarProvider } from "notistack";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { Database } from "../../../public/types/database";
 import Copyright from "../components/copyright/copyright";
 import snackBarErro from "../components/snackBar/snackBarError";
+import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import { chekcCpfDuplicated } from "../helpers/supabase/checkCpfDuplicated";
 import { phoneRegExp } from "../helpers/validator/phoneRegexValidacao";
 
@@ -97,12 +98,8 @@ export default function SignUp() {
       return;
     }
 
-    enqueueSnackbar(
-      "Usuário criado com sucesso, confirme seu e-mail para ter acesso ao sistema!",
-      {
-        variant: "success",
-        anchorOrigin: { vertical: "bottom", horizontal: "center" },
-      }
+    snackBarSucesso(
+      "Usuário criado com sucesso! Confirme seu email para ter acesso ao sistema!"
     );
 
     router.push("/");
