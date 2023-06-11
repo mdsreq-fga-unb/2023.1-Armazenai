@@ -5,6 +5,7 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useEffect, useState } from "react";
 import { Database } from "../../../public/types/database";
+import Menu from "../components/Menu/menu";
 
 export default function AccountForm({ session }: { session: Session | null }) {
   const supabase = createClientComponentClient<Database>();
