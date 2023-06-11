@@ -60,7 +60,7 @@ export default function Login() {
     if (error) snackBarErro(`Houve um erro: ${error}`);
     if (data && data.session) {
       snackBarSucesso("Usuário logado com sucesso");
-      router.push("/perfil");
+      router.push("/dashboard");
     }
   };
 

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Database } from "../../../public/types/database";
 import { Usuario } from "../components/formulario/usuarioFormAtualizacao";
+import BasePage from "../components/navbar/menu";
 import PerfilInfo from "./perfil-info";
 
 export default function Perfil() {
@@ -38,10 +39,12 @@ export default function Perfil() {
     );
 
   return (
-    <Container>
-      <Paper elevation={5} sx={{ p: 5, my: 2 }}>
-        <PerfilInfo usuario={user} setUsuario={setUser} />
-      </Paper>
-    </Container>
+    <BasePage>
+      <Container>
+        <Paper elevation={5} sx={{ p: 5, my: 2 }}>
+          <PerfilInfo usuario={user} setUsuario={setUser} />
+        </Paper>
+      </Container>
+    </BasePage>
   );
 }
