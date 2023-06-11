@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { Database } from "../../../public/types/database";
 import Copyright from "../components/copyright/copyright";
-import UsuarioForm from "../components/formulario/usuarioForm";
+import UsuarioForm from "../components/formulario/usuarioFormCadastro";
 import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import { chekcCpfDuplicated } from "../helpers/supabase/checkCpfDuplicated";

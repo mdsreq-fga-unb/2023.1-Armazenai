@@ -31,12 +31,16 @@ type FormularioCadastro = yup.InferType<typeof schemaFormValidacao>;
 
 interface UsuarioFormProps {
   onSubmit: (formData: FormularioCadastro) => Promise<any>;
+  estadoInicial?: FormularioCadastro;
 }
 
-export default function UsuarioForm({ onSubmit }: UsuarioFormProps) {
+export default function UsuarioForm({
+  onSubmit,
+  estadoInicial,
+}: UsuarioFormProps) {
   const { register, handleSubmit, formState, control } =
     useForm<FormularioCadastro>({
-      defaultValues: {
+      defaultValues: estadoInicial ?? {
         nome: "",
         cpf: "",
         email: "",

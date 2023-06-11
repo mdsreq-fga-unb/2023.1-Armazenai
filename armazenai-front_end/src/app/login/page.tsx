@@ -69,6 +69,7 @@ export default function Login() {
 
   return (
     <>
+      {" "}
       <SnackbarProvider />
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
