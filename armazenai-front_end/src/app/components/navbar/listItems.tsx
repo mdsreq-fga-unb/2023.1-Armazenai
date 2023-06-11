@@ -39,12 +39,6 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Clientes" />
     </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton>
     </Box>
   </React.Fragment>
 );
