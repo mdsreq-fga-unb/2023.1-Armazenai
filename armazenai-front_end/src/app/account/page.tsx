@@ -17,6 +17,5 @@ export default async function Account() {
     redirect("/");
   }
 
-  return <Menu/>;
-  //<AccountForm session={session} />;
+  return <AccountForm session={session} />;
 }
