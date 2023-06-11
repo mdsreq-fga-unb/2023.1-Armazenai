@@ -3,6 +3,7 @@ import { Copyright } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Paper } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
@@ -16,7 +17,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
-import { mainListItems} from "./listItems";
+import { mainListItems } from "./listItems";
 
 const drawerWidth: number = 240;
 
@@ -129,9 +130,7 @@ export default function BasePage({ children }: BasePage) {
           </IconButton>
         </Toolbar>
         <Divider />
-        <List component="nav">
-          {mainListItems}
-        </List>
+        <List component="nav">{mainListItems}</List>
       </Drawer>
       <Box
         component="main"
@@ -147,7 +146,7 @@ export default function BasePage({ children }: BasePage) {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          {children}
+          <Paper sx={{ p: 1 }}>{children}</Paper>
           <Copyright sx={{ pt: 4 }} />
         </Container>
       </Box>
