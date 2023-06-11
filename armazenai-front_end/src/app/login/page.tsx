@@ -60,7 +60,7 @@ export default function Login() {
     if (error) snackBarErro(`Houve um erro: ${error}`);
     if (data && data.session) {
       snackBarSucesso("Usuário logado com sucesso");
-      router.push("/account");
+      router.push("/perfil");
     }
   };
 
@@ -69,6 +69,7 @@ export default function Login() {
 
   return (
     <>
+      {" "}
       <SnackbarProvider />
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
