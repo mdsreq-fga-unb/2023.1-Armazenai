@@ -15,11 +15,10 @@ Product Owner | Atualizar o escopo do projeto, validar as entregas. | Hugo Araú
 |--- |--- |--- |--- |
 | Sprint 1 | 24/04/2023 | 07/05/2023 | MVP e Planejamento do projeto |
 | Sprint 2 | 08/05/2023 | 21/05/2023 | Definição de backlog |
-| Sprint 3 | 22/05/2023 | 04/06/2023 | Reajuste do produto e bases front-end e back-end | 
-| Sprint 4 | 05/06/2023 | 18/06/2023 | * Colocar USXX, USXX * | 
-| Sprint 5 | 19/06/2023 | 02/07/2023 | * Colocar USXX, USXX * |
-| Sprint 6 | 03/07/2023 | 16/07/2023 | * Colocar USXX, USXX * |
-| Sprint 7 | 11/07/2023 | 17/07/2023 | * Colocar USXX, USXX * | 
+| Sprint 3 | 22/05/2023 | 11/06/2023 | Reajuste do produto e bases front-end e back-end, US04, US05, US08, US12, US13, US16, US11 | 
+| Sprint 4 | 12/06/2023 | 25/06/2023 | US01, US06, US07, US09, US10 |
+| Sprint 5 | 26/06/2023 | 09/07/2023 | US02, US03, US11, US14, US15, US17, US18 |
+| Sprint 6 | 10/07/2023 | 17/07/2023 | US19, US20, US21 |
 
 ## Matriz de comunicação
 | Descrição | Envolvidos | Peridiocidade | Produtos Gerados |
