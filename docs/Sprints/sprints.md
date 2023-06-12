@@ -41,17 +41,18 @@ Registrado novos débitos técnicos de atualização de documentação. Reconhec
 
 Data início : 22/05/2023
 
-Data término : 04/06/2023
+Data término : 11/06/2023
 
 
 ### Sprint Planning
-Em reunião com cliente, houve reajuste do produto e discussão a respeito de até que ponto a equipe é capaz de solucionar certos problemas apresentados por aqueles e reafirmação do propósito de cada história e seu impacto no produto que será desenvolvido.
+Em reunião com cliente, houve reajuste do produto e discussão a respeito de até que ponto a equipe é capaz de solucionar certos problemas apresentados por aqueles e reafirmação do propósito de cada história e seu impacto no produto que será desenvolvido. Também foi definido que seriam trabalhadas as histórias do [MVP1](../Unidade%202/requisitos.md). 
 Em reunião com equipe e a partir das orientações do professor, foi concordado a realização das bases de front-end e back-end para o desenvolvimento do código e trabalho em cima das histórias de usuários a partir das próximas sprints.
 
 ### Sprint Review
-A ser registrado.
+Não houve review com PO por indisponbilidade dos mesmos nas datas pré-estabelecidas.
 
 ### Sprint Retrospective 
+Registrado débitos técnicos de review com cliente a ser remarcado antes da finalização da sprint seguinte, não entrega das US05, US08, US12, US13, US16, US11.
 A equipe se reuniu em sala para discutir sobre a realização de Pair Programming e quais são os membros com maior experiência para tomar frente inicial no desenvolvimento de códigos e compartilhar conhecimento com seu par. Com o abandono de um dos membros da equipe do projeto durante a sprint, foi feita uma revisão de documentação e prazos esperados de realização das sprints. 
 
 ### Pair Programming
@@ -61,17 +62,19 @@ A equipe se reuniu em sala para discutir sobre a realização de Pair Programmin
 | 25/05/2023 | Kaio Enzo, Lucas Meireles, Jhenifer Castro | Criação e merge da base para desenvolvimento do Front-end |
 | 25/05/2023 | Lara Giuliana, Lucas Pereira | Criação e atualização do Git Projects para tarefas de desenvolvimento |
 | 04/06/2023 | Kaio Enzo, Lara Giuliana | Criação do Back-end pelo Supabase |
+| 08/06/2023 | Kaio Enzo, Lara Giuliana | Desenvolvimento da US04 |
 
 
 ## Srint 4
 
-Data início : 05/06/2023
+Data início : 12/06/2023
 
-Data término : 18/06/2023
+Data término : 25/06/2023
 
 
 ### Sprint Planning
-Em reunião com cliente, ficou concordado e decidido o desenvolvimento das histórias US__, US__, US__ com seus respectivos critérios de aceitação durante o decorrer da sprint. Em reunião com os membros, houve instruções para o desenvolvimento de cada história partindo da página do Git Projects da equipe, reforçando a ideia do Pair Programming.
+Recebe-se os débitos técnicos da sprint anterior para serem sanados durante a realização da presente sprint. 
+Reunião com cliente ainda a ser realizada.
 
 ### Sprint Review
 A ser realizada.
@@ -82,19 +85,16 @@ A ser realizada.
 ### Pair Programming
 | Data | Membros envolvidos | Atividade desempenhada |
 |--- |--- |--- |
-| 08/06/2023 | Kaio Enzo, Lara Giuliana | Desenvolvimento da US04 |
 
 ## Planjeamento das sprints
 | Sprint | Data de início | Data de término | Produto(Entrega) | 
 |--- |--- |--- |--- |
 | Sprint 1 | 24/04/2023 | 07/05/2023 | MVP e Planejamento do projeto |
 | Sprint 2 | 08/05/2023 | 21/05/2023 | Definição de backlog |
-| Sprint 3 | 22/05/2023 | 04/06/2023 | Reajuste do produto e bases front-end e back-end | 
-| Sprint 4 | 05/06/2023 | 18/06/2023 | * Colocar USXX, USXX * | 
-| Sprint 5 | 19/06/2023 | 02/07/2023 | * Colocar USXX, USXX * |
-| Sprint 6 | 03/07/2023 | 16/07/2023 | * Colocar USXX, USXX * |
-| Sprint 7 | 11/07/2023 | 17/07/2023 | * Colocar USXX, USXX * | 
-
+| Sprint 3 | 22/05/2023 | 11/06/2023 | Reajuste do produto e bases front-end e back-end, US04, US05, US08, US12, US13, US16, US11 | 
+| Sprint 4 | 12/06/2023 | 25/06/2023 | US01, US06, US07, US09, US10 |
+| Sprint 5 | 26/06/2023 | 09/07/2023 | US02, US03, US11, US14, US15, US17, US18 |
+| Sprint 6 | 10/07/2023 | 17/07/2023 | US19, US20, US21 |
 
 
 ## Histórico de revisões
@@ -105,7 +105,8 @@ A ser realizada.
 | 18/05/2023 | 0.2 | Atualização da sprint 1 | Lucas Meireles, Mateus Vinicius e Lara Giuliana |
 | 18/05/2023 | 0.3 | Registro inicial sprint 2 | Lucas Meireles e Mateus Vinicius |
 | 06/06/2023 | 0.4 | Junção das sprints em documento único e atualização de registros | Lara Giuliana e Lucas Meireles |
-| 09/06/2023 | 0.5 | Registro Sprints 3 e 4 e atualizações | Lucas Meireles e Lara Giuliana |
+| 09/06/2023 | 0.5 | Registro Sprints 3 e atualizações | Lucas Meireles e Lara Giuliana |
+| 12/06/2023 | 0.6 | Atualização de Sprint e atualizações | Lucas Meireles, Lara Giuliana, Jhenifer Castro |
 
 
 

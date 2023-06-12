@@ -117,7 +117,7 @@
 
 | Data       | Versão | Descrição                                         | Autor                                                    |
 | ---------- | ------ | ------------------------------------------------- | -------------------------------------------------------- |
-| 27/04/2023 | 0.1    | Criação do documento                              | Kaio Melo, Lucas Pereira, Lucas Meirelles, Lara Giuliana |
+| 27/04/2023 | 0.1    | Criação do documento                              | Kaio Melo, Lucas Pereira, Lucas Meireles, Lara Giuliana |
 | 02/05/2023 | 0.2    | Adição de paleta de cores                         | Lara Giuliana                                            |
 | 15/05/2023 | 0.3    | Refinamento do backlog e definição de US's        | Kaio Melo                                                |
 | 17/05/2023 | 0.4    | Ordernação das histórias pelo valor de prioridade | Lucas Pereira                                            |
