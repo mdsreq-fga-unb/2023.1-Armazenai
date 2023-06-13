@@ -4,12 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 import { Cliente } from "../../../../public/types/main-types";
 
 type formCliente = {
   cliente?: Cliente;
   onSubmit: (data: Cliente) => any;
+  loading: boolean;
 };
 
 const schemaClienteForm = yup.object({
@@ -27,7 +29,11 @@ const schemaClienteForm = yup.object({
 
 type FormularioCliente = yup.InferType<typeof schemaClienteForm>;
 
-export default function ClienteForm({ cliente, onSubmit }: formCliente) {
+export default function ClienteForm({
+  cliente,
+  onSubmit,
+  loading,
+}: formCliente) {
   const { formState, register, control, handleSubmit } =
     useForm<FormularioCliente>({
       defaultValues: cliente
@@ -91,9 +97,14 @@ export default function ClienteForm({ cliente, onSubmit }: formCliente) {
             helperText={errors.email?.message}
           />
         </Grid>
-        <Button variant="contained" type="submit" fullWidth>
+        <LoadingButton
+          loading={loading}
+          variant="contained"
+          type="submit"
+          fullWidth
+        >
           {cliente && cliente.id ? "Atualizar" : "Salvar"}
-        </Button>
+        </LoadingButton>
       </Grid>
     </form>
   );
