@@ -2,10 +2,8 @@
 import { Copyright } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Paper } from "@mui/material";
+import { Paper, Tooltip } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,7 +15,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { mainListItems } from "./listItems";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const drawerWidth: number = 240;
 
@@ -75,6 +77,9 @@ type BasePage = {
 
 export default function BasePage({ children }: BasePage) {
   const [open, setOpen] = React.useState(true);
+  const supabase = createClientComponentClient();
+  const router = useRouter();
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -100,6 +105,7 @@ export default function BasePage({ children }: BasePage) {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             component="h1"
             variant="h6"
@@ -109,11 +115,24 @@ export default function BasePage({ children }: BasePage) {
           >
             Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <Tooltip title="Perfil">
+            <IconButton color="inherit" onClick={() => router.push("/perfil")}>
+              <AccountCircleIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Sair">
+            <IconButton
+              color="inherit"
+              onClick={() =>
+                supabase.auth
+                  .signOut()
+                  .then(() => router.push("/"))
+                  .catch((e) => console.log(e))
+              }
+            >
+              <LogoutIcon />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
