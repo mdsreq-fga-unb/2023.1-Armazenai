@@ -63,17 +63,13 @@ export default function Login() {
     if (error) snackBarErro(`Houve um erro: ${error}`);
     if (data && data.session) {
       snackBarSucesso("Usuário logado com sucesso");
-      setLoading(false);
       router.push("/dashboard");
+      setLoading(false);
     }
   };
 
   // TODO - ENVIAR EMAIL DE RECUPERAÇÃO
   const enviarEmailDeRecuperacao = () => {};
-
-  supabase.auth.getSession().then((session) => {
-    session && session.data.session && router.push("/dashboard");
-  });
 
   return (
     <>
