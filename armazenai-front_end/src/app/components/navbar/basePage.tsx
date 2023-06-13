@@ -2,7 +2,7 @@
 import { Copyright } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Paper, Tooltip } from "@mui/material";
+import { ListItemButton, ListItemIcon, Paper, Tooltip } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -20,6 +20,7 @@ import { mainListItems } from "./listItems";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ListItemText from "@mui/material/ListItemText";
 
 const drawerWidth: number = 240;
 
@@ -149,7 +150,16 @@ export default function BasePage({ children }: BasePage) {
           </IconButton>
         </Toolbar>
         <Divider />
-        <List component="nav">{mainListItems}</List>
+        <List component="nav">
+          <Box sx={{ height: "92vh" }}>
+            {mainListItems.map((item) => (
+              <ListItemButton onClick={() => router.push(item.path)}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.nome} />
+              </ListItemButton>
+            ))}
+          </Box>
+        </List>
       </Drawer>
       <Box
         component="main"
