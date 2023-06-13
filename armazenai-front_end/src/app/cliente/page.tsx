@@ -9,7 +9,7 @@ import { Database } from "../../../public/types/database";
 import { Cliente } from "../../../public/types/main-types";
 import ClienteForm from "../components/formulario/clienteFormCadastro";
 import ModalForm from "../components/modal/modal-form";
-import BasePage from "../components/navbar/menu";
+import BasePage from "../components/navbar/basePage";
 import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 
