@@ -26,6 +26,7 @@ import Copyright from "../components/copyright/copyright";
 import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import { errosFormularioMensagem } from "../helpers/validator/mensagensDeErro";
+import { LoadingButton } from "@mui/lab";
 
 const schemaLogin = yup.object({
   email: yup
@@ -39,6 +40,7 @@ type FormularioLogin = yup.InferType<typeof schemaLogin>;
 
 export default function Login() {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
   const { register, handleSubmit, formState, control } =
@@ -52,6 +54,7 @@ export default function Login() {
   const { errors } = formState;
 
   const onSubimit = async ({ email, senha }: FormularioLogin) => {
+    setLoading(true);
     let { data, error } = await supabase.auth.signInWithPassword({
       email,
       password: senha,
@@ -60,12 +63,17 @@ export default function Login() {
     if (error) snackBarErro(`Houve um erro: ${error}`);
     if (data && data.session) {
       snackBarSucesso("Usuário logado com sucesso");
+      setLoading(false);
       router.push("/dashboard");
     }
   };
 
   // TODO - ENVIAR EMAIL DE RECUPERAÇÃO
   const enviarEmailDeRecuperacao = () => {};
+
+  supabase.auth.getSession().then((session) => {
+    session && session.data.session && router.push("/dashboard");
+  });
 
   return (
     <>
@@ -134,14 +142,15 @@ export default function Login() {
                 error={!!errors.senha}
                 helperText={errors.senha?.message}
               />
-              <Button
+              <LoadingButton
+                loading={loading}
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Login
-              </Button>
+                <span>Login</span>
+              </LoadingButton>
               <Grid container>
                 <Grid item xs>
                   <Button onClick={() => setOpen(true)}>
