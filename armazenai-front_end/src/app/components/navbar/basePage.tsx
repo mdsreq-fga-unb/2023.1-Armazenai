@@ -154,7 +154,7 @@ export default function BasePage({ children }: BasePage) {
           <Box sx={{ height: "92vh" }}>
             {mainListItems.map((item) => (
               <ListItemButton onClick={() => router.push(item.path)}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemIcon key={item.nome}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.nome} />
               </ListItemButton>
             ))}

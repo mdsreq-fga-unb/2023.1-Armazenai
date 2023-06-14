@@ -1,6 +1,6 @@
 "use client";
 import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { SnackbarProvider } from "notistack";
@@ -12,9 +12,11 @@ import ModalForm from "../components/modal/modal-form";
 import BasePage from "../components/navbar/basePage";
 import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
+import CustomPaginationActionsTable from "./tabelaCliente";
 
 export default function Cliente() {
   const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 
@@ -33,6 +35,7 @@ export default function Cliente() {
     id,
     telefone,
   }: Cliente) => {
+    setLoading(true);
     const { error } = await supabase.from("cliente").insert({
       email,
       nome,
@@ -42,10 +45,12 @@ export default function Cliente() {
     if (error) {
       snackBarErro("Houve um erro ao salvar as informações do cliente.");
       console.log(error);
+      setLoading(false);
       return;
     }
 
     snackBarSucesso("Cliente criado com sucesso.");
+    setLoading(false);
     setOpenModal(false);
   };
 
@@ -60,8 +65,12 @@ export default function Cliente() {
         Adicionar cliente
       </Button>
       <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
-        <ClienteForm onSubmit={onSubmit} />
+        <ClienteForm onSubmit={onSubmit} loading={loading} />
       </ModalForm>
+      <Container component="div">
+        <h1>Clientes</h1>
+        <CustomPaginationActionsTable />
+      </Container>
     </BasePage>
   );
 }
