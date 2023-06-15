@@ -1,21 +1,25 @@
-import * as React from "react";
-import { useTheme } from "@mui/material/styles";
+import EditIcon from "@mui/icons-material/Edit";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import { TableHead } from "@mui/material";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
+import { TablePaginationActionsProps } from "@mui/material/TablePagination/TablePaginationActions";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import FirstPageIcon from "@mui/icons-material/FirstPage";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import LastPageIcon from "@mui/icons-material/LastPage";
+import { useTheme } from "@mui/material/styles";
+import * as React from "react";
+import { useState } from "react";
 
-interface TablePaginationActionsProps {
+interface TabelaBasePaginacao {
   count: number;
   page: number;
   rowsPerPage: number;
@@ -25,6 +29,13 @@ interface TablePaginationActionsProps {
   ) => void;
 }
 
+interface TabelaBaseProps<T extends Record<string, unknown>> {
+  rows: T[];
+  loadingData: boolean;
+  tableHeaders: string[];
+  handleEditarBotao: (id: number, pagina: number, porPagina: number) => void;
+  handleDeletarBotao: (id: number, pagina: number, porPagina: number) => void;
+}
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -95,33 +106,18 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-function createData(name: string, calories: number, fat: number) {
-  return { name, calories, fat };
+interface BaseType {
+  id: number;
 }
-
-const rows = [
-  createData("Cupcake", 305, 3.7),
-  createData("Donut", 452, 25.0),
-  createData("Eclair", 262, 16.0),
-  createData("Frozen yoghurt", 159, 6.0),
-  createData("Gingerbread", 356, 16.0),
-  createData("Honeycomb", 408, 3.2),
-  createData("Ice cream sandwich", 237, 9.0),
-  createData("Jelly Bean", 375, 0.0),
-  createData("KitKat", 518, 26.0),
-  createData("Lollipop", 392, 0.2),
-  createData("Marshmallow", 318, 0),
-  createData("Nougat", 360, 19.0),
-  createData("Oreo", 437, 18.0),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
-
-export default function CustomPaginationActionsTable() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+export default function TabelaBase<T extends Record<string, unknown>>({
+  rows,
+  loadingData,
+  tableHeaders,
+  handleEditarBotao,
+  handleDeletarBotao,
+}: TabelaBaseProps<T>) {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -137,23 +133,53 @@ export default function CustomPaginationActionsTable() {
     setPage(0);
   };
 
+  if (loadingData) {
+    return (
+      <>
+        <h1>Carregando...</h1>
+      </>
+    );
+  }
+
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  console.log("rows", rows);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <TableHead>
+          <TableRow>
+            {tableHeaders.map((header) => (
+              <TableCell key={header}>{header}</TableCell>
+            ))}
+            <TableCell>Ações</TableCell>
+          </TableRow>
+        </TableHead>
         <TableBody>
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
-          ).map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.calories}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.fat}
+          ).map((row, index) => (
+            <TableRow key={index}>
+              {Object.values(row).map(
+                (value, columnIndex) =>
+                  (value as React.ReactNode) !== null && (
+                    <TableCell component={columnIndex === 1 ? "th" : undefined}>
+                      {value as React.ReactNode}
+                    </TableCell>
+                  )
+              )}
+              <TableCell>
+                <Box component="div" display="flex" flexDirection="row">
+                  <IconButton
+                    onClick={() => handleEditarBotao(index, page, rowsPerPage)}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton>
+                    {/* <DeleteIcon onClick={() => handleDeletarBotao()} /> */}
+                  </IconButton>
+                </Box>
               </TableCell>
             </TableRow>
           ))}
