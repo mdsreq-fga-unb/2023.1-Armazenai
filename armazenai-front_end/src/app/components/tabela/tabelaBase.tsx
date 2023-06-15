@@ -1,11 +1,10 @@
-import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import { TableHead } from "@mui/material";
+import { IconButton, TableHead } from "@mui/material";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -174,7 +173,7 @@ export default function TabelaBase<T extends Record<string, unknown>>({
                   <IconButton
                     onClick={() => handleEditarBotao(index, page, rowsPerPage)}
                   >
-                    <EditIcon />
+                    <DeleteIcon />
                   </IconButton>
                   <IconButton>
                     {/* <DeleteIcon onClick={() => handleDeletarBotao()} /> */}
