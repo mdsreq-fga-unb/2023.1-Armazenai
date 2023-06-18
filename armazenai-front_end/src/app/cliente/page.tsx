@@ -22,6 +22,7 @@ type ClienteTable = {
   id: number;
   nome: string;
   telefone: string;
+  cnpj: string;
   email: string;
 };
 
@@ -33,7 +34,7 @@ export default function Cliente() {
   const [clienteSendoEditado, setClienteSendoEditado] = useState<
     Cliente | undefined
   >(undefined);
-  const tableHeaders = ["ID", "Nome", "Telefone", "Email"];
+  const tableHeaders = ["ID", "Nome", "Telefone", "Email", "CNPJ"];
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 
@@ -41,7 +42,7 @@ export default function Cliente() {
     setLoading(true);
     const { data: clienteData, error } = await supabase
       .from("cliente")
-      .select(`id, nome, telefone , email`)
+      .select(`id, nome, telefone , email, cnpj`)
       .returns<ClienteTable[]>();
     if (clienteData) {
       setClientes(clienteData);
@@ -66,6 +67,7 @@ export default function Cliente() {
     created_at,
     id,
     telefone,
+    cnpj,
   }: Cliente) => {
     setLoading(true);
 
@@ -76,6 +78,7 @@ export default function Cliente() {
           email: email,
           nome: nome,
           telefone: telefone,
+          cnpj: cnpj,
         })
         .eq("id", id);
 
@@ -89,6 +92,7 @@ export default function Cliente() {
         email,
         nome,
         telefone,
+        cnpj,
       });
 
       if (error) {

@@ -6,6 +6,7 @@ import { Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import validarCNPJ from "@/app/helpers/validator/validarCNPJ";
 import { Cliente } from "../../../../public/types/main-types";
 
 type formCliente = {
@@ -25,6 +26,10 @@ const schemaClienteForm = yup.object({
     .string()
     .required("O telefone do cliente é obrigatório!")
     .matches(phoneRegExp, errosFormularioMensagem.telefoneInvalido),
+  cnpj: yup
+    .string()
+    .required("O CNPJ é obrigatório")
+    .test("validar-cnpj", "CNPJ inválido", (cnpj) => validarCNPJ(cnpj)),
 });
 
 type FormularioCliente = yup.InferType<typeof schemaClienteForm>;
@@ -42,11 +47,13 @@ export default function ClienteForm({
             email: cliente.email,
             nome: cliente.nome,
             telefone: cliente.telefone,
+            cnpj: cliente.cnpj,
           }
         : {
             email: "",
             nome: "",
             telefone: "",
+            cnpj: "",
           },
       resolver: yupResolver(schemaClienteForm),
     });
@@ -73,6 +80,17 @@ export default function ClienteForm({
             fullWidth
             error={!!errors.nome}
             helperText={errors.nome?.message}
+          />
+        </Grid>
+        <Grid item xs={6} sm={12} my={1}>
+          <TextField
+            label="CNPJ"
+            {...register("cnpj")}
+            required
+            autoFocus
+            fullWidth
+            error={!!errors.cnpj}
+            helperText={errors.cnpj?.message}
           />
         </Grid>
         <Grid item xs={6} sm={12} my={1}>
