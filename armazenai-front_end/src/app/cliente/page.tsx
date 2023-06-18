@@ -132,7 +132,7 @@ export default function Cliente() {
   };
 
   return (
-    <BasePage>
+    <BasePage labelNavBar="Clientes">
       <SnackbarProvider />
       <Button
         variant="contained"
