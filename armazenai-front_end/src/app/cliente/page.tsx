@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { SnackbarProvider } from "notistack";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Database } from "../../../public/types/database";
 import { Cliente } from "../../../public/types/main-types";
 import ClienteForm from "../components/formulario/clienteFormCadastro";
@@ -38,7 +38,7 @@ export default function Cliente() {
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 
-  const getClientes = async () => {
+  const getClientes = useCallback(async () => {
     setLoading(true);
     const { data: clienteData, error } = await supabase
       .from("cliente")
@@ -49,7 +49,7 @@ export default function Cliente() {
     }
     if (error) console.log(error);
     setLoading(false);
-  };
+  }, [supabase]);
 
   useEffect(() => {
     const getUserSession = async () => {
@@ -59,7 +59,7 @@ export default function Cliente() {
 
     getUserSession();
     getClientes();
-  }, []);
+  }, [getClientes, router, supabase.auth]);
 
   const onSubmit = async ({
     nome,

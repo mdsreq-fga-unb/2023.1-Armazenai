@@ -87,14 +87,14 @@ export default function BasePage({ children, labelNavBar }: BasePage) {
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 
-  const getUsuario = async () => {
+  const getUsuario = React.useCallback(async () => {
     const usuarioData = await getPerfildoUsuarioLogado(supabase);
     setUsuario(usuarioData);
-  };
+  }, [supabase]);
 
   useEffect(() => {
     getUsuario();
-  }, []);
+  }, [getUsuario]);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -171,7 +171,10 @@ export default function BasePage({ children, labelNavBar }: BasePage) {
               if (item.path === "/usuarios" && usuario && usuario.role !== 1)
                 return;
               return (
-                <ListItemButton onClick={() => router.push(item.path)}>
+                <ListItemButton
+                  onClick={() => router.push(item.path)}
+                  key={item.nome}
+                >
                   <ListItemIcon key={item.nome}>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.nome} />
                 </ListItemButton>

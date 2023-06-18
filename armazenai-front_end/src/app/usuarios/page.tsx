@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { SnackbarProvider } from "notistack";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Database } from "../../../public/types/database";
 import { FormularioCadastro } from "../cadastro/page";
 import UsuarioFormAtualizacao, {
@@ -41,7 +41,7 @@ export default function UsuariosPage() {
   const supabase = createClientComponentClient<Database>();
   const idUsuarioAtual = useRef<string | null>(null);
 
-  const getUsuarios = async () => {
+  const getUsuarios = useCallback(async () => {
     const { data, error } = await supabase.from("profiles").select("*");
     if (error)
       snackBarErro(
@@ -53,7 +53,7 @@ export default function UsuariosPage() {
 
     setLoadingData(false);
     return;
-  };
+  }, [supabase]);
 
   const handleDeletarBotao = (
     id: number,
@@ -137,11 +137,11 @@ export default function UsuariosPage() {
 
   useEffect(() => {
     getUsuarios();
-  }, []);
+  }, [getUsuarios]);
 
   useEffect(() => {
     getUsuarios();
-  }, [openEditModalForm]);
+  }, [getUsuarios, openEditModalForm]);
 
   return (
     <SnackbarProvider>

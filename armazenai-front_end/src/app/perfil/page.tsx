@@ -28,7 +28,7 @@ export default function Perfil() {
       }
     };
     getUser();
-  }, []);
+  }, [supabase]);
 
   if (!user)
     return (
