@@ -13,7 +13,7 @@ import BasePage from "../components/navbar/menu";
 import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 
-export default function Cliente() {
+export default function ClientePage() {
   const [openModal, setOpenModal] = useState(false);
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();

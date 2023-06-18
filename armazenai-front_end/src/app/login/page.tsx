@@ -102,7 +102,7 @@ export default function Login() {
           >
             <img src="/assets/logo.png" width={225}></img>
             <Typography component="h1" variant="h5" sx={{ my: 1 }}>
-              Login
+              Seja vem vindo ao <strong>Armazenaí</strong>
             </Typography>
             <Box
               component="form"
