@@ -70,8 +70,6 @@ export default function Cliente() {
     setLoading(true);
 
     if (id) {
-      console.log(id);
-      console.log("Nome", nome);
       const { status, error, statusText } = await supabase
         .from("cliente")
         .update({
@@ -81,7 +79,6 @@ export default function Cliente() {
         })
         .eq("id", id);
 
-      console.log("status", status, statusText, error);
       if (error || status !== 204) {
         snackBarErro("Houve um erro ao atualizar as informações do cliente.");
         setLoading(false);
@@ -126,7 +123,6 @@ export default function Cliente() {
       .eq("id", idCLienteAtual.current);
     if (error) console.log(error);
     if (status === 204) {
-      console.log("Deletado com sucesso");
       setClientes((state) =>
         state.filter((s) => s.id !== idCLienteAtual.current)
       );

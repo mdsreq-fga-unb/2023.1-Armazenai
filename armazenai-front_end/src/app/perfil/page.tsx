@@ -15,7 +15,6 @@ export default function Perfil() {
   useEffect(() => {
     const getUser = async () => {
       const user = await supabase.auth.getUser();
-      console.log(user);
       if (!user || !user.data.user?.id) return redirect("/");
 
       const { data } = await supabase

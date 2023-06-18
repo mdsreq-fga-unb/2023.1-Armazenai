@@ -34,7 +34,6 @@ export default function ClienteForm({
   onSubmit,
   loading,
 }: formCliente) {
-  console.log(cliente);
   const { formState, register, control, handleSubmit } =
     useForm<FormularioCliente>({
       defaultValues: cliente
