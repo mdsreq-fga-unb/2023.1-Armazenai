@@ -167,7 +167,7 @@ export default function TabelaBase<T extends Record<string, unknown>>({
                     {value as React.ReactNode}
                   </TableCell>
                 ) : (
-                  <TableCell>Vazio</TableCell>
+                  <TableCell key={"vazio"}>Vazio</TableCell>
                 )
               )}
               <TableCell>
