@@ -18,6 +18,7 @@ import TableRow from "@mui/material/TableRow";
 import { useTheme } from "@mui/material/styles";
 import * as React from "react";
 import { useState } from "react";
+import LoadingComponente from "../loading/loadingComponente";
 
 interface TabelaBasePaginacao {
   count: number;
@@ -134,11 +135,7 @@ export default function TabelaBase<T extends Record<string, unknown>>({
   };
 
   if (loadingData) {
-    return (
-      <>
-        <h1>Carregando...</h1>
-      </>
-    );
+    return <LoadingComponente />;
   }
 
   const emptyRows =
