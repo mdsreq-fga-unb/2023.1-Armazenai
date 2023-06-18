@@ -1,11 +1,11 @@
 "use client";
 import { Copyright } from "@mui/icons-material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Paper } from "@mui/material";
+import { ListItemButton, ListItemIcon, Paper, Tooltip } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,9 +13,12 @@ import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
+import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import { mainListItems } from "./listItems";
 
@@ -71,10 +74,14 @@ const Drawer = styled(MuiDrawer, {
 
 type BasePage = {
   children: React.ReactNode;
+  labelNavBar?: string;
 };
 
-export default function BasePage({ children }: BasePage) {
+export default function BasePage({ children, labelNavBar }: BasePage) {
   const [open, setOpen] = React.useState(true);
+  const supabase = createClientComponentClient();
+  const router = useRouter();
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -100,6 +107,7 @@ export default function BasePage({ children }: BasePage) {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             component="h1"
             variant="h6"
@@ -107,13 +115,26 @@ export default function BasePage({ children }: BasePage) {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            Dashboard
+            {labelNavBar ? labelNavBar : "EGL"}
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <Tooltip title="Perfil">
+            <IconButton color="inherit" onClick={() => router.push("/perfil")}>
+              <AccountCircleIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Sair">
+            <IconButton
+              color="inherit"
+              onClick={() =>
+                supabase.auth
+                  .signOut()
+                  .then(() => router.push("/"))
+                  .catch((e) => console.log(e))
+              }
+            >
+              <LogoutIcon />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -130,7 +151,16 @@ export default function BasePage({ children }: BasePage) {
           </IconButton>
         </Toolbar>
         <Divider />
-        <List component="nav">{mainListItems}</List>
+        <List component="nav">
+          <Box sx={{ height: "92vh" }}>
+            {mainListItems.map((item) => (
+              <ListItemButton onClick={() => router.push(item.path)}>
+                <ListItemIcon key={item.nome}>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.nome} />
+              </ListItemButton>
+            ))}
+          </Box>
+        </List>
       </Drawer>
       <Box
         component="main"

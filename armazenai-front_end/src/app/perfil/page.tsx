@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Database } from "../../../public/types/database";
 import { Usuario } from "../components/formulario/usuarioFormAtualizacao";
-import BasePage from "../components/navbar/menu";
+import BasePage from "../components/navbar/basePage";
 import PerfilInfo from "./perfil-info";
 
 export default function Perfil() {
@@ -15,7 +15,6 @@ export default function Perfil() {
   useEffect(() => {
     const getUser = async () => {
       const user = await supabase.auth.getUser();
-      console.log(user);
       if (!user || !user.data.user?.id) return redirect("/");
 
       const { data } = await supabase

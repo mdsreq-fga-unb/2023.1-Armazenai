@@ -4,4 +4,5 @@ export type Cliente = {
   id?: number;
   nome: string;
   telefone: string;
+  cnpj: string;
 };
