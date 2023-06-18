@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Head from "next/head";
 import { useRouter } from "next/navigation";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
@@ -92,7 +93,8 @@ export default function SignUp() {
     }
 
     snackBarSucesso(
-      "Usuário criado com sucesso! Confirme seu email para ter acesso ao sistema!"
+      "Usuário criado com sucesso! Confirme seu email para ter acesso ao sistema!",
+      { autoHideDuration: 5000 }
     );
 
     router.push("/");
@@ -101,6 +103,9 @@ export default function SignUp() {
 
   return (
     <Paper elevation={3} sx={{ mx: 10, my: 3, padding: 1 }}>
+      <Head>
+        <title>Cadastro - EGL</title>
+      </Head>
       <SnackbarProvider />
       <Container component="main">
         <CssBaseline />
