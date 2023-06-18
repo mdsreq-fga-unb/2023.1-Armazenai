@@ -39,7 +39,6 @@ export default function UsuariosPage() {
   const [openEditModalForm, setOpenEditModalForm] = useState(false);
   const [openCadastroModalForm, setOpenCadastroModalForm] = useState(false);
   const [CPFError, setCPFError] = useState(false);
-  const [filtroAtivado, setFilterAtivado] = useState(false);
   const supabase = createClientComponentClient<Database>();
   const idUsuarioAtual = useRef<string | null>(null);
 
