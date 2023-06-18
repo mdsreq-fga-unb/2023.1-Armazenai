@@ -26,6 +26,7 @@ import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import TabelaBase from "../components/tabela/tabelaBase";
 import { chekcCpfDuplicated } from "../helpers/supabase/checkCpfDuplicated";
+import FiltroUsuarios, { FiltroUsuarioForm } from "./filtroUsuarios";
 
 export default function UsuariosPage() {
   const [loadingData, setLoadingData] = useState(true);
@@ -38,22 +39,37 @@ export default function UsuariosPage() {
   const [openEditModalForm, setOpenEditModalForm] = useState(false);
   const [openCadastroModalForm, setOpenCadastroModalForm] = useState(false);
   const [CPFError, setCPFError] = useState(false);
+  const [filtroAtivado, setFilterAtivado] = useState(false);
   const supabase = createClientComponentClient<Database>();
   const idUsuarioAtual = useRef<string | null>(null);
 
-  const getUsuarios = useCallback(async () => {
-    const { data, error } = await supabase.from("profiles").select("*");
-    if (error)
-      snackBarErro(
-        `Houve um erro ao pegar as informações dos usuários. Descrição: ${error}`
-      );
-    if (data) {
-      setUsuarios(data);
-    }
+  const getUsuarios = useCallback(
+    async (filter?: FiltroUsuarioForm) => {
+      setLoadingData(true);
 
-    setLoadingData(false);
-    return;
-  }, [supabase]);
+      let query = supabase.from("profiles").select("*");
+      if (filter && filter?.nome !== "" && filter.nome)
+        query = query.ilike("nome", `%${filter.nome}%`);
+      if (filter && filter?.cpf !== "" && filter.cpf)
+        query = query.ilike("nome", `%${filter.cpf}%`);
+      if (filter && filter?.telefone !== "" && filter.telefone)
+        query = query.ilike("nome", `%${filter.telefone}%`);
+
+      const { data, error } = await query;
+
+      if (error)
+        snackBarErro(
+          `Houve um erro ao pegar as informações dos usuários. Descrição: ${error}`
+        );
+      if (data) {
+        setUsuarios(data);
+      }
+
+      setLoadingData(false);
+      return;
+    },
+    [supabase]
+  );
 
   const handleDeletarBotao = (
     id: number,
@@ -143,6 +159,14 @@ export default function UsuariosPage() {
     getUsuarios();
   }, [getUsuarios, openEditModalForm]);
 
+  const submitFilter = (data: FiltroUsuarioForm) => {
+    getUsuarios({
+      cpf: data.cpf ?? "",
+      nome: data.nome ?? "",
+      telefone: data.telefone ?? "",
+    });
+  };
+
   return (
     <SnackbarProvider>
       <BasePage labelNavBar="Painel de Usuários">
@@ -188,6 +212,7 @@ export default function UsuariosPage() {
           <strong>Usuários</strong>
         </Typography>
         <Container component="div" sx={{ p: 2 }}>
+          <FiltroUsuarios submitFilter={getUsuarios} />
           <TabelaBase<Usuario>
             rows={usuarios}
             loadingData={loadingData}
@@ -196,7 +221,6 @@ export default function UsuariosPage() {
             handleDeletarBotao={handleDeletarBotao}
           />
         </Container>
-
         <Dialog
           open={openDeleteDialog}
           onClose={() => setOpenDeleteDialog(false)}
