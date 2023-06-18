@@ -1,4 +1,5 @@
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
@@ -163,7 +164,10 @@ export default function TabelaBase<T extends Record<string, unknown>>({
               {Object.values(row).map(
                 (value, columnIndex) =>
                   (value as React.ReactNode) !== null && (
-                    <TableCell component={columnIndex === 1 ? "th" : undefined}>
+                    <TableCell
+                      key={columnIndex}
+                      component={columnIndex === 1 ? "th" : undefined}
+                    >
                       {value as React.ReactNode}
                     </TableCell>
                   )
@@ -173,10 +177,12 @@ export default function TabelaBase<T extends Record<string, unknown>>({
                   <IconButton
                     onClick={() => handleEditarBotao(index, page, rowsPerPage)}
                   >
-                    <DeleteIcon />
+                    <EditIcon />
                   </IconButton>
-                  <IconButton>
-                    {/* <DeleteIcon onClick={() => handleDeletarBotao()} /> */}
+                  <IconButton
+                    onClick={() => handleDeletarBotao(index, page, rowsPerPage)}
+                  >
+                    <DeleteIcon />
                   </IconButton>
                 </Box>
               </TableCell>

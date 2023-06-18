@@ -1,10 +1,10 @@
 import { errosFormularioMensagem } from "@/app/helpers/validator/mensagensDeErro";
 import { phoneRegExp } from "@/app/helpers/validator/phoneRegexValidacao";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import LoadingButton from "@mui/lab/LoadingButton";
 
 import { Cliente } from "../../../../public/types/main-types";
 
@@ -34,12 +34,13 @@ export default function ClienteForm({
   onSubmit,
   loading,
 }: formCliente) {
+  console.log(cliente);
   const { formState, register, control, handleSubmit } =
     useForm<FormularioCliente>({
       defaultValues: cliente
         ? {
-            email: cliente.email,
             id: cliente.id,
+            email: cliente.email,
             nome: cliente.nome,
             telefone: cliente.telefone,
           }
@@ -64,7 +65,7 @@ export default function ClienteForm({
         {cliente ? "Atualizar cliente" : "Adicionar cliente"}
       </Typography>
       <Grid container>
-        <Grid xs={6} sm={12} my={1}>
+        <Grid item xs={6} sm={12} my={1}>
           <TextField
             label="Nome"
             {...register("nome")}
@@ -75,23 +76,21 @@ export default function ClienteForm({
             helperText={errors.nome?.message}
           />
         </Grid>
-        <Grid xs={6} sm={12} my={1}>
+        <Grid item xs={6} sm={12} my={1}>
           <TextField
             label="Telefone"
             {...register("telefone")}
             required
-            autoFocus
             fullWidth
             error={!!errors.telefone}
             helperText={errors.telefone?.message}
           />
         </Grid>
-        <Grid xs={6} sm={12} my={1}>
+        <Grid item xs={6} sm={12} my={1}>
           <TextField
             label="Email"
             {...register("email")}
             required
-            autoFocus
             fullWidth
             error={!!errors.email}
             helperText={errors.email?.message}
