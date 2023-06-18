@@ -44,6 +44,7 @@ const schemaFormValidacao = yup.object({
 export type FormularioCadastro = yup.InferType<typeof schemaFormValidacao>;
 
 export default function SignUp() {
+  const [loading, setLoading] = useState(false);
   const [CPFError, setCPFError] = useState(false);
   const supabase = createClientComponentClient<Database>();
 
@@ -67,6 +68,8 @@ export default function SignUp() {
     password,
     telefone,
   }: FormularioCadastro) => {
+    setLoading(true);
+
     const cpfDuplicado = await chekcCpfDuplicated(cpf);
     if (cpfDuplicado) {
       setCPFError(true);
@@ -89,6 +92,7 @@ export default function SignUp() {
 
     if (error || status !== 204) {
       snackBarErro("Houve um erro ao cadastrar");
+      setLoading(false);
       return;
     }
 
@@ -97,6 +101,7 @@ export default function SignUp() {
       { autoHideDuration: 5000 }
     );
 
+    setLoading(false);
     router.push("/");
     return;
   };
@@ -131,7 +136,11 @@ export default function SignUp() {
           >
             CPF Duplicado!
           </Alert>
-          <UsuarioForm onSubmit={onSubmit} />
+          <UsuarioForm
+            onSubmit={onSubmit}
+            loading={loading}
+            formularioInterno={false}
+          />
         </Box>
         <Copyright />
       </Container>
