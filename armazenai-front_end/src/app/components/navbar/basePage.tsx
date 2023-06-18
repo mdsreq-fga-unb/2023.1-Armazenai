@@ -1,6 +1,8 @@
 "use client";
 import { Copyright } from "@mui/icons-material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import { ListItemButton, ListItemIcon, Paper, Tooltip } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
@@ -11,16 +13,14 @@ import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
+import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import * as React from "react";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { mainListItems } from "./listItems";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ListItemText from "@mui/material/ListItemText";
+import * as React from "react";
+import { mainListItems } from "./listItems";
 
 const drawerWidth: number = 240;
 
@@ -74,9 +74,10 @@ const Drawer = styled(MuiDrawer, {
 
 type BasePage = {
   children: React.ReactNode;
+  labelNavBar?: string;
 };
 
-export default function BasePage({ children }: BasePage) {
+export default function BasePage({ children, labelNavBar }: BasePage) {
   const [open, setOpen] = React.useState(true);
   const supabase = createClientComponentClient();
   const router = useRouter();
@@ -114,7 +115,7 @@ export default function BasePage({ children }: BasePage) {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            Dashboard
+            {labelNavBar ? labelNavBar : "EGL"}
           </Typography>
           <Tooltip title="Perfil">
             <IconButton color="inherit" onClick={() => router.push("/perfil")}>
