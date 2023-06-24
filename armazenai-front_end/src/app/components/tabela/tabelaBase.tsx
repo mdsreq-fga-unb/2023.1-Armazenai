@@ -158,16 +158,17 @@ export default function TabelaBase<T extends Record<string, unknown>>({
             : rows
           ).map((row, index) => (
             <TableRow key={index}>
-              {Object.values(row).map(
-                (value, columnIndex) =>
-                  (value as React.ReactNode) !== null && (
-                    <TableCell
-                      key={columnIndex}
-                      component={columnIndex === 1 ? "th" : undefined}
-                    >
-                      {value as React.ReactNode}
-                    </TableCell>
-                  )
+              {Object.values(row).map((value, columnIndex) =>
+                (value as React.ReactNode) !== null ? (
+                  <TableCell
+                    key={columnIndex}
+                    component={columnIndex === 1 ? "th" : undefined}
+                  >
+                    {value as React.ReactNode}
+                  </TableCell>
+                ) : (
+                  <TableCell key={"vazio"}>Vazio</TableCell>
+                )
               )}
               <TableCell>
                 <Box component="div" display="flex" flexDirection="row">

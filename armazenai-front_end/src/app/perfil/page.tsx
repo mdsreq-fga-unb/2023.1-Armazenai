@@ -9,7 +9,7 @@ import BasePage from "../components/navbar/basePage";
 import PerfilInfo from "./perfil-info";
 
 export default function Perfil() {
-  const [user, setUser] = useState<Usuario | null>(null);
+  const [user, setUser] = useState<Usuario | null | undefined>(null);
   const supabase = createClientComponentClient<Database>();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Perfil() {
       }
     };
     getUser();
-  }, []);
+  }, [supabase]);
 
   if (!user)
     return (

@@ -1,4 +1,5 @@
 "use client";
+import { getPerfildoUsuarioLogado } from "@/app/helpers/supabase/getUsuarioLogado";
 import { Copyright } from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -20,6 +21,9 @@ import { styled } from "@mui/material/styles";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import * as React from "react";
+import { useEffect } from "react";
+import { Database } from "../../../../public/types/database";
+import { Usuario } from "../formulario/usuarioFormAtualizacao";
 import { mainListItems } from "./listItems";
 
 const drawerWidth: number = 240;
@@ -79,8 +83,18 @@ type BasePage = {
 
 export default function BasePage({ children, labelNavBar }: BasePage) {
   const [open, setOpen] = React.useState(true);
-  const supabase = createClientComponentClient();
+  const [usuario, setUsuario] = React.useState<Usuario | null>(null);
+  const supabase = createClientComponentClient<Database>();
   const router = useRouter();
+
+  const getUsuario = React.useCallback(async () => {
+    const usuarioData = await getPerfildoUsuarioLogado(supabase);
+    setUsuario(usuarioData);
+  }, [supabase]);
+
+  useEffect(() => {
+    getUsuario();
+  }, [getUsuario]);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -153,12 +167,19 @@ export default function BasePage({ children, labelNavBar }: BasePage) {
         <Divider />
         <List component="nav">
           <Box sx={{ height: "92vh" }}>
-            {mainListItems.map((item) => (
-              <ListItemButton onClick={() => router.push(item.path)}>
-                <ListItemIcon key={item.nome}>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.nome} />
-              </ListItemButton>
-            ))}
+            {mainListItems.map((item) => {
+              if (item.path === "/usuarios" && usuario && usuario.role !== 1)
+                return;
+              return (
+                <ListItemButton
+                  onClick={() => router.push(item.path)}
+                  key={item.nome}
+                >
+                  <ListItemIcon key={item.nome}>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.nome} />
+                </ListItemButton>
+              );
+            })}
           </Box>
         </List>
       </Drawer>

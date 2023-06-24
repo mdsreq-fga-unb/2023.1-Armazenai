@@ -29,12 +29,12 @@ export type Usuario = {
   id: string;
   nome: string | null;
   telefone: string | null;
-  updated_at: string | null;
+  role: number | null;
 };
 
 type formAtualizacao = {
   usuario: Usuario;
-  setUsuario: Dispatch<SetStateAction<Usuario | null>>;
+  setUsuario: Dispatch<SetStateAction<Usuario | null | undefined>>;
 };
 
 export default function UsuarioFormAtualizacao({

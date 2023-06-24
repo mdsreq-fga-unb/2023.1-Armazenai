@@ -1,7 +1,8 @@
-import * as React from "react";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleIcon from "@mui/icons-material/People";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import GroupIcon from "@mui/icons-material/Group";
+import PeopleIcon from "@mui/icons-material/People";
+import * as React from "react";
 
 type ItemMenu = {
   icon: React.ReactNode;
@@ -34,5 +35,10 @@ export const mainListItems: ItemMenu[] = [
     icon: <AccountCircleIcon />,
     nome: "Perfil",
     path: "/perfil",
+  },
+  {
+    icon: <GroupIcon />,
+    nome: "Usuários",
+    path: "/usuarios",
   },
 ];
