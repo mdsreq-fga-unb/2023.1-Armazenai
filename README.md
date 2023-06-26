@@ -9,10 +9,10 @@
 O projeto "Armazenaí" é uma solução web criada para a empresa EGL. Nossa plataforma oferece serviços de controle de processos e realização de orçamentos primários, com geração de gráficos que ajudam na tomada de decisões do cliente e dos representantes.
 
 # Documentação
-[Clique Aqui] https://mdsreq-fga-unb.github.io/2023.1-Armazenai/ para acessar a documentação do projeto.
+[Clique Aqui](https://mdsreq-fga-unb.github.io/2023.1-Armazenai/) para acessar a documentação do projeto.
 
 # Tecnologias
-![Supabase](https://www.vectorlogo.zone/util/preview.html?image=/logos/supabase/supabase-ar21.svg)
+![Supabase](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*MpDbGkmXHLzow_m63qJBPA.jpeg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
