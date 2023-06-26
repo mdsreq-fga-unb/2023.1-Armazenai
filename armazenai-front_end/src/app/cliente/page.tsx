@@ -11,12 +11,11 @@ import { SnackbarProvider } from "notistack";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Database } from "../../../public/types/database";
 import { Cliente } from "../../../public/types/main-types";
-import ClienteForm from "../components/formulario/clienteFormCadastro";
 import ModalForm from "../components/modal/modal-form";
 import BasePage from "../components/navbar/basePage";
-import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import TabelaBase from "../components/tabela/tabelaBase";
+import StepperCliente from "./stepperCliente";
 
 type ClienteTable = {
   id: number;
@@ -61,52 +60,10 @@ export default function Cliente() {
     getClientes();
   }, [getClientes, router, supabase.auth]);
 
-  const onSubmit = async ({
-    nome,
-    email,
-    created_at,
-    id,
-    telefone,
-    cnpj,
-  }: Cliente) => {
-    setLoading(true);
+  useEffect(() => {
+    getClientes();
+  }, [getClientes, openModal]);
 
-    if (id) {
-      const { status, error, statusText } = await supabase
-        .from("cliente")
-        .update({
-          email: email,
-          nome: nome,
-          telefone: telefone,
-          cnpj: cnpj,
-        })
-        .eq("id", id);
-
-      if (error || status !== 204) {
-        snackBarErro("Houve um erro ao atualizar as informações do cliente.");
-        setLoading(false);
-        return;
-      }
-    } else {
-      const { error } = await supabase.from("cliente").insert({
-        email,
-        nome,
-        telefone,
-        cnpj,
-      });
-
-      if (error) {
-        snackBarErro("Houve um erro ao salvar as informações do cliente.");
-        setLoading(false);
-        return;
-      }
-    }
-
-    snackBarSucesso(`Cliente ${id ? "atualizado" : "criado"}  com sucesso.`);
-    setLoading(false);
-    await getClientes();
-    setOpenModal(false);
-  };
   const idCLienteAtual = useRef<number | null>(null);
   const handleDeletar = (id: number, pagina: number, porPagina: number) => {
     idCLienteAtual.current = clientes.slice(pagina * porPagina)[id].id ?? null;
@@ -149,11 +106,7 @@ export default function Cliente() {
         Adicionar cliente
       </Button>
       <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
-        <ClienteForm
-          onSubmit={onSubmit}
-          loading={loading}
-          cliente={clienteSendoEditado}
-        />
+        <StepperCliente setOpenModal={setOpenModal} />
       </ModalForm>
       <Container component="div">
         <Typography variant="h2" fontSize={24} my={2}>
