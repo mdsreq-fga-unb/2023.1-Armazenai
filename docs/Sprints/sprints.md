@@ -97,6 +97,7 @@ A ser realizada.
 
 | Data | Membros envolvidos | Atividade desempenhada |
 |--- |--- |--- |
+| 25/06/2023 | Kaio Enzo, Jheniffer Castro | Desenvolvimento da US01 |
 
 ## Planjeamento das sprints
 
