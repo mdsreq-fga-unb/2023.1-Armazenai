@@ -84,6 +84,41 @@ Foi definido a divisão das sprint em 1 semana. Com a definição das histórias
 | US08 | Lara Giuliana e Mateus |
 | US09 | Kaio Enzo |
 | US12 | Kaio Enzo |
+| US13 | Kaio Enzo e Lucas Meireles |
+
+### Sprint Review
+
+A ser realizada.
+
+### Sprint Retrospective
+
+A retrospectiva foi realizada no dia 26/06/2023. Os membros da equipe comentaram sobre o andamento das sprints e registraram os débitos técnicos da sprint 4. Foi definido que a próxima sprint será realizada em 2 semana e que serão trabalhadas as histórias do MVP2. Sendo que a equipe se reunira em uma retrospectiva intermediária no dia 03/07/2023 para avaliar o andamento da sprint e definir as histórias a serem trabalhadas na segunda semana. Essa estratégia foi definidada a partir do feedback do professor sobre a necessidade de maior organização da equipe para o desenvolvimento do projeto.
+
+### Pair Programming
+
+| Data | Membros envolvidos | Atividade desempenhada |
+|--- |--- |--- |
+| 25/06/2023 | Kaio Enzo, Jheniffer Castro | Desenvolvimento da US01 |
+
+# Sprint 5
+
+Data início : 26/06/2023
+
+Data término : 09/07/2023
+
+### Sprint Planning
+
+Recebe-se os débitos técnicos da sprint anterior, no caso a US08 para ser sanada durante a realização da presente sprint.
+Foi definido a divisão das sprint em 2 semana. Com a definição das histórias de usuário a serem trabalhadas na sprint, de acordo com o quadro abaixo:
+
+| US | Responsável |
+|--- |--- |
+| US02 | Jheniffer Castro |
+| US05 | Mateus |
+| US08 | Lara Giuliana e Mateus |
+| US10 | Lucas Meireles |
+| US11 | Lara Giuliana |
+| US16 | Lara Giuliana e Mateus |
 
 ### Sprint Review
 
@@ -93,22 +128,16 @@ A ser realizada.
 
 A ser realizada.
 
-### Pair Programming
-
-| Data | Membros envolvidos | Atividade desempenhada |
-|--- |--- |--- |
-| 25/06/2023 | Kaio Enzo, Jheniffer Castro | Desenvolvimento da US01 |
-
 ## Planjeamento das sprints
 
 | Sprint | Data de início | Data de término | Produto(Entrega) |
 |--- |--- |--- |--- |
 | Sprint 1 | 24/04/2023 | 07/05/2023 | MVP e Planejamento do projeto |
 | Sprint 2 | 08/05/2023 | 21/05/2023 | Definição de backlog |
-| Sprint 3 | 22/05/2023 | 11/06/2023 | Reajuste do produto e bases front-end e back-end, US04, US05, US08, US12, US13, US16, US11 |
-| Sprint 4 | 12/06/2023 | 25/06/2023 | US01, US06, US07, US09, US10 |
-| Sprint 5 | 26/06/2023 | 09/07/2023 | US02, US03, US11, US14, US15, US17, US18 |
-| Sprint 6 | 10/07/2023 | 17/07/2023 | US19, US20, US21 |
+| Sprint 3 | 22/05/2023 | 11/06/2023 | Reajuste do produto e bases front-end e back-end |
+| Sprint 4 | 12/06/2023 | 25/06/2023 | US01, US04, US08, US09, US12, US13 |
+| Sprint 5 | 26/06/2023 | 09/07/2023 | US02, US05, US08, US11, US16 |
+| Sprint 6 | 10/07/2023 | 17/07/2023 | US03, US06,  US07 |
 
 ## Histórico de revisões
 
@@ -121,3 +150,4 @@ A ser realizada.
 | 09/06/2023 | 0.5 | Registro Sprints 3 e atualizações | Lucas Meireles e Lara Giuliana |
 | 12/06/2023 | 0.6 | Atualização de Sprint e atualizações | Lucas Meireles, Lara Giuliana, Jhenifer Castro |
 | 18/06/2023 | 0.7 | Atualização de Sprint | Kaio Enzo |
+| 18/06/2023 | 0.7 | Atualização de Sprint e Planning de nova Sprint | Kaio Enzo, Lucas Meireles, Jhenifer Castro, Lara Giuliana |
