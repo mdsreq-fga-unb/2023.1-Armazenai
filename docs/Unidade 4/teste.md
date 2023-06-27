@@ -16,8 +16,13 @@ O teste manual deve testar cenários para provar que as regras de negócio estã
 3. Escolher os dados de saída
 4. Executar o teste
 5. Aferir o resultado
+
 O teste manual deve ser realizado por um membro da equipe que não seja o desenvolvedor da história de usuário. O desenvolvedor da história de usuário deve acompanhar o teste e realizar as correções necessárias.
 O teste manual deve ser realizado em todos os cenários de teste definidos para a história de usuário. Caso algum cenário de teste não seja aprovado, a história de usuário deve ser rejeitada e o desenvolvedor deve realizar as correções necessárias.
+
+### Testes Unitários e de Integração automatizados
+
+Para realização dos testes unitários utilizaremos a biblioteca Jest. Onde faremos testes de caixa branca e caixa preta. Os testes de caixa branca serão realizados para garantir que as regras de negócio estão sendo respeitadas. Já os testes de caixa preta serão realizados para garantir que os dados estão sendo persistidos corretamente.
 
 ## Estratégia de testes para o MVP1
 
