@@ -41,4 +41,9 @@ export const mainListItems: ItemMenu[] = [
     nome: "Usuários",
     path: "/usuarios",
   },
+  {
+    icon: <GroupIcon />,
+    nome: "Pedidos",
+    path: "/pedidos",
+  },
 ];
