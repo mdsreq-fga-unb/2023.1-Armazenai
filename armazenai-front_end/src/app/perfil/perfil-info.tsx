@@ -33,7 +33,7 @@ export default function PerfilInfo({
   setUsuario,
 }: {
   usuario: Usuario;
-  setUsuario: Dispatch<SetStateAction<Usuario | null>>;
+  setUsuario: Dispatch<SetStateAction<Usuario | null | undefined>>;
 }) {
   const [openModal, setOpenModal] = useState(false);
 

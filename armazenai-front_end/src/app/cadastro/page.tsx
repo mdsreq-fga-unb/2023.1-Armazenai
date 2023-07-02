@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Head from "next/head";
 import { useRouter } from "next/navigation";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
@@ -43,6 +44,7 @@ const schemaFormValidacao = yup.object({
 export type FormularioCadastro = yup.InferType<typeof schemaFormValidacao>;
 
 export default function SignUp() {
+  const [loading, setLoading] = useState(false);
   const [CPFError, setCPFError] = useState(false);
   const supabase = createClientComponentClient<Database>();
 
@@ -66,6 +68,8 @@ export default function SignUp() {
     password,
     telefone,
   }: FormularioCadastro) => {
+    setLoading(true);
+
     const cpfDuplicado = await chekcCpfDuplicated(cpf);
     if (cpfDuplicado) {
       setCPFError(true);
@@ -88,19 +92,25 @@ export default function SignUp() {
 
     if (error || status !== 204) {
       snackBarErro("Houve um erro ao cadastrar");
+      setLoading(false);
       return;
     }
 
     snackBarSucesso(
-      "Usuário criado com sucesso! Confirme seu email para ter acesso ao sistema!"
+      "Usuário criado com sucesso! Confirme seu email para ter acesso ao sistema!",
+      { autoHideDuration: 5000 }
     );
 
+    setLoading(false);
     router.push("/");
     return;
   };
 
   return (
     <Paper elevation={3} sx={{ mx: 10, my: 3, padding: 1 }}>
+      <Head>
+        <title>Cadastro - EGL</title>
+      </Head>
       <SnackbarProvider />
       <Container component="main">
         <CssBaseline />
@@ -126,7 +136,11 @@ export default function SignUp() {
           >
             CPF Duplicado!
           </Alert>
-          <UsuarioForm onSubmit={onSubmit} />
+          <UsuarioForm
+            onSubmit={onSubmit}
+            loading={loading}
+            formularioInterno={false}
+          />
         </Box>
         <Copyright />
       </Container>

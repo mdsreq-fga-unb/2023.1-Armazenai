@@ -32,11 +32,16 @@ type FormularioCadastro = yup.InferType<typeof schemaFormValidacao>;
 interface UsuarioFormProps {
   onSubmit: (formData: FormularioCadastro) => Promise<any>;
   estadoInicial?: FormularioCadastro;
+  loading: boolean;
+  // Essa propriedade existe pois na tela de "Usuários" é possível cadastrar um novo cliente, logo algumas informações são desnecessárias, como o footer com link para logar.
+  formularioInterno: boolean;
 }
 
 export default function UsuarioForm({
   onSubmit,
   estadoInicial,
+  loading,
+  formularioInterno,
 }: UsuarioFormProps) {
   const { register, handleSubmit, formState, control } =
     useForm<FormularioCadastro>({
@@ -49,8 +54,6 @@ export default function UsuarioForm({
       resolver: yupResolver(schemaFormValidacao),
     });
   const { errors } = formState;
-
-  console.log(errors);
 
   return (
     <>
