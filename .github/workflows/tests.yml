@@ -1,7 +1,7 @@
 name: test-workflow
 on:
   pull_request:
-  types: [review_requested]
+    types: [review_requested]
 jobs:
   build:
     runs-on: ubuntu-latest
