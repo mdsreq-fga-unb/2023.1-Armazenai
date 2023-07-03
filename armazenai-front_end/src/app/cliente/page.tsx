@@ -25,7 +25,7 @@ type ClienteTable = {
   email: string;
 };
 
-export default function Cliente() {
+export default function ClientePage() {
   const [openModal, setOpenModal] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [loading, setLoading] = useState(false);

@@ -1,5 +1,6 @@
 "use client";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { LoadingButton } from "@mui/lab";
 import {
   Dialog,
   DialogActions,
@@ -26,7 +27,6 @@ import Copyright from "../components/copyright/copyright";
 import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import { errosFormularioMensagem } from "../helpers/validator/mensagensDeErro";
-import { LoadingButton } from "@mui/lab";
 
 const schemaLogin = yup.object({
   email: yup
@@ -106,7 +106,7 @@ export default function Login() {
           >
             <img src="/assets/logo.png" width={225}></img>
             <Typography component="h1" variant="h5" sx={{ my: 1 }}>
-              Login
+              Seja vem vindo ao <strong>Armazenaí</strong>
             </Typography>
             <Box
               component="form"
@@ -118,6 +118,7 @@ export default function Login() {
                 margin="normal"
                 required
                 fullWidth
+                aria-label="email"
                 id="email"
                 label="Endereço de email"
                 autoComplete="email"
@@ -131,9 +132,10 @@ export default function Login() {
                 required
                 fullWidth
                 label="Senha"
+                aria-label="senha"
                 type="password"
                 {...register("senha")}
-                id="password"
+                id="senha"
                 autoComplete="current-password"
                 error={!!errors.senha}
                 helperText={errors.senha?.message}
