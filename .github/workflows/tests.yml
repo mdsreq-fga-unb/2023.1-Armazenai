@@ -2,7 +2,7 @@ name: test-workflow
 on: [pull_request]
 defaults:
   run:
-    working-directory: ./armazenai-fron_end
+    working-directory: ./armazenai-front_end
 jobs:
   build:
     runs-on: ubuntu-latest
