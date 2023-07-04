@@ -1,16 +1,9 @@
-import validarCNPJ from "../../src/app/helpers/validator/validarCNPJ";
-import ClienteForm from "../../src/app/components/formulario/clienteFormCadastro";
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Cliente } from "../../public/types/main-types";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { errosFormularioMensagem } from "../../src/app/helpers/validator/mensagensDeErro";
+import { Cliente } from "../../public/types/main-types";
+import ClienteForm from "../../src/app/components/formulario/clienteFormCadastro";
+import validarCNPJ from "../../src/app/helpers/validator/validarCNPJ";
 
 describe("Teste do validador de CNPJ ", () => {
   it("deveria retornar true quando cnpj for válido", () => {
@@ -70,26 +63,48 @@ describe("Teste do formulário de cliente", () => {
     expect(screen.queryByText(/salvar/i)).toBeNull();
   });
 
-  it("Deveria mostrar os erros de formulário quando o formulário for submetido e for inválido", async () => {
+  it("Deveria mostrar os erros de formulário quando o formulário for vazio", async () => {
     const user = userEvent.setup();
 
     render(
       <ClienteForm
         loading={false}
         onSubmit={function (data: Cliente) {
-          console.log(data);
+          return;
         }}
       />
     );
-    const nomeInput = screen.getByLabelText("Nome");
-    const cnpjInput = screen.getByLabelText("CNPJ");
-    const telefoneInput = screen.getByLabelText("Telefone");
-    const emailInput = screen.getByLabelText("Email");
 
-    user.type(nomeInput, "Nome do cliente");
-    user.type(cnpjInput, "123456789");
-    user.type(telefoneInput, "123456789");
-    user.type(emailInput, "email");
+    // Clicar no botão de submit
+    const submitButton = screen.getByRole("button", { name: /salvar/i });
+    user.click(submitButton);
+
+    await waitFor(() => {
+      expect(
+        screen.queryByText("O nome do cliente é obrigatório!")
+      ).toBeInTheDocument();
+      expect(screen.queryByText("O email é obrigatório")).toBeInTheDocument();
+      expect(screen.queryByText("O CNPJ é obrigatório!")).toBeInTheDocument();
+      expect(
+        screen.queryByText("O telefone do cliente é obrigatório!")
+      ).toBeInTheDocument();
+    });
+  });
+
+  it("Deveria mostrar os erros de CNPJ no formulário quando o CNPJ for inválido", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <ClienteForm
+        loading={false}
+        onSubmit={function (data: Cliente) {
+          return;
+        }}
+      />
+    );
+
+    const cnpjInput = screen.getByLabelText("CNPJ");
+    user.type(cnpjInput, "12312312");
 
     // Clicar no botão de submit
     const submitButton = screen.getByRole("button", { name: /salvar/i });
@@ -97,12 +112,38 @@ describe("Teste do formulário de cliente", () => {
 
     await waitFor(() => {
       expect(screen.queryByText("CNPJ inválido!")).toBeInTheDocument();
-      expect(
-        screen.queryByText(errosFormularioMensagem.emailObrigatorio)
-      ).toBeInTheDocument();
-      expect(
-        screen.queryByText("O telefone informado é inválido!")
-      ).toBeInTheDocument();
     });
   });
+
+  it("should call onSubmit when the form is submitted", async () => {
+    const user = userEvent.setup();
+
+    // Create a mock function for onSubmit
+    const onSubmitMock = jest.fn<any, any, Cliente>();
+
+    render(<ClienteForm onSubmit={onSubmitMock} loading={false} />);
+
+    // Fill in the form inputs
+    const nomeInput = screen.getByLabelText("Nome");
+    const cnpjInput = screen.getByLabelText("CNPJ");
+    const telefoneInput = screen.getByLabelText("Telefone");
+    const emailInput = screen.getByLabelText("Email");
+
+    await user.type(nomeInput, "cliente");
+    await user.type(cnpjInput, "03556054000126");
+    await user.type(telefoneInput, "6199909999");
+    await user.type(emailInput, "email@example.com");
+
+    // Submit the form
+    const submitButton = screen.getByRole("button", { name: /salvar/i });
+    await user.click(submitButton);
+
+    // Verify that onSubmit has been called with the expected data
+    await waitFor(() => {
+      expect(onSubmitMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it("deveria cadastrar um cliente e retornar do supabase", async () => {});
+  it("deveria retoranr um erro ao enviar cliente com informações pendentes para o supabase", async () => {});
 });
