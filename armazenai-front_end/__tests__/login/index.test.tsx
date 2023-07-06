@@ -124,7 +124,7 @@ describe("Teste da página inicial de Login", () => {
   it("deveria retornar um erro ao logar com credenciais incorretas", async () => {
     try {
       await axios.post<AuthResponse>(
-        "https://hflbuhswxxfxbsuuvzbv.supabase.co/auth/v1/token?grant_type=password",
+        "https://lyniiwdvsfpsbexrkons.supabase.co/auth/v1/token?grant_type=password",
         {
           email: "invalid-email@example.com",
           password: "invalid-password",
@@ -132,7 +132,7 @@ describe("Teste da página inicial de Login", () => {
         {
           headers: {
             apiKey:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhmbGJ1aHN3eHhmeGJzdXV2emJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODE2ODQ2OTAsImV4cCI6MTk5NzI2MDY5MH0.uLlyBbCh9JYU74ysIggXa_Kg2hmptUitzwS2O9ukuNc",
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bmlpd2R2c2Zwc2JleHJrb25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODUwMjU3ODEsImV4cCI6MjAwMDYwMTc4MX0.YYdZlKJKT4Njbfg0k-a7YEg890f7ulZpCNqndDDf9Uk",
             "Content-Type": "application/json",
           },
         }

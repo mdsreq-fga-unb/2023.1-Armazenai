@@ -43,6 +43,5 @@ export default function validarCNPJ(cnpj: string) {
   }
   resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
   if (resultado != (digitos.charAt(1) as unknown as number)) return false;
-
   return true;
 }

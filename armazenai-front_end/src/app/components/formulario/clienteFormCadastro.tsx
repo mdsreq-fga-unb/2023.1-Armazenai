@@ -1,13 +1,13 @@
-import { errosFormularioMensagem } from "@/app/helpers/validator/mensagensDeErro";
-import { phoneRegExp } from "@/app/helpers/validator/phoneRegexValidacao";
+import { phoneRegExp } from "../../helpers/validator/phoneRegexValidacao";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
-import validarCNPJ from "@/app/helpers/validator/validarCNPJ";
+import validarCNPJ from "../..//helpers/validator/validarCNPJ";
 import { Cliente } from "../../../../public/types/main-types";
+import { errosFormularioMensagem } from "../../helpers/validator/mensagensDeErro";
 
 type formCliente = {
   cliente?: Cliente;
@@ -28,8 +28,8 @@ const schemaClienteForm = yup.object({
     .matches(phoneRegExp, errosFormularioMensagem.telefoneInvalido),
   cnpj: yup
     .string()
-    .required("O CNPJ é obrigatório")
-    .test("validar-cnpj", "CNPJ inválido", (cnpj) => validarCNPJ(cnpj)),
+    .required("O CNPJ é obrigatório!")
+    .test("validar-cnpj", "CNPJ inválido!", (cnpj) => validarCNPJ(cnpj)),
 });
 
 type FormularioCliente = yup.InferType<typeof schemaClienteForm>;
@@ -74,9 +74,12 @@ export default function ClienteForm({
         <Grid item xs={6} sm={12} my={1}>
           <TextField
             label="Nome"
+            aria-label="nome"
+            id="nome"
             {...register("nome")}
-            required
+            // required
             autoFocus
+            type="text"
             fullWidth
             error={!!errors.nome}
             helperText={errors.nome?.message}
@@ -85,9 +88,11 @@ export default function ClienteForm({
         <Grid item xs={6} sm={12} my={1}>
           <TextField
             label="CNPJ"
+            aria-label="cnpj"
+            id="cnpj"
             {...register("cnpj")}
-            required
-            autoFocus
+            // required
+            type="text"
             fullWidth
             error={!!errors.cnpj}
             helperText={errors.cnpj?.message}
@@ -96,9 +101,11 @@ export default function ClienteForm({
         <Grid item xs={6} sm={12} my={1}>
           <TextField
             label="Telefone"
+            // aria-label="telefone"
             {...register("telefone")}
-            required
+            // required
             fullWidth
+            type="text"
             error={!!errors.telefone}
             helperText={errors.telefone?.message}
           />
@@ -106,14 +113,19 @@ export default function ClienteForm({
         <Grid item xs={6} sm={12} my={1}>
           <TextField
             label="Email"
+            aria-label="email"
+            autoComplete="email"
+            id="email"
+            type="email"
             {...register("email")}
-            required
+            // required
             fullWidth
             error={!!errors.email}
             helperText={errors.email?.message}
           />
         </Grid>
         <LoadingButton
+          id="salvar"
           loading={loading}
           variant="contained"
           type="submit"
