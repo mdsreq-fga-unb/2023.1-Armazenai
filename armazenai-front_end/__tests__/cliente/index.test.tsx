@@ -1,9 +1,17 @@
 import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import axios, { AxiosError } from "axios";
 import { Cliente } from "../../public/types/main-types";
 import ClienteForm from "../../src/app/components/formulario/clienteFormCadastro";
 import validarCNPJ from "../../src/app/helpers/validator/validarCNPJ";
+
+type ApiErro = {
+  code: string;
+  details: string | null;
+  hint: string | null;
+  message: string;
+};
 
 describe("Teste do validador de CNPJ ", () => {
   it("deveria retornar true quando cnpj for válido", () => {
@@ -143,7 +151,84 @@ describe("Teste do formulário de cliente", () => {
       expect(onSubmitMock).toHaveBeenCalledTimes(1);
     });
   });
+});
 
-  it("deveria cadastrar um cliente e retornar do supabase", async () => {});
-  it("deveria retoranr um erro ao enviar cliente com informações pendentes para o supabase", async () => {});
+describe("Teste da API de Cliente", () => {
+  let token: string | undefined;
+  let idToDelete: number | undefined;
+
+  beforeAll(() => {
+    axios.interceptors.request.use((config) => {
+      config.headers["apikey"] =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bmlpd2R2c2Zwc2JleHJrb25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODUwMjU3ODEsImV4cCI6MjAwMDYwMTc4MX0.YYdZlKJKT4Njbfg0k-a7YEg890f7ulZpCNqndDDf9Uk";
+      config.headers["Content-Type"] = "application/json";
+      config.baseURL = "https://lyniiwdvsfpsbexrkons.supabase.co/";
+      return config;
+    });
+  });
+
+  beforeEach(async () => {
+    await axios
+      .post("auth/v1/token?grant_type=password", {
+        email: "kaioenzobr@gmail.com",
+        password: "123321",
+      })
+      .then((d) => (token = d.data.access_token));
+    axios.interceptors.request.use((config) => {
+      config.headers["Authorization"] = `Bearer ${token}`;
+      return config;
+    });
+  });
+
+  afterEach(async () => {
+    if (idToDelete) {
+      const retorno = await axios.delete(`rest/v1/cliente?id=eq.${idToDelete}`);
+      expect(retorno.status).toBe(204);
+      idToDelete = undefined;
+    }
+  });
+
+  it("deveria retornar um erro ao enviar cliente com informações pendentes para o supabase", async () => {
+    try {
+      await axios.post<ApiErro>(
+        "rest/v1/cliente",
+        {},
+        {
+          headers: {
+            Prefer: "return=representation",
+          },
+        }
+      );
+    } catch (e) {
+      const erro = e as AxiosError<ApiErro>;
+      expect(erro.response?.data.code).toBe("23502");
+      idToDelete = undefined;
+    }
+  });
+
+  it("deveria cadastrar um cliente e retornar do supabase", async () => {
+    const mockedCliente = {
+      telefone: "61999999999",
+      nome: "CLIENTE DE TESTE DEVE SER EXCLUIDO",
+      email: "EMAIL@TESTE.COM",
+      cnpj: "67168350000132",
+    };
+    const retorno = await axios.post<Cliente[]>(
+      "rest/v1/cliente",
+      mockedCliente,
+      {
+        headers: {
+          Prefer: "return=representation",
+        },
+      }
+    );
+    expect(retorno.data).toHaveLength(1);
+    expect(retorno.data[0].telefone).toBe(mockedCliente.telefone);
+    expect(retorno.data[0].cnpj).toBe(mockedCliente.cnpj);
+    expect(retorno.data[0].nome).toBe(mockedCliente.nome);
+    expect(retorno.data[0].email).toBe(mockedCliente.email);
+    expect(retorno.data[0].id).toBeDefined();
+
+    idToDelete = retorno.data[0].id;
+  });
 });
