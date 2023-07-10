@@ -18,14 +18,12 @@ import TabelaBase from "../components/tabela/tabelaBase";
 import PedidoFormulario from "../components/formulario/pedidoForm";
 import { get } from "http";
 
-
-
 type PedidoTable = {
   id: number;
   created_at: Date;
   client_id: number;
   tipo_servico: string;
-
+  tipo_pedido: string;
 };
 
 export default function Pedido() {
@@ -39,21 +37,22 @@ export default function Pedido() {
   const tableHeaders = ["ID", "Cliente", "Pedido"];
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
-  
+
   const getPedidos = useCallback(async () => {
     setLoading(true);
-    
+
     const { data: pedidoData, error } = await supabase
       .from("pedido")
       .select(`*`)
       .returns<PedidoTable[]>();
-      console.log(pedidos)
+
     if (pedidoData) {
       setPedidos(pedidoData);
     }
     if (error) console.log(error);
     setLoading(false);
   }, [supabase]);
+
   useEffect(() => {
     const getUserSession = async () => {
       const session = await supabase.auth.getSession();
@@ -77,7 +76,7 @@ export default function Pedido() {
   const handleEditar = (id: number, pagina: number, porPagina: number) => {
     idPedidoAtual.current = pedidos.slice(pagina * porPagina)[id].id ?? null;
     const pedido = pedidos.find((c) => c.id === idPedidoAtual.current);
-    setPedidoSendoEditado(pedido);
+    setPedidoSendoEditado(pedido as Pedido);
     setOpenModal(true);
   };
 
@@ -111,9 +110,14 @@ export default function Pedido() {
       </Button>
 
       <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
-        <PedidoFormulario enviaDadosFormulario={function (dataFormulario: { tipo_servico: string; }) {
-          throw new Error("Function not implemented.");
-        }} carregando={false} />
+        <PedidoFormulario
+          enviaDadosFormulario={function (dataFormulario: {
+            tipo_servico: string;
+          }) {
+            throw new Error("Function not implemented.");
+          }}
+          carregando={false}
+        />
       </ModalForm>
       <Container component="div">
         <Typography variant="h2" fontSize={24} my={2}>
@@ -140,7 +144,7 @@ export default function Pedido() {
             <DialogContentText id="alert-dialog-description">
               Tem certeza que deseja deletar o pedido{" "}
               <strong>
-                {pedidos.find((c) => c.id === idPedidoAtual.current)?.nome}?
+                {pedidos.find((c) => c.id === idPedidoAtual.current)?.id}?
               </strong>
             </DialogContentText>
           </DialogContent>
