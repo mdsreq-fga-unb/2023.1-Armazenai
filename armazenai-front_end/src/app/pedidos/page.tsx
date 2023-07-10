@@ -45,13 +45,13 @@ export default function Pedido() {
       .from("pedido")
       .select(`*`)
       .returns<PedidoTable[]>();
-    console.log(pedidos);
+
     if (pedidoData) {
       setPedidos(pedidoData);
     }
     if (error) console.log(error);
     setLoading(false);
-  }, [pedidos, supabase]);
+  }, [supabase]);
 
   useEffect(() => {
     const getUserSession = async () => {
