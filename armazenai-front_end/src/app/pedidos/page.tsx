@@ -10,45 +10,50 @@ import { useRouter } from "next/navigation";
 import { SnackbarProvider } from "notistack";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Database } from "../../../public/types/database";
-import { Cliente } from "../../../public/types/main-types";
+import { Pedido } from "../../../public/types/main-types";
 import ModalForm from "../components/modal/modal-form";
 import BasePage from "../components/navbar/basePage";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import TabelaBase from "../components/tabela/tabelaBase";
+import PedidoFormulario from "../components/formulario/pedidoForm";
+import { get } from "http";
 
-type ClienteTable = {
+
+
+type PedidoTable = {
   id: number;
-  nome: string;
-  telefone: string;
-  cnpj: string;
-  email: string;
+  created_at: Date;
+  client_id: number;
+  tipo_servico: string;
+
 };
 
-export default function Cliente() {
+export default function Pedido() {
   const [openModal, setOpenModal] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [clientes, setClientes] = useState<ClienteTable[]>([]);
-  const [clienteSendoEditado, setClienteSendoEditado] = useState<
-    Cliente | undefined
+  const [pedidos, setPedidos] = useState<PedidoTable[]>([]);
+  const [pedidoSendoEditado, setPedidoSendoEditado] = useState<
+    Pedido | undefined
   >(undefined);
-  const tableHeaders = ["ID", "Nome", "Telefone", "Email", "CNPJ"];
+  const tableHeaders = ["ID", "Cliente", "Pedido"];
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
-
-  const getClientes = useCallback(async () => {
+  
+  const getPedidos = useCallback(async () => {
     setLoading(true);
-    const { data: clienteData, error } = await supabase
-      .from("cliente")
-      .select(`id, nome, telefone , email, cnpj`)
-      .returns<ClienteTable[]>();
-    if (clienteData) {
-      setClientes(clienteData);
+    
+    const { data: pedidoData, error } = await supabase
+      .from("pedido")
+      .select(`*`)
+      .returns<PedidoTable[]>();
+      console.log(pedidos)
+    if (pedidoData) {
+      setPedidos(pedidoData);
     }
     if (error) console.log(error);
     setLoading(false);
   }, [supabase]);
-
   useEffect(() => {
     const getUserSession = async () => {
       const session = await supabase.auth.getSession();
@@ -56,60 +61,67 @@ export default function Cliente() {
     };
 
     getUserSession();
-    getClientes();
-  }, [getClientes, router, supabase.auth]);
+    getPedidos();
+  }, [getPedidos, router, supabase.auth]);
 
   useEffect(() => {
-    getClientes();
-  }, [getClientes, openModal]);
+    getPedidos();
+  }, [getPedidos, openModal]);
 
-  const idCLienteAtual = useRef<number | null>(null);
+  const idPedidoAtual = useRef<number | null>(null);
   const handleDeletar = (id: number, pagina: number, porPagina: number) => {
-    idCLienteAtual.current = clientes.slice(pagina * porPagina)[id].id ?? null;
+    idPedidoAtual.current = pedidos.slice(pagina * porPagina)[id].id ?? null;
     setOpenDeleteDialog(true);
   };
 
   const handleEditar = (id: number, pagina: number, porPagina: number) => {
-    idCLienteAtual.current = clientes.slice(pagina * porPagina)[id].id ?? null;
-    const cliente = clientes.find((c) => c.id === idCLienteAtual.current);
-    setClienteSendoEditado(cliente);
+    idPedidoAtual.current = pedidos.slice(pagina * porPagina)[id].id ?? null;
+    const pedido = pedidos.find((c) => c.id === idPedidoAtual.current);
+    setPedidoSendoEditado(pedido);
     setOpenModal(true);
   };
 
-  const deletarCliente = async () => {
+  const deletarPedido = async () => {
     const { status, error } = await supabase
-      .from("cliente")
+      .from("pedido")
       .delete()
-      .eq("id", idCLienteAtual.current);
+      .eq("id", idPedidoAtual.current);
     if (error) console.log(error);
     if (status === 204) {
-      setClientes((state) =>
-        state.filter((s) => s.id !== idCLienteAtual.current)
+      setPedidos((state) =>
+        state.filter((s) => s.id !== idPedidoAtual.current)
       );
-      snackBarSucesso("Cliente deletado com sucesso!");
+      snackBarSucesso("Pedido deletado com sucesso!");
     }
     setOpenDeleteDialog(false);
   };
 
   return (
-    <BasePage labelNavBar="Clientes">
+    <BasePage labelNavBar="Pedidos">
       <SnackbarProvider />
       <Button
         variant="contained"
         onClick={() => {
-          setClienteSendoEditado(undefined);
+          setPedidoSendoEditado(undefined);
           setOpenModal(true);
         }}
         startIcon={<AddIcon />}
       >
-        Adicionar cliente
+        Novo pedido
       </Button>
+
+      <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
+        <PedidoFormulario enviaDadosFormulario={function (dataFormulario: { tipo_servico: string; }) {
+          throw new Error("Function not implemented.");
+        }} carregando={false} />
+      </ModalForm>
       <Container component="div">
         <Typography variant="h2" fontSize={24} my={2}>
-          Clientes
+          Pedidos
         </Typography>
-        <TabelaBase<ClienteTable>
-          rows={clientes}
+
+        <TabelaBase<PedidoTable>
+          rows={pedidos}
           loadingData={loading}
           tableHeaders={tableHeaders}
           handleEditarBotao={handleEditar}
@@ -122,13 +134,13 @@ export default function Cliente() {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            Confirme a deleção do cliente
+            Confirme a deleção do pedido
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Tem certeza que deseja deletar o cliente{" "}
+              Tem certeza que deseja deletar o pedido{" "}
               <strong>
-                {clientes.find((c) => c.id === idCLienteAtual.current)?.nome}?
+                {pedidos.find((c) => c.id === idPedidoAtual.current)?.nome}?
               </strong>
             </DialogContentText>
           </DialogContent>
@@ -136,7 +148,7 @@ export default function Cliente() {
             <Button onClick={() => setOpenDeleteDialog(false)} autoFocus>
               Cancelar
             </Button>
-            <Button onClick={deletarCliente}>Deletar</Button>
+            <Button onClick={deletarPedido}>Deletar</Button>
           </DialogActions>
         </Dialog>
       </Container>

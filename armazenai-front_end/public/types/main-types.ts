@@ -22,7 +22,7 @@ export type Proprieade = {
 };
 
 export type Pedido = {
-  created_at?: string | null
-  cliente_id?: number
-  id: number
+  tipo_pedido: string;
+  cliente_id?: number;
+  id: number;
 }
