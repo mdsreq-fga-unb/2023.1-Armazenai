@@ -58,8 +58,8 @@ export default function PedidoFormulario({
             placeholder="Cliente ID"
             required
             {...register("cliente_id")}
-            error={!!formState.errors.tipo_servico}
-            helperText={formState.errors.tipo_servico?.message}
+            error={!!formState.errors.cliente_id}
+            helperText={formState.errors.cliente_id?.message}
           />
         </Grid>
         <Box
