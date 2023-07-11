@@ -96,7 +96,6 @@ describe("Teste do formulário de criação de usuário", () => {
       nome: "Kaio Enzo",
       cpf: "12345678910",
       telefone: "12345678910",
-      email: "kaioenzobr@gmail.com",
     };
 
     beforeAll(() => {
@@ -192,7 +191,6 @@ describe("Teste do formulário de criação de usuário", () => {
       const data = await axios.get<Usuario[]>(
         `rest/v1/profiles?select=*&nome=ilike.${mockedUser.nome}`
       );
-
       expect(data.data).toBeDefined();
       expect(data.data).not.toBeNull();
       expect(data.data.length).toBeGreaterThan(0);
@@ -201,7 +199,7 @@ describe("Teste do formulário de criação de usuário", () => {
 
     it("deveria filtrar pelo telefone", async () => {
       const data = await axios.get<Usuario[]>(
-        `rest/v1/profiles?select=*&telefone=ilike.${mockedUser.email}`
+        `rest/v1/profiles?select=*&telefone=ilike.${mockedUser.telefone}`
       );
 
       expect(data.data).toBeDefined();
