@@ -67,4 +67,5 @@ Para realização dos testes unitários utilizaremos a biblioteca Jest. Onde far
 
 | Data       | Versão | Descrição                                         | Autor                                                    |
 | ---------- | ------ | ------------------------------------------------- | -------------------------------------------------------- |
-| 26/06/2023 | 0.1    | Criação do documento                              | Kaio Melo|
+| 26/06/2023 | 0.1    | Criação do documento                              | Kaio Melo |
+| 11/07/2023 | 0.2    | Adiciona estratégia de testes                              | Kaio Melo |
