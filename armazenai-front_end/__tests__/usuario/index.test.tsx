@@ -92,6 +92,12 @@ describe("Teste do formulário de criação de usuário", () => {
     let token: string | undefined;
     let idToDelete: number | undefined;
     let idUsuario: string | undefined;
+    const mockedUser = {
+      nome: "Kaio Enzo",
+      cpf: "12345678910",
+      telefone: "12345678910",
+      email: "kaioenzobr@gmail.com",
+    };
 
     beforeAll(() => {
       axios.interceptors.request.use((config) => {
@@ -161,11 +167,7 @@ describe("Teste do formulário de criação de usuário", () => {
     it("deveria atualizar um cliente existente", async () => {
       const data = await axios.patch<Usuario[]>(
         `rest/v1/profiles?id=eq.${idUsuario}`,
-        {
-          nome: "Kaio Enzo",
-          cpf: "12345678910",
-          telefone: "12345678910",
-        },
+        mockedUser,
         {
           headers: {
             Prefer: "return=representation",
@@ -174,9 +176,38 @@ describe("Teste do formulário de criação de usuário", () => {
       );
 
       expect(data.status).toBe(200);
-      expect(data.data[0].nome).toBe("Kaio Enzo");
-      expect(data.data[0].cpf).toBe("12345678910");
-      expect(data.data[0].telefone).toBe("12345678910");
+      expect(data.data[0].nome).toBe(mockedUser.nome);
+      expect(data.data[0].cpf).toBe(mockedUser.cpf);
+      expect(data.data[0].telefone).toBe(mockedUser.telefone);
+    });
+
+    it("deveria retornar uma lista de clientes existentes", async () => {
+      const data = await axios.get<Usuario[]>("rest/v1/profiles?select=*");
+      expect(data.data).toBeDefined();
+      expect(data.data).not.toBeNull();
+      expect(data.data.length).toBeGreaterThan(0);
+    });
+
+    it("deveria filtrar os clientes pelo nome", async () => {
+      const data = await axios.get<Usuario[]>(
+        `rest/v1/profiles?select=*&nome=ilike.${mockedUser.nome}`
+      );
+
+      expect(data.data).toBeDefined();
+      expect(data.data).not.toBeNull();
+      expect(data.data.length).toBeGreaterThan(0);
+      expect(data.data[0].nome).toBe(mockedUser.nome);
+    });
+
+    it("deveria filtrar pelo telefone", async () => {
+      const data = await axios.get<Usuario[]>(
+        `rest/v1/profiles?select=*&email=ilike.${mockedUser.email}`
+      );
+
+      expect(data.data).toBeDefined();
+      expect(data.data).not.toBeNull();
+      expect(data.data.length).toBeGreaterThan(0);
+      expect(data.data[0].telefone).toBe(mockedUser.telefone);
     });
   });
 });
