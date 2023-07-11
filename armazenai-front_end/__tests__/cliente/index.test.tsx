@@ -6,7 +6,7 @@ import { Cliente } from "../../public/types/main-types";
 import ClienteForm from "../../src/app/components/formulario/clienteFormCadastro";
 import validarCNPJ from "../../src/app/helpers/validator/validarCNPJ";
 
-type ApiErro = {
+export type ApiErro = {
   code: string;
   details: string | null;
   hint: string | null;
