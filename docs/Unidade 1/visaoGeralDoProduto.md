@@ -25,7 +25,7 @@ Problema: Os representantes se queixaram da dificuldade de captação de cliente
  **A ferramenta Armazenaí tem como objetivo melhorar a realização do estudo de viabilidade financeira na compra de armazéns e secadores de grãos da empresa EGL, a fim de simular previamente sua lucratividade e resultados positivos ou não, para que assim, esse processo entre o cliente e aquele que detém a propriedade sobre esses serviços industriais seja mais rápido, compacto e intuitivo, além de seguro e confiável. Tabém pretende rastrear o processo de pedidos e criar uma base de dados para manter o histórico de cada cliente e contribuir para a melhor compreensão e localização de cada etapa de venda para cada cliente, desde apresentação do produto até a realização e acompanhamento do mesmo**
 
 ## Tecnologias a Serem Utilizadas
-**A ferramenta trata-se de uma aplicação PWA onde será utilizado o React com o back-end sendo constrúido com o Supabase, uma alternativa open-source e mais simples de utilizar que o Firebase.**
+**A ferramenta trata-se de uma aplicação web onde será utilizado o React com o back-end sendo constrúido com o Supabase, uma alternativa open-source e mais simples de utilizar que o Firebase.**
 
  - React
  - Supabase
@@ -41,3 +41,4 @@ Problema: Os representantes se queixaram da dificuldade de captação de cliente
 | 20/04/2023 | 0.2 | Atualização da visão geral do produto | Kaio Melo |
 | 17/05/2023 | 0.3 | Atualização da visão geral do produto | Lucas Meireles e Kaio Melo |
 | 17/05/2023 | 0.3 | Atualização da imagem de Espinha de Peixe | Lucas Meireles e Lara Giuliana |
+| 11/07/2023 | 0.4 | Atualização da visão geral do produto | Kaio Enzo |

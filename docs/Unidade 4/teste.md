@@ -48,6 +48,21 @@ Para realização dos testes unitários utilizaremos a biblioteca Jest. Onde far
 | US09  | Como operador, desejo armazenar os dados do cliente para decisões internas.                                                                                                                                                                | Teste de integração do tipo caixa preta <ul><li>Teste de retorno da API, para garantir que as informações estão sendo persistidas corretamente.</li></ul>
 | US10 | Como operador, desejo poder salvar o orçamento para futuras operações                                                                 | Teste de integração do tipo caixa preta <ul><li>Teste de retorno da API, para garantir que as informações estão sendo persistidas corretamente.</li></ul> |
 
+
+# Estratégia de testes com objetivo
+
+| MVP | Tipo | Nível | Técnica | Objetivo/ Perspectiva |
+| --- | ---- |---|----|---|
+1 | Funcional | Unitário | Automatizado | Qualidade interna / Equipe |
+1 | Funcional | Integração | Automatizado | Qualidade interna / Equipe |
+1 | Segurança | Integração | Automatizado | Qualidade externa / Cliente |
+1 | Funcional | Caixa Preta | Manual |Qualidade externa / Negócio |
+2 | Funcional | Unitário | Automatizado | Qualidade/Equipe |
+2 | Usabilidade | Aceitação | Manual | Qualidade externa / Negócio |
+2 | Sistema | Caixa Preta | Manual | Qualidade interna/ Equipe |
+
+
+
 ## Histórico de revisões
 
 | Data       | Versão | Descrição                                         | Autor                                                    |
