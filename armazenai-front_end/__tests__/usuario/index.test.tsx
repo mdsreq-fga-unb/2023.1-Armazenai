@@ -201,7 +201,7 @@ describe("Teste do formulário de criação de usuário", () => {
 
     it("deveria filtrar pelo telefone", async () => {
       const data = await axios.get<Usuario[]>(
-        `rest/v1/profiles?select=*&email=ilike.${mockedUser.email}`
+        `rest/v1/profiles?select=*&telefone=ilike.${mockedUser.email}`
       );
 
       expect(data.data).toBeDefined();
