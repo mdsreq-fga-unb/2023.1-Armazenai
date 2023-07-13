@@ -49,8 +49,8 @@ Para realização dos testes funcionais, tanto de integração como os manuais u
 
 | Tipo  | Nível | Técnica | Objetivo | Perspectiva | Escopo |
 | ----- | ----- | ------- | -------- | ----------- | ------ |
-| Funcional | Unidade | Teste unitário automatizado | Garantir qualidade interna | Técnica  | US01, US04, US09, US13, US16 |
-| Funcional | Integração | Teste de integração automatizado | Garantir qualidade interna | Técnica  | US01, US04, US09, US12, US13 |
+| Funcional | Unidade | Teste unitário automatizado | Garantir qualidade interna | Técnica  | US04, US13, US16 |
+| Funcional | Integração | Teste de integração automatizado | Garantir qualidade interna | Técnica  | US04, US12, US13 |
 | Segurança | Sistema | Teste de integração automatizado | Garantir qualidade externa | Negócio | US04 |
 | Usabilidade | Aceitação | Teste caixa preta manual | Garantir qualidade externa | Negócio | Todos |
 
@@ -58,8 +58,8 @@ Para realização dos testes funcionais, tanto de integração como os manuais u
 
 | Tipo  | Nível | Técnica | Objetivo | Perspectiva | Escopo |
 | ----- | ----- | ------- | -------- | ----------- | ------ |
-| Funcional | Unidade | Teste unitário automatizado | Garantir qualidade interna | Técnica  | US10, US08 |
-| Funcional | Integração | Teste de integração automatizado | Garantir qualidade interna | Técnica  | US10, US08, US05 |
+| Funcional | Unidade | Teste unitário automatizado | Garantir qualidade interna | Técnica  | US01, US08, US09, US10 |
+| Funcional | Integração | Teste de integração automatizado | Garantir qualidade interna | Técnica  | US01, US05, US08, US09, US10|
 | Usabilidade | Aceitação | Teste caixa preta manual | Garantir qualidade externa | Negócio | Todos |
 
 ### Exemplos de testes
