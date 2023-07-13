@@ -1,1 +1,1 @@
-describe("Teste da API de pedido no supabase", () => {});
+//describe("Teste da API de pedido no supabase", () => {});
