@@ -2,6 +2,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import PeopleIcon from "@mui/icons-material/People";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as React from "react";
 
 type ItemMenu = {
@@ -40,5 +41,10 @@ export const mainListItems: ItemMenu[] = [
     icon: <GroupIcon />,
     nome: "Usuários",
     path: "/usuarios",
+  },
+  {
+    icon: <ShoppingCartIcon />,
+    nome: "Pedidos",
+    path: "/pedidos",
   },
 ];

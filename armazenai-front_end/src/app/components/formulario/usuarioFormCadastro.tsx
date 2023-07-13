@@ -1,12 +1,12 @@
-import { errosFormularioMensagem } from "@/app/helpers/validator/mensagensDeErro";
-import { phoneRegExp } from "@/app/helpers/validator/phoneRegexValidacao";
+import { errosFormularioMensagem } from "../../helpers/validator/mensagensDeErro";
+import { phoneRegExp } from "../..//helpers/validator/phoneRegexValidacao";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Grid, TextField } from "@mui/material";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
-const errorsFormularioCadastro = {
+export const errorsFormularioCadastro = {
   nomeObrigatorio: "O nome é obrigatório!",
   telefoneRegex: "O telefone informado é inválido!",
   telefoneObrigatorio: "O telefone é obrigatóro!",
@@ -62,7 +62,7 @@ export default function UsuarioForm({
           <Grid item xs={12} sm={6}>
             <TextField
               autoComplete="given-name"
-              required
+              // required
               fullWidth
               id="nome"
               label="Nome"
@@ -74,7 +74,7 @@ export default function UsuarioForm({
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
+              // required
               fullWidth
               id="telefone"
               label="Telefone"
@@ -87,7 +87,7 @@ export default function UsuarioForm({
           </Grid>
           <Grid item xs={12}>
             <TextField
-              required
+              // required
               fullWidth
               id="cpf"
               label="CPF"
@@ -100,7 +100,7 @@ export default function UsuarioForm({
           </Grid>
           <Grid item xs={12}>
             <TextField
-              required
+              // required
               fullWidth
               id="email"
               label="Endereço de Email"
@@ -112,7 +112,7 @@ export default function UsuarioForm({
           </Grid>
           <Grid item xs={12}>
             <TextField
-              required
+              // required
               fullWidth
               label="Senha"
               type="password"

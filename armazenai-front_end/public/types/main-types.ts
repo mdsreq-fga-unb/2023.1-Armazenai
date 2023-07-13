@@ -20,3 +20,9 @@ export type Proprieade = {
   umidade_media_milho?: number | null;
   umidade_media_soja?: number | null;
 };
+
+export type Pedido = {
+  tipo_pedido: string;
+  cliente_id?: number;
+  id: number;
+}

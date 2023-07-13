@@ -30,7 +30,7 @@ Problema: Os representantes se queixaram da dificuldade de captação de cliente
 
 ## Tecnologias a Serem Utilizadas
 
-**A ferramenta trata-se de uma aplicação PWA onde será utilizado o React com o back-end sendo constrúido com o Supabase, uma alternativa open-source e mais simples de utilizar que o Firebase.**
+**A ferramenta trata-se de uma aplicação web onde será utilizado o React com o back-end sendo constrúido com o Supabase, uma alternativa open-source e mais simples de utilizar que o Firebase.**
 
 - React
 - Supabase
@@ -45,4 +45,4 @@ Problema: Os representantes se queixaram da dificuldade de captação de cliente
 | 20/04/2023 | 0.2 | Atualização da visão geral do produto | Kaio Melo |
 | 17/05/2023 | 0.3 | Atualização da visão geral do produto | Lucas Meireles e Kaio Melo |
 | 17/05/2023 | 0.3 | Atualização da imagem de Espinha de Peixe | Lucas Meireles e Lara Giuliana |
-| 12/07/2023 | 0.4 | Atualização do objetivo do produto | Kaio Melo |
+| 11/07/2023 | 0.4 | Atualização da visão geral do produto | Kaio Enzo |

@@ -56,8 +56,8 @@ export default function PropriedadeFormulario({
       <Grid container spacing={2}>
         <Grid xs={6} item>
           <TextField
+            label="Nome"
             placeholder="Nome da propriedade"
-            required
             {...register("nome")}
             error={!!formState.errors.nome}
             helperText={formState.errors.nome?.message}
@@ -65,8 +65,8 @@ export default function PropriedadeFormulario({
         </Grid>
         <Grid xs={6} item>
           <TextField
+            label="Endereco"
             placeholder="Endereco da propriedade"
-            required
             {...register("endereco")}
             error={!!formState.errors.endereco}
             helperText={formState.errors.endereco?.message}
@@ -74,9 +74,9 @@ export default function PropriedadeFormulario({
         </Grid>
         <Grid xs={6} item>
           <TextField
+            label="Area"
             type="number"
             placeholder="Area da propriedade"
-            required
             {...register("areaDisponivel")}
             error={!!formState.errors.areaDisponivel}
             helperText={formState.errors.areaDisponivel?.message}
@@ -85,8 +85,8 @@ export default function PropriedadeFormulario({
 
         <Grid xs={6} item>
           <TextField
+            label="producaoSoja"
             placeholder="Producao de Soja da propriedade"
-            required
             type="number"
             {...register("producaoSoja")}
             error={!!formState.errors.producaoSoja}
@@ -96,8 +96,8 @@ export default function PropriedadeFormulario({
 
         <Grid xs={6} item>
           <TextField
+            label="hectaresSoja"
             placeholder="Hectares de Soja da propriedade"
-            required
             type="number"
             {...register("hectaresSoja")}
             error={!!formState.errors.hectaresSoja}
@@ -106,8 +106,8 @@ export default function PropriedadeFormulario({
         </Grid>
         <Grid xs={6} item>
           <TextField
+            label="umidadeMediaSoja"
             placeholder="Umidade de Soja da propriedade"
-            required
             type="number"
             {...register("umidadeMediaSoja")}
             error={!!formState.errors.umidadeMediaSoja}
@@ -116,8 +116,8 @@ export default function PropriedadeFormulario({
         </Grid>
         <Grid xs={6} item>
           <TextField
+            label="producaoMilho"
             placeholder="Producao de Milho da propriedade"
-            required
             type="number"
             {...register("producaoMilho")}
             error={!!formState.errors.producaoMilho}
@@ -127,8 +127,8 @@ export default function PropriedadeFormulario({
 
         <Grid xs={6} item>
           <TextField
+            label="hectaresMilho"
             placeholder="Hectares de Milho da propriedade"
-            required
             type="number"
             {...register("hectaresMilho")}
             error={!!formState.errors.hectaresMilho}
@@ -137,9 +137,9 @@ export default function PropriedadeFormulario({
         </Grid>
         <Grid xs={12} item>
           <TextField
+            label="umidadeMediaMilho"
             placeholder="Umidade de Milho da propriedade"
             type="number"
-            required
             {...register("umidadeMediaMilho")}
             error={!!formState.errors.umidadeMediaMilho}
             helperText={formState.errors.umidadeMediaMilho?.message}
