@@ -142,15 +142,16 @@ it("deveria retornar um erro ao logar com credenciais incorretas", async () => {
 
 # Estratégia de testes com objetivo
 
-| MVP | Tipo | Nível | Técnica | Objetivo/ Perspectiva |
+| MVP | Tipo | Nível | Técnica | Objetivo/ Perspectiva | Escopo |
 | --- | ---- |---|----|---|
-1 | Funcional | Unitário | Automatizado | Qualidade interna / Equipe |
-1 | Funcional | Integração | Automatizado | Qualidade interna / Equipe |
-1 | Segurança | Integração | Automatizado | Qualidade externa / Cliente |
-1 | Funcional | Caixa Preta | Manual |Qualidade externa / Negócio |
-2 | Funcional | Unitário | Automatizado | Qualidade/Equipe |
-2 | Usabilidade | Aceitação | Manual | Qualidade externa / Negócio |
-2 | Sistema | Caixa Preta | Manual | Qualidade interna/ Equipe |
+1 | Funcional | Unitário | Automatizado | Qualidade interna / Equipe | US01, US04, US09, US13, US16 | 
+1 | Funcional | Integração | Automatizado | Qualidade interna / Equipe | US01, US04, US09, US12, US13 |
+1 | Segurança | Integração | Automatizado | Qualidade externa / Cliente | US04, |
+1 | Funcional | Caixa Preta | Manual |Qualidade externa / Negócio | Todos |
+2 | Funcional | Unitário | Automatizado | Qualidade/Equipe | US10, US08 |
+2 | Usabilidade | Aceitação | Manual | Qualidade externa / Negócio | Todos |
+2 | Sistema | Caixa Preta | Manual | Qualidade interna/ Equipe | Todos |
+2 | Funcional | Integração | Automatizado | Qualidade interna/ Equipe | US10, US08, US05 | 
 
 ## Histórico de revisões
 
