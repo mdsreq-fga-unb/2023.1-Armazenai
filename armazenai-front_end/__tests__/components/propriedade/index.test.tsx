@@ -1,7 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import PropriedadeForm from "../../../src/app/components/formulario/propriedadeForm";
 import { render, screen, waitFor } from "@testing-library/react";
-import { describe } from "node:test";
 import axios from "axios";
 
 describe("Teste do componente de formulário de Propriedade", () => {

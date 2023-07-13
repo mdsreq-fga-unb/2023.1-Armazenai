@@ -79,7 +79,7 @@ Recebe-se os débitos técnicos da sprint anterior para serem sanados durante a 
 Foi definido a divisão das sprint em 1 semana. Com a definição das histórias de usuário a serem trabalhadas na sprint, foi definido que seriam trabalhadas as histórias do [MVP2](../Unidade%202/requisitos.md).
 | US | Responsável |
 |--- |--- |
-| US01 | Jhennifer Castro |
+| US01 | Jhennifer Castro e Kaio Enzo |
 | US04 | Kaio Enzo |
 | US08 | Lara Giuliana e Mateus |
 | US09 | Kaio Enzo |
@@ -126,6 +126,33 @@ A ser realizada.
 
 ### Sprint Retrospective
 
+Nessa sprint a equipe entregou a US16, além dos testes unitários, de integração e de segurança das histórias concluídas na sprint anterior: US04, US09.
+
+# Sprint 5
+
+Data início : 10/07/2023
+
+Data término : 17/07/2023
+
+### Sprint Planning
+
+Recebe-se os débitos técnicos da sprint anterior, no caso a US08, US02, US05, US10, US11 para ser sanada durante a realização da presente sprint. Além dos testes de integração e unitários das histórias concluídas: US01, US12, US13, US16. Assim como os testes das histórias desenvolvidas durante o decorrer da sprint.
+Foi definido a divisão das sprint em 1 semana. Com a definição das histórias de usuário a serem trabalhadas na sprint, de acordo com o quadro abaixo:
+
+| US | Responsável |
+|--- |--- |
+| US02 | Jheniffer Castro |
+| US05 | Mateus e Kaio Melo |
+| US08 | Mateus e Kaio Melo |
+| US10 | Lucas Meireles e Lara Giuliana |
+| US11 | Lara Giuliana |
+
+### Sprint Review
+
+A ser realizada.
+
+### Sprint Retrospective
+
 A ser realizada.
 
 ## Planjeamento das sprints
@@ -135,9 +162,9 @@ A ser realizada.
 | Sprint 1 | 24/04/2023 | 07/05/2023 | MVP e Planejamento do projeto |
 | Sprint 2 | 08/05/2023 | 21/05/2023 | Definição de backlog |
 | Sprint 3 | 22/05/2023 | 11/06/2023 | Reajuste do produto e bases front-end e back-end |
-| Sprint 4 | 12/06/2023 | 25/06/2023 | US01, US04, US08, US09, US12, US13 |
-| Sprint 5 | 26/06/2023 | 09/07/2023 | US02, US05, US08, US11, US16 |
-| Sprint 6 | 10/07/2023 | 17/07/2023 | US03, US06,  US07 |
+| Sprint 4 | 12/06/2023 | 25/06/2023 | Desenvolvimento das US13, US12, US01, US09 |
+| Sprint 5 | 26/06/2023 | 09/07/2023 | Desenvolvimento das US16 e desenvolvimento dos testes do MVP1 |
+| Sprint 6 | 10/07/2023 | 17/07/2023 | Desenvolvimento das US02, US05, US08, US10, US11 e desenvolvimentod dos testes|
 
 ## Histórico de revisões
 
@@ -151,3 +178,4 @@ A ser realizada.
 | 12/06/2023 | 0.6 | Atualização de Sprint e atualizações | Lucas Meireles, Lara Giuliana, Jhenifer Castro |
 | 18/06/2023 | 0.7 | Atualização de Sprint | Kaio Enzo |
 | 18/06/2023 | 0.7 | Atualização de Sprint e Planning de nova Sprint | Kaio Enzo, Lucas Meireles, Jhenifer Castro, Lara Giuliana |
+| 12/07/2023 | 0.8 | Atualização de Sprint e Planning de nova Sprint, Atualização da sprint review | Kaio Melo |
