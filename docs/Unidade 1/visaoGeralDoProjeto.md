@@ -11,16 +11,18 @@ Desenvolvedor Scrum Master | Garantir a qualidade do produto, garantir o cumprim
 Product Owner | Atualizar o escopo do projeto, validar as entregas. | Hugo Araújo | Abel Ferreira, Hugo Araújo e George Marsicano Corrêa |
 
 ## Planjeamento das sprints
-| Sprint | Data de início | Data de término | Produto(Entrega) | 
+
+| Sprint | Data de início | Data de término | Produto(Entrega) |
 |--- |--- |--- |--- |
 | Sprint 1 | 24/04/2023 | 07/05/2023 | MVP e Planejamento do projeto |
 | Sprint 2 | 08/05/2023 | 21/05/2023 | Definição de backlog |
-| Sprint 3 | 22/05/2023 | 11/06/2023 | Reajuste do produto e bases front-end e back-end, US04, US05, US08, US12, US13, US16, US11 | 
-| Sprint 4 | 12/06/2023 | 25/06/2023 | US01, US06, US07, US09, US10 |
-| Sprint 5 | 26/06/2023 | 09/07/2023 | US02, US03, US11, US14, US15, US17, US18 |
-| Sprint 6 | 10/07/2023 | 17/07/2023 | US19, US20, US21 |
+| Sprint 3 | 22/05/2023 | 11/06/2023 | Reajuste do produto e bases front-end e back-end |
+| Sprint 4 | 12/06/2023 | 25/06/2023 | Desenvolvimento das US13, US12, US01, US09 |
+| Sprint 5 | 26/06/2023 | 09/07/2023 | Desenvolvimento das US16 e desenvolvimento dos testes do MVP1 |
+| Sprint 6 | 10/07/2023 | 17/07/2023 | Desenvolvimento das US10, US11, US08, US02, US05 |
 
 ## Matriz de comunicação
+
 | Descrição | Envolvidos | Peridiocidade | Produtos Gerados |
 |--- |--- |--- |--- |
 | Planejamento da sprint | Equipe do Projeto e PO | A cada duas semanas | <ul><li>Backlog da Sprint</li> <li>Ata de reunião</li></ul>  |
@@ -29,6 +31,7 @@ Product Owner | Atualizar o escopo do projeto, validar as entregas. | Hugo Araú
 | Retrospectiva da sprint | Equipe do Projeto | A cada duas semanas | <ul><li>Feedback da equipe</li><li>Pontuação e avaliação cruzada</li></ul> |
 
 ## Gerenciamento de riscos
+
 | Descrição | Causa | Probabilidade | Mitigação |
 |--- |--- |--- |--- |
 | Falta de comunicação com o cliente | Dificuldade na comunicação com o cliente por indisponibilidade. | Média | <ul><li>Estudo e otimização de técnica de levantamento de requisitos</li></ul> |
@@ -37,12 +40,14 @@ Product Owner | Atualizar o escopo do projeto, validar as entregas. | Hugo Araú
 |Atraso nas entregas| Falta de conhecimento técnico dos membros da equipe. Dimensionamento incorreto do escopo da sprint e do projeto | Média | <ul><li>Estudo e otimização de técnicas de desenvolvimento de software</li> <li>Estudo e otimização de técnicas de gerenciamento de projetos</li><li>Análise e adaptação constante do escopo do projeto e busca pela transparência da equipe no desenvolvimento da atividades</li></ul> |
 
 ## Critérios de replanejamento
- - Insatisfação do cliente com o produto entregue 
- - Dificuldade no cumprimento da definição de pronto
- - Baixa qualidade do produto desenvolvido
- - Escopo/complexidade do projeto maior que o esperado
+
+- Insatisfação do cliente com o produto entregue
+- Dificuldade no cumprimento da definição de pronto
+- Baixa qualidade do produto desenvolvido
+- Escopo/complexidade do projeto maior que o esperado
 
 ## Histórico de revisões
+
 | Data | Versão | Descrição | Autor |
 |---|---|---|---|
 | 19/04/2023 | 0.1 | Criação do documento | Kaio Enzo Melo |
@@ -50,3 +55,4 @@ Product Owner | Atualizar o escopo do projeto, validar as entregas. | Hugo Araú
 | 27/04/2023 | 0.3 | Atualização de visão do projeto | Kaio Melo |
 | 18/05/2023 | 0.3 | Atualização do Planejamento | Lucas Meireles |
 | 09/06/2023 | 0.3 | Atualização de datas das sprints | Lucas Meireles, Lara Giuliana |
+| 12/07/2023 | 0.5 | Atualização do planejamento das sprints | Kaio Melo |

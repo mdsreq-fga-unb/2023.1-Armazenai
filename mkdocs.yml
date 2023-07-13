@@ -53,3 +53,11 @@ nav :
     - Registro de Sprints: 'Sprints/sprints.md'
   - Sobre nós:
     - A equipe: 'Sobre/sobre-nos.md'
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
