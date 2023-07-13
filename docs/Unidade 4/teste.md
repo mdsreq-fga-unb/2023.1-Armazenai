@@ -49,19 +49,18 @@ Para realização dos testes funcionais, tanto de integração como os manuais u
 
 | Tipo  | Nível | Técnica | Objetivo | Perspectiva | Escopo |
 | ----- | ----- | ------- | -------- | ----------- | ------ |
-| Funcional | Unidade | Teste unitário automatizado | Garantir qualidade interna | Técnica  | USXX |
-| Funcional | Integração | Teste de integração automatizado | Garantir qualidade interna | Técnica  | USXX |
-| Segurança | Sistema | Teste de integração automatizado | Garantir qualidade externa | Negócio | USXX |
-| Usabilidade | Sistema | Teste caixa preta /  manual | Garantir qualidade externa | Negócio | USXX |
+| Funcional | Unidade | Teste unitário automatizado | Garantir qualidade interna | Técnica  | US01, US04, US09, US13, US16 |
+| Funcional | Integração | Teste de integração automatizado | Garantir qualidade interna | Técnica  | US01, US04, US09, US12, US13 |
+| Segurança | Sistema | Teste de integração automatizado | Garantir qualidade externa | Negócio | US04 |
+| Usabilidade | Aceitação | Teste caixa preta manual | Garantir qualidade externa | Negócio | Todos |
 
 ## Estratégia de testes para o MVP2
 
 | Tipo  | Nível | Técnica | Objetivo | Perspectiva | Escopo |
 | ----- | ----- | ------- | -------- | ----------- | ------ |
-| Funcional | Unidade | Teste unitário automatizado | Garantir qualidade interna | Técnica  | USXX |
-| Funcional | Integração | Teste de integração automatizado | Garantir qualidade interna | Técnica  | USXX |
-| Segurança | Sistema | Teste de caixa preta | Garantir qualidade externa | Negócio | USXX |
-| Usabilidade | Aceitação | Teste caixa preta /  manual | Garantir qualidade externa | Negócio | USXX |
+| Funcional | Unidade | Teste unitário automatizado | Garantir qualidade interna | Técnica  | US10, US08 |
+| Funcional | Integração | Teste de integração automatizado | Garantir qualidade interna | Técnica  | US10, US08, US05 |
+| Usabilidade | Aceitação | Teste caixa preta manual | Garantir qualidade externa | Negócio | Todos |
 
 ### Exemplos de testes
 
@@ -140,19 +139,6 @@ it("deveria retornar um erro ao logar com credenciais incorretas", async () => {
   });
 ```
 
-# Estratégia de testes com objetivo
-
-| MVP | Tipo | Nível | Técnica | Objetivo/ Perspectiva | Escopo |
-| --- | ---- |---|----|---|
-1 | Funcional | Unitário | Automatizado | Qualidade interna / Equipe | US01, US04, US09, US13, US16 | 
-1 | Funcional | Integração | Automatizado | Qualidade interna / Equipe | US01, US04, US09, US12, US13 |
-1 | Segurança | Integração | Automatizado | Qualidade externa / Cliente | US04, |
-1 | Funcional | Caixa Preta | Manual |Qualidade externa / Negócio | Todos |
-2 | Funcional | Unitário | Automatizado | Qualidade/Equipe | US10, US08 |
-2 | Usabilidade | Aceitação | Manual | Qualidade externa / Negócio | Todos |
-2 | Sistema | Caixa Preta | Manual | Qualidade interna/ Equipe | Todos |
-2 | Funcional | Integração | Automatizado | Qualidade interna/ Equipe | US10, US08, US05 | 
-
 ## Histórico de revisões
 
 | Data       | Versão | Descrição                                         | Autor                                                    |
@@ -160,3 +146,4 @@ it("deveria retornar um erro ao logar com credenciais incorretas", async () => {
 | 26/06/2023 | 0.1    | Criação do documento                              | Kaio Melo |
 | 11/07/2023 | 0.2    | Adiciona estratégia de testes                              | Kaio Melo |
 | 12/07/2023 | 0.3    | Atualização da estratégia de testes                              | Kaio Melo|
+| 13/07/2023 | 0.4    | Atualização da tabela de estratégia de testes     | Lucas Meireles | 
