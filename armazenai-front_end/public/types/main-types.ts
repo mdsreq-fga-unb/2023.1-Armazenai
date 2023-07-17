@@ -22,7 +22,7 @@ export type Proprieade = {
 };
 
 export type Pedido = {
-  tipo_pedido: string;
+  tipo_servico: string;
   cliente_id?: number;
   id: number;
 }

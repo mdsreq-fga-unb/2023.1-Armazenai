@@ -11,12 +11,12 @@ import { SnackbarProvider } from "notistack";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Database } from "../../../public/types/database";
 import { Pedido } from "../../../public/types/main-types";
+import PedidoFormulario from "../components/formulario/pedidoForm";
 import ModalForm from "../components/modal/modal-form";
 import BasePage from "../components/navbar/basePage";
+import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import TabelaBase from "../components/tabela/tabelaBase";
-import PedidoFormulario from "../components/formulario/pedidoForm";
-import { get } from "http";
 
 type PedidoTable = {
   id: number;
@@ -80,6 +80,33 @@ export default function Pedido() {
     setOpenModal(true);
   };
 
+  const enviaDadosFormulario = async ({
+    cliente_id,
+    tipo_servico,
+    id,
+  }: {
+    cliente_id: number;
+    tipo_servico: string;
+    id?: number;
+  }) => {
+    if (id) {
+      const { error } = await supabase
+        .from("pedido")
+        .update({ cliente_id, tipo_servico })
+        .eq("id", id);
+      if (error) snackBarErro("Houve um erro ao atualizar o pedido!");
+      else snackBarSucesso("Pedido atualizado com sucesso!");
+    } else {
+      const { error } = await supabase
+        .from("pedido")
+        .insert({ cliente_id, tipo_servico });
+      if (error) snackBarErro("Houve um erro ao criar o pedido!");
+      else snackBarSucesso("Pedido criado com sucesso!");
+    }
+
+    setOpenModal(false);
+  };
+
   const deletarPedido = async () => {
     const { status, error } = await supabase
       .from("pedido")
@@ -97,65 +124,73 @@ export default function Pedido() {
 
   return (
     <BasePage labelNavBar="Pedidos">
-      <SnackbarProvider />
-      <Button
-        variant="contained"
-        onClick={() => {
-          setPedidoSendoEditado(undefined);
-          setOpenModal(true);
-        }}
-        startIcon={<AddIcon />}
-      >
-        Novo pedido
-      </Button>
-
-      <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
-        <PedidoFormulario
-          enviaDadosFormulario={function (dataFormulario: {
-            tipo_servico: string;
-          }) {
-            throw new Error("Function not implemented.");
+      <SnackbarProvider>
+        <Button
+          variant="contained"
+          onClick={() => {
+            setPedidoSendoEditado(undefined);
+            setOpenModal(true);
           }}
-          carregando={false}
-        />
-      </ModalForm>
-      <Container component="div">
-        <Typography variant="h2" fontSize={24} my={2}>
-          Pedidos
-        </Typography>
-
-        <TabelaBase<PedidoTable>
-          rows={pedidos}
-          loadingData={loading}
-          tableHeaders={tableHeaders}
-          handleEditarBotao={handleEditar}
-          handleDeletarBotao={handleDeletar}
-        />
-        <Dialog
-          open={openDeleteDialog}
-          onClose={() => setOpenDeleteDialog(false)}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+          startIcon={<AddIcon />}
         >
-          <DialogTitle id="alert-dialog-title">
-            Confirme a deleção do pedido
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Tem certeza que deseja deletar o pedido{" "}
-              <strong>
-                {pedidos.find((c) => c.id === idPedidoAtual.current)?.id}?
-              </strong>
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOpenDeleteDialog(false)} autoFocus>
-              Cancelar
-            </Button>
-            <Button onClick={deletarPedido}>Deletar</Button>
-          </DialogActions>
-        </Dialog>
-      </Container>
+          Novo pedido
+        </Button>
+
+        <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
+          <PedidoFormulario
+            enviaDadosFormulario={enviaDadosFormulario}
+            pedido={
+              pedidoSendoEditado &&
+              pedidoSendoEditado.cliente_id &&
+              pedidoSendoEditado.tipo_servico
+                ? {
+                    cliente_id: pedidoSendoEditado?.cliente_id,
+                    tipo_servico: pedidoSendoEditado?.tipo_servico,
+                    id: pedidoSendoEditado.id,
+                  }
+                : undefined
+            }
+            carregando={false}
+          />
+        </ModalForm>
+        <Container component="div">
+          <Typography variant="h2" fontSize={24} my={2}>
+            Pedidos
+          </Typography>
+
+          <TabelaBase<PedidoTable>
+            rows={pedidos}
+            loadingData={loading}
+            tableHeaders={tableHeaders}
+            handleEditarBotao={handleEditar}
+            handleDeletarBotao={handleDeletar}
+          />
+          <Dialog
+            open={openDeleteDialog}
+            onClose={() => setOpenDeleteDialog(false)}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              Confirme a deleção do pedido
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Tem certeza que deseja deletar o pedido{" "}
+                <strong>
+                  {pedidos.find((c) => c.id === idPedidoAtual.current)?.id}?
+                </strong>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setOpenDeleteDialog(false)} autoFocus>
+                Cancelar
+              </Button>
+              <Button onClick={deletarPedido}>Deletar</Button>
+            </DialogActions>
+          </Dialog>
+        </Container>
+      </SnackbarProvider>
     </BasePage>
   );
 }
