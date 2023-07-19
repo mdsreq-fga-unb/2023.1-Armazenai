@@ -101,7 +101,7 @@ export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
   const cadastraClienteASuaPropriedade = async (propriedade: Proprieade) => {
     const { error } = await supabase
       .from("cliente_propriedade")
-      .insert({ cliente_id: cliente?.id, propriedade_id: propriedade?.id })
+      .insert({ cliente_id: cliente?.id, propriedade_id: propriedade.id! })
       .select();
 
     if (error) {
