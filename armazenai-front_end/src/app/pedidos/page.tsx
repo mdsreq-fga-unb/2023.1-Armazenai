@@ -182,17 +182,66 @@ export default function Pedido() {
       resolver: yupResolver(schemaFiltroUsuarios),
     });
 
-  const submitFilter = (filter?: SchemaFiltroUsuarioForm) => {
-    console.log(filter);
+  const submitFilter = async () => {
+    setLoading(true);
+    const query = supabase.from("pedido_etapa").select(`*, pedido!inner(*)`);
+    if (cliente) {
+      query.eq("pedido.cliente_id", cliente);
+    }
+    if (etapaFiltro) {
+      query.gt(`etapa_${etapaFiltro}`, 0);
+    }
+    if (dataFiltro) {
+      query.gte("pedido.created_at", dataFiltro.toISOString());
+    }
+
+    const { data, error } = await query;
+
+    console.log(data);
+    if (data && data.length > 0) {
+      const pedidosInt: PedidoTable[] = data.map((pedido) => {
+        return {
+          id: pedido.pedido.id,
+          client_id: pedido.pedido.cliente_id,
+          tipo_servico: pedido.pedido?.tipo_servico,
+          created_at: pedido.pedido?.created_at,
+        };
+      });
+      setPedidos(pedidosInt as PedidoTable[]);
+    } else {
+      setPedidos([]);
+    }
+    if (error) snackBarErro("Houve um erro ao procurar os pedidos");
+    setLoading(false);
   };
 
   const [cliente, setCliente] = useState<number | undefined>(undefined);
   const [clientes, setClientes] = useState<Cliente[]>([]);
   const [dataFiltro, setDataFiltro] = useState<Dayjs | null>(null);
-
+  const [etapaFiltro, setEtapaFiltro] = useState<
+    | "orcamento"
+    | "feedback"
+    | "contratacao"
+    | "execucao"
+    | "negociacao"
+    | undefined
+  >(undefined);
   const handleChangeCliente = (event: SelectChangeEvent) => {
     setCliente(event.target.value as unknown as number);
     setValue("cliente", event.target.value as unknown as number);
+  };
+  const handleChangeEtapaFilter = (event: SelectChangeEvent) => {
+    const value = event.target.value as unknown as string;
+    if (
+      value === "orcamento" ||
+      value === "feedback" ||
+      value === "contratacao" ||
+      value === "execucao" ||
+      value === "negociacao"
+    ) {
+      setEtapaFiltro(value);
+      setValue("etapa", value);
+    }
   };
 
   useEffect(() => {
@@ -253,7 +302,7 @@ export default function Pedido() {
                   id="demo-simple-select"
                   value={(cliente as unknown as string) ?? ""}
                   label="Cliente"
-                  fullWidth
+                  sx={{ width: "33%" }}
                   onChange={handleChangeCliente}
                 >
                   {clientes.map((c) => (
@@ -270,16 +319,16 @@ export default function Pedido() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={(cliente as unknown as string) ?? ""}
+                  value={etapaFiltro ?? ""}
                   label="Cliente"
-                  fullWidth
-                  onChange={handleChangeCliente}
+                  sx={{ width: "33%" }}
+                  onChange={handleChangeEtapaFilter}
                 >
-                  {clientes.map((c) => (
-                    <MenuItem value={c.id} key={c.id}>
-                      {c.nome} - {c.cnpj}
-                    </MenuItem>
-                  ))}
+                  <MenuItem value={"orcamento"}>Orçamento</MenuItem>
+                  <MenuItem value={"feedback"}>Feedback</MenuItem>
+                  <MenuItem value={"negociacao"}>Negociação</MenuItem>
+                  <MenuItem value={"contratacao"}>Contratação</MenuItem>
+                  <MenuItem value={"execucao"}>Execução</MenuItem>
                 </Select>
               </Box>
               <Box
@@ -296,6 +345,7 @@ export default function Pedido() {
                     reset();
                     setCliente(undefined);
                     setDataFiltro(null);
+                    setEtapaFiltro(undefined);
                   }}
                   sx={{ mr: 1 }}
                 >
@@ -307,6 +357,7 @@ export default function Pedido() {
                   type="submit"
                   variant="contained"
                   sx={{ ml: 1 }}
+                  onClick={() => submitFilter()}
                 >
                   Filtrar
                 </Button>
