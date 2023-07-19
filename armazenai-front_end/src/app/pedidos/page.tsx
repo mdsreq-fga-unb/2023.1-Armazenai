@@ -197,7 +197,6 @@ export default function Pedido() {
 
     const { data, error } = await query;
 
-    console.log(data);
     if (data && data.length > 0) {
       const pedidosInt: PedidoTable[] = data.map((pedido) => {
         return {
