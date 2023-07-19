@@ -58,7 +58,6 @@ export default function PedidoFormulario({
             tipo_servico: undefined,
           },
     });
-  console.log(pedido);
 
   const [clientes, setClientes] = React.useState<Cliente[]>([]);
   const [cliente, setCliente] = React.useState<number | undefined>(undefined);
