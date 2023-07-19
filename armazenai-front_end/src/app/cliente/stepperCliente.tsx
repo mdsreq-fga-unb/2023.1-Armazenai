@@ -137,7 +137,7 @@ export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
         );
     }
   };
-
+  console.log(activeStep);
   return (
     <Box sx={{ width: "100%" }}>
       <SnackbarProvider />
@@ -150,6 +150,7 @@ export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
 
           return (
             <Step key={label} {...stepProps}>
+
               <StepLabel {...labelProps}>{label}</StepLabel>
             </Step>
           );

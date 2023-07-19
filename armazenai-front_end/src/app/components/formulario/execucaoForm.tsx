@@ -16,7 +16,6 @@ import * as yup from "yup";
 import { Database } from "../../../../public/types/database";
 import { Cliente } from "../../../../public/types/main-types";
 import snackBarErro from "../snackBar/snackBarError";
-import LoadingButton from "@mui/lab/LoadingButton";
 
 const errorsPedidoForm = {
   deveSerNumero: "Este campo deve ser um número!",
@@ -44,6 +43,7 @@ export default function PedidoFormulario({
   carregando,
   pedido,
 }: FormularioPedidoProps) {
+  console.log(pedido);
   const { formState, handleSubmit, setValue, register } =
     useForm<FormularioPedido>({
       resolver: yupResolver(schemaPedidoForm),
@@ -62,7 +62,7 @@ export default function PedidoFormulario({
 
   const [clientes, setClientes] = React.useState<Cliente[]>([]);
   const [cliente, setCliente] = React.useState<number | undefined>(undefined);
-  
+
   const handleChangeE = (event: SelectChangeEvent) => {
     setCliente(event.target.value as unknown as number);
     setValue("cliente_id", event.target.value as unknown as number);
@@ -128,6 +128,14 @@ export default function PedidoFormulario({
             backgroundColor: colors.grey[400],
           }}
         >
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            disabled={carregando}
+          >
+            Salvar
+          </Button>
         </Box>
       </Grid>
     </form>

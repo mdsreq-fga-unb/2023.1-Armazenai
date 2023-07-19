@@ -32,6 +32,7 @@ import BasePage from "../components/navbar/basePage";
 import snackBarErro from "../components/snackBar/snackBarError";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
 import TabelaBase from "../components/tabela/tabelaBase";
+import StepperPedidos from "./stepperPedidos";
 
 type PedidoTable = {
   id: number;
@@ -265,24 +266,9 @@ export default function Pedido() {
           >
             Novo pedido
           </Button>
-
           <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
+            <StepperPedidos setOpenModal={setOpenModal} />
             {pedidoSendoEditado?.cliente_id}
-            <PedidoFormulario
-              enviaDadosFormulario={enviaDadosFormulario}
-              pedido={
-                pedidoSendoEditado &&
-                pedidoSendoEditado.cliente_id &&
-                pedidoSendoEditado.tipo_servico
-                  ? {
-                      cliente_id: pedidoSendoEditado?.cliente_id,
-                      tipo_servico: pedidoSendoEditado?.tipo_servico,
-                      id: pedidoSendoEditado.id,
-                    }
-                  : undefined
-              }
-              carregando={false}
-            />
           </ModalForm>
           <Container component="div">
             <Typography variant="h2" fontSize={24} my={2}>

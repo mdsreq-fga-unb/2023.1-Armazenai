@@ -26,3 +26,32 @@ export type Pedido = {
   cliente_id?: number;
   id: number;
 }
+
+export type Feedback = {
+  id: number;
+  pedido_id: number;
+  nota: number;
+  comentario: string;
+}
+
+export type Negociacao = {
+  id: number;
+  pedido_id: number;
+  propriedade_id: number;
+  preco: number;
+  status: string;
+}
+
+export type Contratacao = {
+  id: number;
+  pedido_id: number;
+  propriedade_id: number;
+  preco: number;
+  status: string;
+}
+
+export type Execucao = {
+  id: number;
+  pedido_id: number;
+  status: string;
+}
