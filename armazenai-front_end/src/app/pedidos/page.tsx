@@ -35,10 +35,9 @@ import TabelaBase from "../components/tabela/tabelaBase";
 
 type PedidoTable = {
   id: number;
-  created_at: Date;
+  created_at: string;
   client_id: number;
-  tipo_servico: string;
-  tipo_pedido: string;
+  tipo_servico: string | null;
 };
 
 const schemaFiltroUsuarios = yup.object({
@@ -57,7 +56,7 @@ export default function Pedido() {
   const [pedidoSendoEditado, setPedidoSendoEditado] = useState<
     Pedido | undefined
   >(undefined);
-  const tableHeaders = ["ID", "Cliente", "Pedido"];
+  const tableHeaders = ["ID", "Cliente", "Pedido", "Data"];
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 
@@ -65,14 +64,21 @@ export default function Pedido() {
     setLoading(true);
 
     const { data: pedidoData, error } = await supabase
-      .from("pedido")
-      .select(`*`)
-      .returns<PedidoTable[]>();
+      .from("pedido_etapa")
+      .select(`*, pedido(*)`);
 
     if (pedidoData) {
-      setPedidos(pedidoData);
+      const pedidosInt: PedidoTable[] = pedidoData.map((pedido) => {
+        return {
+          id: pedido.pedido.id,
+          client_id: pedido.pedido.cliente_id,
+          tipo_servico: pedido.pedido?.tipo_servico,
+          created_at: pedido.pedido?.created_at,
+        };
+      });
+      setPedidos(pedidosInt as PedidoTable[]);
     }
-    if (error) console.log(error);
+    if (error) snackBarErro("Houve um erro ao procurar os pedidos");
     setLoading(false);
   }, [supabase]);
 
@@ -99,7 +105,14 @@ export default function Pedido() {
   const handleEditar = (id: number, pagina: number, porPagina: number) => {
     idPedidoAtual.current = pedidos.slice(pagina * porPagina)[id].id ?? null;
     const pedido = pedidos.find((c) => c.id === idPedidoAtual.current);
-    setPedidoSendoEditado(pedido as Pedido);
+
+    if (pedido && pedido.tipo_servico) {
+      setPedidoSendoEditado({
+        id: pedido.id,
+        tipo_servico: pedido?.tipo_servico,
+        cliente_id: pedido?.client_id,
+      });
+    }
     setOpenModal(true);
   };
 
@@ -113,17 +126,37 @@ export default function Pedido() {
     id?: number;
   }) => {
     if (id) {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("pedido")
         .update({ cliente_id, tipo_servico })
-        .eq("id", id);
+        .eq("id", id)
+        .select();
+
       if (error) snackBarErro("Houve um erro ao atualizar o pedido!");
       else snackBarSucesso("Pedido atualizado com sucesso!");
     } else {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("pedido")
-        .insert({ cliente_id, tipo_servico });
-      if (error) snackBarErro("Houve um erro ao criar o pedido!");
+        .insert({ cliente_id, tipo_servico })
+        .select()
+        .single();
+
+      if (!data || !data.id) {
+        snackBarErro("Houve um erro ao criar o pedido!");
+        return;
+      }
+
+      const { error: erroPedidoEtapaInsert } = await supabase
+        .from("pedido_etapa")
+        .insert({
+          pedido: data.id,
+          etapa_orcamento: 1,
+          cancelado: false,
+          concluido: false,
+        });
+
+      if (error || erroPedidoEtapaInsert)
+        snackBarErro("Houve um erro ao criar o pedido!");
       else snackBarSucesso("Pedido criado com sucesso!");
     }
 
@@ -135,7 +168,6 @@ export default function Pedido() {
       .from("pedido")
       .delete()
       .eq("id", idPedidoAtual.current);
-    if (error) console.log(error);
     if (status === 204) {
       setPedidos((state) =>
         state.filter((s) => s.id !== idPedidoAtual.current)
@@ -187,6 +219,7 @@ export default function Pedido() {
           </Button>
 
           <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
+            {pedidoSendoEditado?.cliente_id}
             <PedidoFormulario
               enviaDadosFormulario={enviaDadosFormulario}
               pedido={

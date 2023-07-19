@@ -43,6 +43,7 @@ export default function PedidoFormulario({
   carregando,
   pedido,
 }: FormularioPedidoProps) {
+  console.log(pedido);
   const { formState, handleSubmit, setValue, register } =
     useForm<FormularioPedido>({
       resolver: yupResolver(schemaPedidoForm),

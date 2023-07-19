@@ -140,7 +140,6 @@ export default function TabelaBase<T extends Record<string, unknown>>({
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  console.log("rows", rows);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
