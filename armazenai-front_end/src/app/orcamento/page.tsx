@@ -12,6 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { type } from "os";
 
 type ClienteTableOrc = {
     id: number;
@@ -20,10 +21,25 @@ type ClienteTableOrc = {
     email: string;
   };
 
+type Clientes_Propriedades ={
+  idCliente: number;
+  idPropriedade: number;
+}
+
+type Propriedades = {
+  producao_milho : number;
+  producao_soja : number;
+  umidade_media_soja : number;
+  umidade_media_milho : number;
+}
+ // precisarei adicionar Descontro prestador, taxa operacional, input para desconto de impureza, input para custo de frete
+
 export default function OrcamentoPage(){
 
     const supabase = createClientComponentClient<Database>();
     const [clientesOrc, setClientesOrc] = useState<ClienteTableOrc[]>([]);
+    const [clientesEPropriedades, setClientesEPropriedades] = useState<Clientes_Propriedades>({idCliente: 0, idPropriedade:0});
+    const [propriedades, setPropriedades] = useState<Propriedades>({producao_milho:0, producao_soja:0, umidade_media_soja:0, umidade_media_milho:0});
 
     
     const getClientes = useCallback(async () => {
@@ -38,7 +54,31 @@ export default function OrcamentoPage(){
       }, [supabase]);
 
     getClientes();
-    
+
+    const getDadosPropriedade = useCallback(async (id:number) => {
+      const {data: propriedadeData, error } = await supabase
+        .from("propriedade")
+        .select('producao_milho, producao_soja, umidade_media_soja, umidade_media_milho')
+        .returns<Propriedades>();
+        if (propriedadeData) {
+          setPropriedades(propriedadeData);
+        }
+        if (error) console.log(error);
+      }, [supabase]);
+
+    const getIdCLiente_Propriedade = useCallback(async (id:number) => {
+      const { data: idClientePropriedadeData, error } = await supabase
+          .from("cliente_propriedade")
+          .select(`cliente_id, propriedade_id`)
+          .eq('cliente_id',id)
+          .returns<Clientes_Propriedades>();
+        if (idClientePropriedadeData) {
+          setClientesEPropriedades(idClientePropriedadeData);
+          getDadosPropriedade(clientesEPropriedades.idPropriedade)
+           }
+        if (error) console.log(error);
+      }, [supabase]);
+   
 
 
     return(
@@ -73,7 +113,7 @@ export default function OrcamentoPage(){
                 {cliente.email}
               </TableCell>
               <TableCell>
-                <Button> Gerar Orçamento </Button>
+                <Button onClick={() => getIdCLiente_Propriedade(cliente.id)}> Gerar Orçamento </Button>
               </TableCell>
 
             </TableRow>
