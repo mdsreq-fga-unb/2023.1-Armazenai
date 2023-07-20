@@ -1,21 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Box,
-  Button,
-  Grid,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  colors,
-} from "@mui/material";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import React, { useEffect } from "react";
+import { Box, Button, Grid, TextField, colors } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { Database } from "../../../../public/types/database";
-import { Cliente } from "../../../../public/types/main-types";
-import snackBarErro from "../snackBar/snackBarError";
 
 const errorsFeedbackForm = {
   deveSerNumero: "Este campo deve ser um número!",
@@ -25,7 +11,7 @@ const errorsFeedbackForm = {
 // Isso cria o schema do formulário, ou seja, a estrutura base do nosso form.
 const schemaFeedbackForm = yup.object({
   id: yup.number(),
-  pedido_id: yup.number().required(errorsFeedbackForm.deveSerNumero),
+  pedido_id: yup.number(),
   nota: yup.number().required(errorsFeedbackForm.deveSerNumero),
   comentario: yup.string().required(errorsFeedbackForm.deveSerString),
 });
@@ -43,36 +29,30 @@ type FormularioFeedbackProps = {
 export default function FeedbackFormulario({
   enviaDadosFormulario,
   carregando,
+  pedido_id,
   feedback,
 }: FormularioFeedbackProps) {
-  console.log(feedback);
   const { formState, handleSubmit, setValue, register } =
     useForm<FormularioFeedback>({
       resolver: yupResolver(schemaFeedbackForm),
       defaultValues: feedback
         ? {
-          id: feedback.id,
-          pedido_id: feedback.pedido_id,
-          comentario: feedback.comentario,
-        }
+            id: feedback.id,
+            pedido_id: feedback.pedido_id,
+            nota: feedback.nota,
+            comentario: feedback.comentario,
+          }
         : {
-          id: undefined,
-          pedido_id: undefined,
-          comentario: undefined,
-        },
+            id: undefined,
+            pedido_id: pedido_id,
+            nota: undefined,
+            comentario: undefined,
+          },
     });
-
-  const supabase = createClientComponentClient<Database>();
 
   return (
     <form onSubmit={handleSubmit(enviaDadosFormulario)}>
-      <Grid
-        container
-        spacing={1}
-        sx={{
-          backgroundColor: colors.grey[100],
-        }}
-      >
+      <Grid container spacing={1}>
         <Grid xs={6} item>
           <TextField
             placeholder="Nota"
@@ -103,7 +83,14 @@ export default function FeedbackFormulario({
             backgroundColor: colors.grey[400],
           }}
         >
-
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            disabled={carregando}
+          >
+            Salvar
+          </Button>
         </Box>
       </Grid>
     </form>

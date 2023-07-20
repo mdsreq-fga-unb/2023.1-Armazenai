@@ -1,123 +1,127 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Box,
-  Button,
-  Grid,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  colors,
-} from "@mui/material";
+import { Box, Button, Grid, TextField, colors } from "@mui/material";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import React, { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { Database } from "../../../../public/types/database";
-import { Cliente } from "../../../../public/types/main-types";
-import snackBarErro from "../snackBar/snackBarError";
 
-const errorsPedidoForm = {
+const errorsExecucaoForm = {
   deveSerNumero: "Este campo deve ser um número!",
   deveSerString: "Este campo deve ser uma string!",
 };
 
 // Isso cria o schema do formulário, ou seja, a estrutura base do nosso form.
-const schemaPedidoForm = yup.object({
+const schemaExecucaoForm = yup.object({
   id: yup.number(),
-  tipo_servico: yup.string().required(errorsPedidoForm.deveSerString),
-  cliente_id: yup.number().required(errorsPedidoForm.deveSerNumero),
+  pedido_id: yup.number(),
+  concluido: yup.boolean(),
 });
 
 // Criamos e exportamos o tipo do formulário, para que o useForm tenha uma tipagwem padrão
-export type FormularioPedido = yup.InferType<typeof schemaPedidoForm>;
+export type FormularioExecucao = yup.InferType<typeof schemaExecucaoForm>;
 
-type FormularioPedidoProps = {
-  enviaDadosFormulario: (dataFormulario: FormularioPedido) => any;
-  carregando: boolean;
-  pedido?: FormularioPedido;
+type FormularioExecucaoProps = {
+  execucao?: FormularioExecucao;
+  enviaDadosFormulario: (dataFormulario: FormularioExecucao) => any;
+  pedido_id: FormularioExecucao["pedido_id"];
 };
 
-export default function PedidoFormulario({
+export default function ExecucaoFormulario({
+  execucao,
+  pedido_id,
   enviaDadosFormulario,
-  carregando,
-  pedido,
-}: FormularioPedidoProps) {
-  console.log(pedido);
+}: FormularioExecucaoProps) {
+  console.log(execucao);
   const { formState, handleSubmit, setValue, register } =
-    useForm<FormularioPedido>({
-      resolver: yupResolver(schemaPedidoForm),
-      defaultValues: pedido
+    useForm<FormularioExecucao>({
+      resolver: yupResolver(schemaExecucaoForm),
+      defaultValues: execucao
         ? {
-            cliente_id: pedido.cliente_id,
-            id: pedido.id,
-            tipo_servico: pedido.tipo_servico,
+            pedido_id: execucao.pedido_id,
+            id: execucao.id,
+            concluido: execucao.concluido,
           }
         : {
             id: undefined,
-            cliente_id: undefined,
-            tipo_servico: undefined,
+            pedido_id: undefined,
+            concluido: undefined,
           },
     });
 
-  const [clientes, setClientes] = React.useState<Cliente[]>([]);
-  const [cliente, setCliente] = React.useState<number | undefined>(undefined);
-
-  const handleChangeE = (event: SelectChangeEvent) => {
-    setCliente(event.target.value as unknown as number);
-    setValue("cliente_id", event.target.value as unknown as number);
-  };
+  // TODO TIPAR ESSE STATE
+  const [media, setMedia] = useState<any>([]);
   const supabase = createClientComponentClient<Database>();
+  const [carregando, setCarregando] = useState(false);
+  console.log("render form");
+  // TODO TIPAR ESSA FUNÇÃO
+  async function uploadImage(e: any) {
+    let file = e.target.files[0];
+
+    const user = await supabase.auth.getUser();
+    if (!user || !user.data.user) return console.log("Usuário não logado");
+    const { data, error } = await supabase.storage
+      .from("execucao")
+      .upload(user.data.user.id + "/" + pedido_id + "/" + execucao?.id, file);
+
+    if (data) {
+      getMedia();
+    } else {
+      console.log(error);
+    }
+  }
+
+  const getMedia = useCallback(async () => {
+    const user = await supabase.auth.getUser();
+    if (!user || !user.data.user) return console.log("Usuário não logado");
+
+    const { data, error } = await supabase.storage
+      .from("uploads")
+      .list(user.data.user.id + "/" + pedido_id + "/" + execucao?.id, {
+        limit: 1,
+        offset: 0,
+      });
+
+    if (data) {
+      setMedia(data);
+    } else {
+      console.log(error);
+    }
+  }, [execucao?.id, pedido_id, supabase.storage]);
+
+  const [canUpload, setCanUpload] = useState(false);
 
   useEffect(() => {
-    const getClientes = async () => {
-      const { data, error } = await supabase.from("cliente").select("*");
-      if (data) setClientes(data);
-      if (error) snackBarErro("Houve um erro ao buscar os cliente");
-      if (pedido && pedido.cliente_id) {
-        setCliente(data?.find((c) => c.id === pedido.cliente_id)?.id);
-      }
-    };
-    getClientes();
-  }, [pedido, supabase]);
+    // getMedia();
+  }, [getMedia]);
+
+  useEffect(() => {
+    if (execucao) {
+      setCanUpload(true);
+    }
+  }, [execucao]);
 
   return (
     <form onSubmit={handleSubmit(enviaDadosFormulario)}>
-      <Grid
-        container
-        spacing={1}
-        sx={{
-          backgroundColor: colors.grey[100],
-        }}
-      >
+      <Grid container spacing={1}>
         <Grid xs={6} item>
           <TextField
-            placeholder="Tipo de Serviço"
-            label="Tipo de serviço"
+            placeholder="Status"
+            label="Status"
             required
-            {...register("tipo_servico")}
-            error={!!formState.errors.tipo_servico}
-            helperText={formState.errors.tipo_servico?.message}
+            {...register("concluido")}
+            error={!!formState.errors.concluido}
+            helperText={formState.errors.concluido?.message}
           />
         </Grid>
+        <Grid xs={6} item></Grid>
         <Grid xs={6} item>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={(cliente as unknown as string) ?? ""}
-            label="Cliente"
-            fullWidth
-            required
-            onChange={handleChangeE}
-          >
-            {clientes.map((c) => (
-              <MenuItem value={c.id} key={c.id}>
-                {c.nome} - {c.cnpj}
-              </MenuItem>
-            ))}
-          </Select>
+          <input
+            type="file"
+            onChange={(e) => uploadImage(e)}
+            disabled={!canUpload}
+          />
         </Grid>
-
         <Box
           component="div"
           sx={{

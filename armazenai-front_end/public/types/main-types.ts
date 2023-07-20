@@ -23,7 +23,7 @@ export type Proprieade = {
 
 export type Pedido = {
   tipo_servico: string;
-  cliente_id?: number;
+  cliente_id: number;
   id: number;
 }
 
@@ -43,15 +43,14 @@ export type Negociacao = {
 }
 
 export type Contratacao = {
+  concluido: boolean | undefined;
   id: number;
   pedido_id: number;
-  propriedade_id: number;
   preco: number;
-  status: string;
 }
 
 export type Execucao = {
+  concluido: boolean | undefined;
   id: number;
   pedido_id: number;
-  status: string;
 }

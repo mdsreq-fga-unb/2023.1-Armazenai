@@ -26,7 +26,6 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { Database } from "../../../public/types/database";
 import { Cliente, Pedido } from "../../../public/types/main-types";
-import PedidoFormulario from "../components/formulario/pedidoForm";
 import ModalForm from "../components/modal/modal-form";
 import BasePage from "../components/navbar/basePage";
 import snackBarErro from "../components/snackBar/snackBarError";
@@ -267,8 +266,10 @@ export default function Pedido() {
             Novo pedido
           </Button>
           <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
-            <StepperPedidos setOpenModal={setOpenModal} />
-            {pedidoSendoEditado?.cliente_id}
+            <StepperPedidos
+              setOpenModal={setOpenModal}
+              pedido={pedidoSendoEditado}
+            />
           </ModalForm>
           <Container component="div">
             <Typography variant="h2" fontSize={24} my={2}>
