@@ -61,7 +61,6 @@ export default function ClientePage() {
       .select(`*, propriedade(*)`);
 
     if (propriedadeData) {
-      console.log(propriedadeData);
       setPropriedades(propriedadeData);
     }
     if (errorPropriedade) console.log(errorPropriedade);

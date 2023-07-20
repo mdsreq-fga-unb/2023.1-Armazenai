@@ -371,7 +371,6 @@ export default function StepperPedidos({
         );
     }
   };
-  console.log("render stepper");
   return (
     <Box sx={{ width: "100%" }}>
       <SnackbarProvider />

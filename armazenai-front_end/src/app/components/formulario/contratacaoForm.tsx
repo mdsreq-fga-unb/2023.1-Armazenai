@@ -100,7 +100,6 @@ export default function ContratacaoFormulario({
 
   const [canUpload, setCanUpload] = useState(false);
   useEffect(() => {
-    console.log("use effect troll");
     if (contratacao && contratacao.id) {
       setCanUpload(true);
       getMedia();
