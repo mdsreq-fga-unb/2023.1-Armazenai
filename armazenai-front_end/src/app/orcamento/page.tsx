@@ -38,7 +38,7 @@ export default function OrcamentoPage(){
 
     const supabase = createClientComponentClient<Database>();
     const [clientesOrc, setClientesOrc] = useState<ClienteTableOrc[]>([]);
-    const [clientesEPropriedades, setClientesEPropriedades] = useState<Clientes_Propriedades>({idCliente: 0, idPropriedade:0});
+    const [clientesEPropriedades, setClientesEPropriedades] = useState<Clientes_Propriedades>({idCliente:0 , idPropriedade:0});
     const [propriedades, setPropriedades] = useState<Propriedades>({producao_milho:0, producao_soja:0, umidade_media_soja:0, umidade_media_milho:0});
 
     
@@ -204,6 +204,7 @@ export default function OrcamentoPage(){
           }
 
           const receitaSafraMilho_armazenagem = ((data.producao_milho) - (data.producao_milho * desconto_unidade_milho) - (data.producao_milho * taxa_op_unidade_milho)) * 100.0;
+          // test area
       return (data.producao_soja, desconto_prestador_soja, taxa_operacional_soja, receitaSafraSoja, data.producao_milho, desconto_prestador_milho, taxa_operacional_milho, receitaSafraMilho,
         desconto_unidade_soja, taxa_op_unidade_soja, receitaSafraSoja_armazenagem, desconto_unidade_milho, taxa_op_unidade_milho, receitaSafraMilho_armazenagem);
     }
@@ -212,7 +213,8 @@ export default function OrcamentoPage(){
       const {data: propriedadeData, error } = await supabase
         .from("propriedade")
         .select('producao_milho, producao_soja, umidade_media_soja, umidade_media_milho')
-        .returns<Propriedades>();
+        .eq('id',id)
+        .single<Propriedades>();
         if (propriedadeData) {
           setPropriedades(propriedadeData);
           geraDadosArquivo(propriedades);
@@ -225,7 +227,7 @@ export default function OrcamentoPage(){
           .from("cliente_propriedade")
           .select(`cliente_id, propriedade_id`)
           .eq('cliente_id',id)
-          .returns<Clientes_Propriedades>();
+          .single<Clientes_Propriedades>();
         if (idClientePropriedadeData) {
           setClientesEPropriedades(idClientePropriedadeData);
           getDadosPropriedade(clientesEPropriedades.idPropriedade)
