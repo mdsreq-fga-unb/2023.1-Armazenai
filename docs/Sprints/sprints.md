@@ -132,7 +132,7 @@ Nessa sprint a equipe entregou a US16, além dos testes unitários, de integraç
 
 Data início : 10/07/2023
 
-Data término : 17/07/2023
+Data término : 20/07/2023
 
 ### Sprint Planning
 
@@ -149,7 +149,7 @@ Foi definido a divisão das sprint em 1 semana. Com a definição das histórias
 
 ### Sprint Review
 
-A ser realizada.
+Na sprint 5 as histórias 05 e 08 foram desenvolvidas, assim como as histórias 11 e 16.
 
 ### Sprint Retrospective
 
