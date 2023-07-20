@@ -1,15 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import UsuarioFormAtualizacao, {
-  Usuario,
-} from "../../src/app/components/formulario/usuarioFormAtualizacao";
-import { SetStateAction } from "react";
+import userEvent from "@testing-library/user-event";
+import axios from "axios";
+import { Usuario } from "../../src/app/components/formulario/usuarioFormAtualizacao";
 import UsuarioForm, {
   errorsFormularioCadastro,
 } from "../../src/app/components/formulario/usuarioFormCadastro";
-import userEvent from "@testing-library/user-event";
-import { errosFormularioMensagem } from "../../src/app/helpers/validator/mensagensDeErro";
-import axios, { AxiosError } from "axios";
-import { ApiErro } from "../cliente/index.test";
 
 describe("Teste do formulário de criação de usuário", () => {
   it("deveria mostrar os erros do formulário de criação de usuário", async () => {
@@ -122,6 +117,7 @@ describe("Teste do formulário de criação de usuário", () => {
         config.headers["Authorization"] = `Bearer ${token}`;
         return config;
       });
+      setTimeout(() => {}, 500);
     });
 
     afterEach(async () => {
@@ -132,7 +128,7 @@ describe("Teste do formulário de criação de usuário", () => {
         expect(retorno.status).toBe(204);
         idToDelete = undefined;
       }
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {}, 100);
     });
 
     it("deveria retornar um usuário existente", async () => {

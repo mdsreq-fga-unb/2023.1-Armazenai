@@ -13,7 +13,6 @@ export const getPerfildoUsuarioLogado = async (
   .from("profiles")
   .select("*")
   .eq("id", usuarioLogado.user.id);
-  console.log(perfilDoUsuario)
   if (perfilDoUsuario && perfilDoUsuario?.length > 0)
     return perfilDoUsuario[0] as Usuario;
 

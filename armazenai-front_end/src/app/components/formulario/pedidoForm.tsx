@@ -58,7 +58,6 @@ export default function PedidoFormulario({
             tipo_servico: undefined,
           },
     });
-  console.log(pedido);
 
   const [clientes, setClientes] = React.useState<Cliente[]>([]);
   const [cliente, setCliente] = React.useState<number | undefined>(undefined);
@@ -83,13 +82,7 @@ export default function PedidoFormulario({
 
   return (
     <form onSubmit={handleSubmit(enviaDadosFormulario)}>
-      <Grid
-        container
-        spacing={1}
-        sx={{
-          backgroundColor: colors.grey[100],
-        }}
-      >
+      <Grid container spacing={1}>
         <Grid xs={6} item>
           <TextField
             placeholder="Tipo de Serviço"

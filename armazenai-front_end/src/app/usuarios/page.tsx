@@ -88,7 +88,6 @@ export default function UsuariosPage() {
   };
 
   const deletarUsuario = async () => {
-    console.log(idUsuarioAtual.current);
     const { data, error, status } = await supabase
       .from("profiles")
       .delete()

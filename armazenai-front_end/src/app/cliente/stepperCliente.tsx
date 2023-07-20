@@ -22,12 +22,20 @@ const steps = ["Cadastrar Cliente", "Cadastrar Propriedade"];
 
 type StepperClienteProps = {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
+  cliente?: Cliente;
+  propriedade?: Proprieade;
 };
-export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
+export default function StepperCliente({
+  setOpenModal,
+  cliente,
+  propriedade,
+}: StepperClienteProps) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
-  const [podeAvancar, setPodeAvancar] = React.useState(false);
-  const [cliente, setCliente] = React.useState<Cliente | null>(null);
+  const [podeAvancar, setPodeAvancar] = React.useState(cliente ? true : false);
+  const [clienteStepper, setCliente] = React.useState<Cliente | undefined>(
+    cliente
+  );
 
   const supabase = createClientComponentClient<Database>();
 
@@ -37,32 +45,60 @@ export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
     created_at,
     telefone,
     cnpj,
+    id,
   }: Cliente) => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("cliente")
-      .insert({
-        email,
-        nome,
-        telefone,
-        cnpj,
-      })
-      .select()
-      .single();
+    if (id) {
+      const { data, error } = await supabase
+        .from("cliente")
+        .update({
+          email,
+          nome,
+          telefone,
+          cnpj,
+        })
+        .eq("id", id)
+        .select()
+        .single();
 
-    if (error) {
-      console.log(error);
-      snackBarErro("Houve um erro ao salvar as informações do cliente!");
-      setLoading(false);
-      return;
+      if (error) {
+        console.log(error);
+        snackBarErro("Houve um erro ao salvar as informações do cliente!");
+        setLoading(false);
+        return;
+      }
+
+      if (data) {
+        setCliente(data);
+        setActiveStep(1);
+        snackBarSucesso(`Cliente atualizado com sucesso!`);
+      }
+    } else {
+      const { data, error } = await supabase
+        .from("cliente")
+        .insert({
+          email,
+          nome,
+          telefone,
+          cnpj,
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.log(error);
+        snackBarErro("Houve um erro ao salvar as informações do cliente!");
+        setLoading(false);
+        return;
+      }
+
+      if (data) {
+        setCliente(data);
+        setActiveStep(1);
+        snackBarSucesso(`Cliente criado com sucesso!`);
+      }
     }
 
-    if (data) {
-      setCliente(data);
-      setActiveStep(1);
-    }
-
-    snackBarSucesso(`Cliente criado com sucesso!`);
     setLoading(false);
   };
 
@@ -70,31 +106,58 @@ export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
     dadosFormulario: FormularioPropriedade
   ) => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("propriedade")
-      .insert({
-        nome: dadosFormulario.nome,
-        endereco: dadosFormulario.endereco,
-        area_disponivel: dadosFormulario.areaDisponivel,
-        hectares_milho: dadosFormulario.hectaresMilho,
-        hectares_soja: dadosFormulario.hectaresSoja,
-        producao_milho: dadosFormulario.producaoMilho,
-        producao_soja: dadosFormulario.producaoSoja,
-        umidade_media_milho: dadosFormulario.umidadeMediaMilho,
-        umidade_media_soja: dadosFormulario.umidadeMediaSoja,
-      })
-      .select()
-      .single();
+    if (dadosFormulario.id) {
+      const { data, error } = await supabase
+        .from("propriedade")
+        .update({
+          nome: dadosFormulario.nome,
+          endereco: dadosFormulario.endereco,
+          area_disponivel: dadosFormulario.areaDisponivel,
+          hectares_milho: dadosFormulario.hectaresMilho,
+          hectares_soja: dadosFormulario.hectaresSoja,
+          producao_milho: dadosFormulario.producaoMilho,
+          producao_soja: dadosFormulario.producaoSoja,
+          umidade_media_milho: dadosFormulario.umidadeMediaMilho,
+          umidade_media_soja: dadosFormulario.umidadeMediaSoja,
+        })
+        .eq("id", dadosFormulario.id)
+        .select()
+        .single();
 
-    if (error) {
-      snackBarErro("Houve um erro ao cadastrar a propriedade.");
-      setLoading(false);
-      console.log(error);
-      return;
-    }
+      if (error) {
+        snackBarErro("Houve um erro ao cadastrar a propriedade.");
+        setLoading(false);
+        console.log(error);
+        return;
+      }
+      if (data) [snackBarSucesso("Propriedade atualizada com sucesso!")];
+    } else {
+      const { data, error } = await supabase
+        .from("propriedade")
+        .insert({
+          nome: dadosFormulario.nome,
+          endereco: dadosFormulario.endereco,
+          area_disponivel: dadosFormulario.areaDisponivel,
+          hectares_milho: dadosFormulario.hectaresMilho,
+          hectares_soja: dadosFormulario.hectaresSoja,
+          producao_milho: dadosFormulario.producaoMilho,
+          producao_soja: dadosFormulario.producaoSoja,
+          umidade_media_milho: dadosFormulario.umidadeMediaMilho,
+          umidade_media_soja: dadosFormulario.umidadeMediaSoja,
+        })
+        .select()
+        .single();
 
-    if (data) {
-      cadastraClienteASuaPropriedade(data);
+      if (error) {
+        snackBarErro("Houve um erro ao cadastrar a propriedade.");
+        setLoading(false);
+        console.log(error);
+        return;
+      }
+
+      if (data) {
+        cadastraClienteASuaPropriedade(data);
+      }
     }
   };
 
@@ -112,10 +175,10 @@ export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
     }
 
     snackBarSucesso("Propriedade cadastrada com sucesso!");
+
     setLoading(false);
-    setTimeout(() => {
-      setOpenModal(false);
-    }, 1000);
+    setPodeAvancar(true);
+    setOpenModal(false);
     return;
   };
 
@@ -124,6 +187,7 @@ export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
       case 0:
         return (
           <ClienteForm
+            cliente={clienteStepper}
             onSubmit={enviaDadosFormularioCliente}
             loading={loading}
           />
@@ -133,11 +197,33 @@ export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
           <PropriedadeFormulario
             enviaDadosFormulario={enviaDadosFormularioPropriedade}
             carregando={loading}
+            propriedade={
+              propriedade &&
+              propriedade.producao_soja &&
+              propriedade.hectares_milho &&
+              propriedade.hectares_soja &&
+              propriedade.producao_milho &&
+              propriedade.umidade_media_milho &&
+              propriedade.umidade_media_soja &&
+              propriedade.area_disponivel
+                ? {
+                    id: propriedade.id,
+                    nome: propriedade.nome,
+                    endereco: propriedade.endereco,
+                    areaDisponivel: propriedade.area_disponivel,
+                    hectaresMilho: propriedade.hectares_milho,
+                    hectaresSoja: propriedade.hectares_soja,
+                    producaoMilho: propriedade.producao_milho,
+                    producaoSoja: propriedade.producao_soja,
+                    umidadeMediaMilho: propriedade.umidade_media_milho,
+                    umidadeMediaSoja: propriedade.umidade_media_soja,
+                  }
+                : undefined
+            }
           />
         );
     }
   };
-
   return (
     <Box sx={{ width: "100%" }}>
       <SnackbarProvider />
@@ -167,7 +253,12 @@ export default function StepperCliente({ setOpenModal }: StepperClienteProps) {
           </Box>
         </React.Fragment>
       ) : (
-        <Box sx={{ pt: 2 }}>{getActivePage(activeStep)}</Box>
+        <>
+          <Box sx={{ pt: 2 }}>{getActivePage(activeStep)}</Box>
+          <Button disabled={!podeAvancar} onClick={() => setActiveStep(1)}>
+            Avançar
+          </Button>
+        </>
       )}
     </Box>
   );
