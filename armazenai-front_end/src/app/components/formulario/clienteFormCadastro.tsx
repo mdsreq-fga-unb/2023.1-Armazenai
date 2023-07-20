@@ -1,12 +1,12 @@
-import { phoneRegExp } from "../../helpers/validator/phoneRegexValidacao";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { phoneRegExp } from "../../helpers/validator/phoneRegexValidacao";
 
-import validarCNPJ from "../..//helpers/validator/validarCNPJ";
 import { Cliente } from "../../../../public/types/main-types";
+import validarCNPJ from "../..//helpers/validator/validarCNPJ";
 import { errosFormularioMensagem } from "../../helpers/validator/mensagensDeErro";
 
 type formCliente = {
@@ -39,6 +39,7 @@ export default function ClienteForm({
   onSubmit,
   loading,
 }: formCliente) {
+  console.log(cliente);
   const { formState, register, control, handleSubmit } =
     useForm<FormularioCliente>({
       defaultValues: cliente

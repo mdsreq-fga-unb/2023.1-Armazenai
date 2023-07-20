@@ -9,6 +9,7 @@ const errorsPropriedadeForm = {
 
 // Isso cria o schema do formulário, ou seja, a estrutura base do nosso form.
 const schemaPropriedadeForm = yup.object({
+  id: yup.number().default(undefined),
   nome: yup.string().required("O nome da propriedade é obrigatório!"),
   endereco: yup.string().required("O endereço é obrigatório!"),
   areaDisponivel: yup.number().required("A área da propriedade é obrigatória!"),
@@ -26,12 +27,15 @@ export type FormularioPropriedade = yup.InferType<typeof schemaPropriedadeForm>;
 type PropriedadeFormularioProps = {
   enviaDadosFormulario: (dataFormulario: FormularioPropriedade) => any;
   carregando: boolean;
+  propriedade?: FormularioPropriedade;
 };
 
 export default function PropriedadeFormulario({
   enviaDadosFormulario,
   carregando,
+  propriedade,
 }: PropriedadeFormularioProps) {
+  console.log(propriedade);
   // O useForm é um hook da biblioteca react-hook-form. Esse hook retorna algumas propriedades.
   // FormState - Esse formState é onde acessamos o estado do formulário para checarmos se há erros, e pegar as mensagens de error.
   // HandleSubmit - É uma função que o hook form cria, essa função é chamada quando nosso formulário é submetido (pelo botao).
@@ -40,6 +44,31 @@ export default function PropriedadeFormulario({
   const { formState, handleSubmit, control, register } =
     useForm<FormularioPropriedade>({
       resolver: yupResolver(schemaPropriedadeForm),
+      defaultValues: propriedade
+        ? {
+            id: propriedade.id,
+            nome: propriedade.nome,
+            endereco: propriedade.endereco,
+            areaDisponivel: propriedade.areaDisponivel,
+            producaoSoja: propriedade.producaoSoja,
+            hectaresSoja: propriedade.hectaresSoja,
+            umidadeMediaSoja: propriedade.umidadeMediaSoja,
+            umidadeMediaMilho: propriedade.umidadeMediaMilho,
+            producaoMilho: propriedade.producaoMilho,
+            hectaresMilho: propriedade.hectaresMilho,
+          }
+        : {
+            id: undefined,
+            nome: "",
+            endereco: "",
+            areaDisponivel: 0,
+            producaoSoja: 0,
+            hectaresSoja: 0,
+            umidadeMediaSoja: 0,
+            umidadeMediaMilho: 0,
+            producaoMilho: 0,
+            hectaresMilho: 0,
+          },
     });
 
   return (
@@ -160,7 +189,7 @@ export default function PropriedadeFormulario({
             fullWidth
             disabled={carregando}
           >
-            Salvar
+            {propriedade ? "Atualizar" : "Cadastrar"}
           </Button>
         </Box>
       </Grid>

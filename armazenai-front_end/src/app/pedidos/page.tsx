@@ -218,12 +218,7 @@ export default function Pedido() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
   const [dataFiltro, setDataFiltro] = useState<Dayjs | null>(null);
   const [etapaFiltro, setEtapaFiltro] = useState<
-    | "orcamento"
-    | "feedback"
-    | "contratacao"
-    | "execucao"
-    | "negociacao"
-    | undefined
+    "feedback" | "execucao" | "contratacao" | undefined
   >(undefined);
   const handleChangeCliente = (event: SelectChangeEvent) => {
     setCliente(event.target.value as unknown as number);
@@ -232,11 +227,9 @@ export default function Pedido() {
   const handleChangeEtapaFilter = (event: SelectChangeEvent) => {
     const value = event.target.value as unknown as string;
     if (
-      value === "orcamento" ||
       value === "feedback" ||
       value === "contratacao" ||
-      value === "execucao" ||
-      value === "negociacao"
+      value === "execucao"
     ) {
       setEtapaFiltro(value);
       setValue("etapa", value);
@@ -284,8 +277,6 @@ export default function Pedido() {
                 justifyContent={"space-evenly"}
               >
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
                   value={(cliente as unknown as string) ?? ""}
                   label="Cliente"
                   sx={{ width: "33%" }}
@@ -302,6 +293,7 @@ export default function Pedido() {
                   value={dataFiltro}
                   onChange={(newValue) => setDataFiltro(newValue)}
                 />
+
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
@@ -310,9 +302,7 @@ export default function Pedido() {
                   sx={{ width: "33%" }}
                   onChange={handleChangeEtapaFilter}
                 >
-                  <MenuItem value={"orcamento"}>Orçamento</MenuItem>
                   <MenuItem value={"feedback"}>Feedback</MenuItem>
-                  <MenuItem value={"negociacao"}>Negociação</MenuItem>
                   <MenuItem value={"contratacao"}>Contratação</MenuItem>
                   <MenuItem value={"execucao"}>Execução</MenuItem>
                 </Select>

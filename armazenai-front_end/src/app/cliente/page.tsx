@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { SnackbarProvider } from "notistack";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Database } from "../../../public/types/database";
-import { Cliente } from "../../../public/types/main-types";
+import { Cliente, Proprieade } from "../../../public/types/main-types";
 import ModalForm from "../components/modal/modal-form";
 import BasePage from "../components/navbar/basePage";
 import snackBarSucesso from "../components/snackBar/snackBarSucesso";
@@ -25,11 +25,19 @@ type ClienteTable = {
   email: string;
 };
 
+// type Propriedade = Database["public"]["Tables"]["propriedade"]["Insert"];
+// type ClientePropriedade =
+//   Database["public"]["Tables"]["cliente_propriedade"]["Relationships"]["0"]["columns"]["0"][""];
+
 export default function ClientePage() {
   const [openModal, setOpenModal] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [clientes, setClientes] = useState<ClienteTable[]>([]);
+  const [propriedades, setPropriedades] = useState<any[]>([]);
+  const [propriedadeSendoEditada, setPropriedadeSendoEditada] = useState<
+    Proprieade | undefined
+  >(undefined);
   const [clienteSendoEditado, setClienteSendoEditado] = useState<
     Cliente | undefined
   >(undefined);
@@ -47,6 +55,17 @@ export default function ClientePage() {
       setClientes(clienteData);
     }
     if (error) console.log(error);
+
+    const { data: propriedadeData, error: errorPropriedade } = await supabase
+      .from("cliente_propriedade")
+      .select(`*, propriedade(*)`);
+
+    if (propriedadeData) {
+      console.log(propriedadeData);
+      setPropriedades(propriedadeData);
+    }
+    if (errorPropriedade) console.log(errorPropriedade);
+
     setLoading(false);
   }, [supabase]);
 
@@ -70,9 +89,21 @@ export default function ClientePage() {
     setOpenDeleteDialog(true);
   };
 
-  const handleEditar = (id: number, pagina: number, porPagina: number) => {
+  const handleEditar = async (
+    id: number,
+    pagina: number,
+    porPagina: number
+  ) => {
     idCLienteAtual.current = clientes.slice(pagina * porPagina)[id].id ?? null;
     const cliente = clientes.find((c) => c.id === idCLienteAtual.current);
+    const propriedade = propriedades.find(
+      (p) => p.cliente_id === idCLienteAtual.current
+    );
+    if (propriedade) {
+      setPropriedadeSendoEditada(propriedade.propriedade as Proprieade);
+    } else {
+      setPropriedadeSendoEditada(undefined);
+    }
     setClienteSendoEditado(cliente);
     setOpenModal(true);
   };
@@ -99,6 +130,7 @@ export default function ClientePage() {
         variant="contained"
         onClick={() => {
           setClienteSendoEditado(undefined);
+          setPropriedadeSendoEditada(undefined);
           setOpenModal(true);
         }}
         startIcon={<AddIcon />}
@@ -106,7 +138,35 @@ export default function ClientePage() {
         Adicionar cliente
       </Button>
       <ModalForm openModal={openModal} setOpenModal={setOpenModal}>
-        <StepperCliente setOpenModal={setOpenModal} />
+        <StepperCliente
+          setOpenModal={setOpenModal}
+          cliente={clienteSendoEditado}
+          propriedade={
+            propriedadeSendoEditada &&
+            propriedadeSendoEditada.producao_soja &&
+            propriedadeSendoEditada.hectares_milho &&
+            propriedadeSendoEditada.hectares_soja &&
+            propriedadeSendoEditada.producao_milho &&
+            propriedadeSendoEditada.umidade_media_milho &&
+            propriedadeSendoEditada.umidade_media_soja &&
+            propriedadeSendoEditada.area_disponivel
+              ? {
+                  id: propriedadeSendoEditada.id,
+                  nome: propriedadeSendoEditada.nome,
+                  endereco: propriedadeSendoEditada.endereco,
+                  area_disponivel: propriedadeSendoEditada.area_disponivel,
+                  hectares_milho: propriedadeSendoEditada.hectares_milho,
+                  hectares_soja: propriedadeSendoEditada.hectares_soja,
+                  producao_milho: propriedadeSendoEditada.producao_milho,
+                  producao_soja: propriedadeSendoEditada.producao_soja,
+                  umidade_media_milho:
+                    propriedadeSendoEditada.umidade_media_milho,
+                  umidade_media_soja:
+                    propriedadeSendoEditada.umidade_media_soja,
+                }
+              : undefined
+          }
+        />
       </ModalForm>
       <Container component="div">
         <Typography variant="h2" fontSize={24} my={2}>
