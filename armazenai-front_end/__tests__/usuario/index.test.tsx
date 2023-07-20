@@ -117,6 +117,7 @@ describe("Teste do formulário de criação de usuário", () => {
         config.headers["Authorization"] = `Bearer ${token}`;
         return config;
       });
+      setTimeout(() => {}, 500);
     });
 
     afterEach(async () => {
