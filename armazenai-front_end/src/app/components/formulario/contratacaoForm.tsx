@@ -1,16 +1,19 @@
+"use client";
 import { yupResolver } from "@hookform/resolvers/yup";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import FolderDeleteIcon from "@mui/icons-material/FolderDelete";
 import { Box, Button, Grid, TextField, colors } from "@mui/material";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { Database } from "../../../../public/types/database";
-
+import snackBarSucesso from "../snackBar/snackBarSucesso";
 const errorsContratacaoForm = {
   deveSerNumero: "Este campo deve ser um número!",
   deveSerString: "Este campo deve ser uma string!",
 };
-
 // Isso cria o schema do formulário, ou seja, a estrutura base do nosso form.
 const schemaContratacaoForm = yup.object({
   id: yup.number(),
@@ -39,73 +42,79 @@ export default function ContratacaoFormulario({
         ? {
             id: contratacao.id,
             pedido_id: contratacao.pedido_id,
-            propriedade_id: contratacao.propriedade_id,
             preco: contratacao.preco,
           }
         : {
             id: undefined,
             pedido_id: pedido_id,
-            propriedade_id: undefined,
             preco: undefined,
           },
     });
 
-  // TODO TIPAR ESSE STATE
-  const [media, setMedia] = useState<any>([]);
+  const [media, setMedia] = useState<Blob | null>(null);
   const supabase = createClientComponentClient<Database>();
   const [carregando, setCarregando] = useState(false);
-  console.log("render form");
-  // TODO TIPAR ESSA FUNÇÃO
-  async function uploadImage(e: any) {
+
+  const uploadImage = async (e: any) => {
     let file = e.target.files[0];
 
-    const user = await supabase.auth.getUser();
-    if (!user || !user.data.user) return console.log("Usuário não logado");
     const { data, error } = await supabase.storage
       .from("contratacao")
-      .upload(
-        user.data.user.id + "/" + pedido_id + "/" + contratacao?.id,
-        file
-      );
+      .upload(pedido_id + "/" + contratacao?.id, file, {
+        contentType: "application/pdf",
+        cacheControl: "1",
+      });
 
-    if (data) {
-      console.log(media);
+    if (data && !error) {
+      snackBarSucesso("Upload realizado com sucesso!");
       getMedia();
     } else {
       console.log(error);
     }
-  }
+  };
+
+  const deleteFile = async () => {
+    const { data, error } = await supabase.storage
+      .from("contratacao")
+      .remove([pedido_id + "/" + contratacao?.id]);
+
+    if (data && !error) {
+      snackBarSucesso("Documento deletado com sucesso!");
+      setMedia(null);
+    } else {
+      console.log(error);
+    }
+  };
 
   const getMedia = useCallback(async () => {
-    const user = await supabase.auth.getUser();
-    if (!user || !user.data.user) return console.log("Usuário não logado");
-
     const { data, error } = await supabase.storage
-      .from("uploads")
-      .list(user.data.user.id + "/" + pedido_id + "/" + contratacao?.id, {
-        limit: 1,
-        offset: 0,
-      });
+      .from("contratacao")
+      .download(pedido_id + "/" + contratacao?.id);
 
     if (data) {
       setMedia(data);
     } else {
       console.log(error);
     }
-  }, [contratacao?.id, pedido_id, supabase.auth, supabase.storage]);
+  }, [contratacao?.id, pedido_id, supabase]);
 
   const [canUpload, setCanUpload] = useState(false);
-
   useEffect(() => {
-    // getMedia();
-  }, [getMedia]);
-
-  useEffect(() => {
-    if (contratacao) {
+    console.log("use effect troll");
+    if (contratacao && contratacao.id) {
       setCanUpload(true);
       getMedia();
     }
   }, [contratacao, getMedia]);
+
+  const baixarDocumento = async () => {
+    if (media) {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(media);
+      link.download = "contratacao.pdf";
+      link.click();
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(enviaDadosFormulario)}>
@@ -120,34 +129,85 @@ export default function ContratacaoFormulario({
             helperText={formState.errors.preco?.message}
           />
         </Grid>
-        <Grid xs={6} item></Grid>
         <Grid xs={6} item>
-          <input
-            type="file"
-            onChange={(e) => uploadImage(e)}
-            disabled={!canUpload}
-          />
+          {media && canUpload ? (
+            <Box sx={{ display: "flex", justifyItems: "center" }}>
+              <Button
+                variant="contained"
+                endIcon={<CloudDownloadIcon />}
+                onClick={baixarDocumento}
+              >
+                Baixar
+              </Button>
+              <Button
+                variant="contained"
+                color="warning"
+                onClick={() => deleteFile()}
+                endIcon={<FolderDeleteIcon />}
+              >
+                Deletar
+              </Button>
+            </Box>
+          ) : (
+            <>
+              <input
+                type="file"
+                accept="pdf/*"
+                disabled={!canUpload}
+                style={{ display: "none" }}
+                id="contained-button-file"
+                onChange={(e) => uploadImage(e)}
+              />
+              <label htmlFor="contained-button-file">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component="span"
+                  disabled={!canUpload}
+                  endIcon={<CloudUploadIcon />}
+                >
+                  Upload
+                </Button>
+              </label>
+            </>
+          )}
         </Grid>
-        <Box
-          component="div"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            mt: 2,
-            backgroundColor: colors.grey[400],
-          }}
-        >
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            disabled={carregando}
-          >
-            Salvar
-          </Button>
-        </Box>
+        <Grid xs={media ? 12 : 6} item>
+          {media ? (
+            <object
+              data={URL.createObjectURL(media)}
+              type="application/pdf"
+              width="100%"
+              height={500}
+            >
+              <p>
+                Link apra o<a href={URL.createObjectURL(media)}>PDF!</a>
+              </p>
+            </object>
+          ) : (
+            <></>
+          )}
+        </Grid>
       </Grid>
+      <Box
+        component="div"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: 2,
+          backgroundColor: colors.grey[400],
+        }}
+      >
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          disabled={carregando}
+        >
+          Salvar
+        </Button>
+      </Box>
     </form>
   );
 }

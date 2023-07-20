@@ -208,7 +208,7 @@ export default function StepperPedidos({
       if (error) snackBarErro("Houve um erro ao atualizar a contratação!");
       else {
         snackBarSucesso("Contratação atualizada com sucesso!");
-        setEtapaMax(3);
+        setEtapaMax(4);
       }
     } else {
       const { data, error } = await supabase
@@ -228,13 +228,12 @@ export default function StepperPedidos({
         snackBarErro("Houve um erro ao finalizar a execução!");
       } else {
         snackBarSucesso("Etapa de execução registrada com sucesso!");
-        setEtapaMax(3);
+        setEtapaMax(4);
       }
     }
   };
 
   const handleNext = () => {
-    console.log(etapaMax, activeStep);
     if (etapaMax > activeStep) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else {
@@ -250,12 +249,15 @@ export default function StepperPedidos({
     if (pedido) {
       const { data, error } = await supabase
         .from("pedido_etapa")
-        .select("*, etapa_feedback_cliente(*), etapa_contratacao(*)")
+        .select(
+          "*, etapa_feedback_cliente(*), etapa_contratacao(*), etapa_execucao_obra(*)"
+        )
         .eq("pedido", pedido.id)
         .single();
 
       if (data) {
         setEtapaMax(1);
+        setActiveStep(1);
 
         if (data.etapa_feedback_cliente) {
           setFeedbackSendoEditado({
@@ -278,13 +280,13 @@ export default function StepperPedidos({
           setEtapaMax(3);
           setActiveStep(3);
         }
-        if (data.etapa_execucao) {
+        if (data.etapa_execucao_obra) {
           setExecucao({
-            id: data.etapa_execucao.id,
-            concluido: data.etapa_execucao.concluido,
+            id: data.etapa_execucao_obra.id,
+            concluido: data.etapa_execucao_obra.concluido,
             pedido_id: pedido.id,
           });
-          setEtapaMax(4);
+          setEtapaMax(5);
           setActiveStep(4);
         }
       }
@@ -388,37 +390,45 @@ export default function StepperPedidos({
         })}
       </Stepper>
       {activeStep === steps.length ? (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            Pedido feito com sucesso!!
-          </Typography>
-          <DoneAllIcon color="success" />
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button>Fechar</Button>
-          </Box>
-        </React.Fragment>
-      ) : (
         <Box
           sx={{
-            pt: 2,
-            //  backgroundColor: colors.green[500],
+            textAlign: "center",
+            // display: "flex",
+            // justifyContent: "center",
           }}
         >
-          <Box sx={{ py: 5 }}>{getActivePage(activeStep)}</Box>
+          <Typography sx={{ mt: 2, mb: 1, fontWeight: 700 }} variant="h5">
+            Pedido feito com sucesso!!
+          </Typography>
+          <DoneAllIcon scale={2} color="success" />
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Box sx={{ flex: "1 1 auto" }} />
+            <Button onClick={() => setOpenModal(false)}>Fechar</Button>
+          </Box>
         </Box>
+      ) : (
+        <>
+          <Box
+            sx={{
+              pt: 2,
+              //  backgroundColor: colors.green[500],
+            }}
+          >
+            <Box sx={{ py: 5 }}>{getActivePage(activeStep)}</Box>
+          </Box>
+          <Button
+            color="inherit"
+            disabled={activeStep === 0}
+            onClick={handleBack}
+            sx={{ mr: 1 }}
+          >
+            Voltar
+          </Button>
+          <Button onClick={handleNext}>
+            {activeStep === steps.length - 1 ? "Salvar" : "Próximo"}
+          </Button>
+        </>
       )}
-      <Button
-        color="inherit"
-        disabled={activeStep === 0}
-        onClick={handleBack}
-        sx={{ mr: 1 }}
-      >
-        Voltar
-      </Button>
-      <Button onClick={handleNext}>
-        {activeStep === steps.length - 1 ? "Salvar" : "Próximo"}
-      </Button>
     </Box>
   );
 }
