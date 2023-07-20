@@ -55,6 +55,159 @@ export default function OrcamentoPage(){
 
     getClientes();
 
+    function geraDadosArquivo (data:Propriedades) {
+        //Soja - Prestador Serviço
+        const desconto_prestador_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 1 );
+        
+        let taxa_operacional_soja = 0;
+          if (data.umidade_media_soja == 14){
+            taxa_operacional_soja = 0.3;
+          }
+          else if(data.umidade_media_soja >= 14.5 && data.umidade_media_soja < 18){
+            taxa_operacional_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.43 )
+          }
+          else if(data.umidade_media_soja >= 18 && data.umidade_media_soja < 19){
+            taxa_operacional_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.56 )
+          }
+          else if(data.umidade_media_soja >= 19 && data.umidade_media_soja < 20){
+            taxa_operacional_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.61 )
+          }
+          else if(data.umidade_media_soja >= 20 && data.umidade_media_soja < 26){
+            taxa_operacional_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.64 )
+          }
+          else if (data.umidade_media_soja == 26.5){
+            taxa_operacional_soja = 0.8
+          }
+          else if (data.umidade_media_soja == 27){
+            taxa_operacional_soja = 0.82
+          }
+          else if (data.umidade_media_soja == 27.5){
+            taxa_operacional_soja = 0.84
+          }
+          else if(data.umidade_media_soja >= 28){
+            taxa_operacional_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.86 )
+          }
+
+          const receitaSafraSoja = ((data.producao_soja) - (data.producao_soja * desconto_prestador_soja) - (data.producao_soja * taxa_operacional_soja)) * 100.0;
+            //Milho - Prestador Serviço
+          const desconto_prestador_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 1 );
+        
+        let taxa_operacional_milho = 0;
+          if (data.umidade_media_milho == 14){
+            taxa_operacional_milho = 0.3;
+          }
+          else if(data.umidade_media_milho >= 14.5 && data.umidade_media_milho < 18){
+            taxa_operacional_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.43 )
+          }
+          else if(data.umidade_media_milho >= 18 && data.umidade_media_milho < 19){
+            taxa_operacional_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.56 )
+          }
+          else if(data.umidade_media_milho >= 19 && data.umidade_media_milho < 20){
+            taxa_operacional_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.61 )
+          }
+          else if(data.umidade_media_milho >= 20 && data.umidade_media_milho < 26){
+            taxa_operacional_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.64 )
+          }
+          else if (data.umidade_media_milho == 26.5){
+            taxa_operacional_milho = 0.8
+          }
+          else if (data.umidade_media_milho == 27){
+            taxa_operacional_milho = 0.82
+          }
+          else if (data.umidade_media_milho == 27.5){
+            taxa_operacional_milho = 0.84
+          }
+          else if(data.umidade_media_milho >= 28){
+            taxa_operacional_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.86 )
+          }
+
+          const receitaSafraMilho = ((data.producao_milho) - (data.producao_milho * desconto_prestador_milho) - (data.producao_milho * taxa_operacional_milho)) * 100.0;
+
+          //////
+          // Soja - Armazenagem
+          let desconto_unidade_soja = 0;
+            if (data.umidade_media_soja <= 14){
+              desconto_unidade_soja = 0;
+            }
+            else{
+              desconto_unidade_soja = (data.umidade_media_soja - 14.0);
+            }
+
+            let taxa_op_unidade_soja = 0;
+          if (data.umidade_media_soja == 14){
+            taxa_op_unidade_soja = 0.3  / 3.5;
+          }
+          else if(data.umidade_media_soja >= 14.5 && data.umidade_media_soja < 18){
+            taxa_op_unidade_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.43 )  / 3.5;
+          }
+          else if(data.umidade_media_soja >= 18 && data.umidade_media_soja < 19){
+            taxa_op_unidade_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.56 )  / 3.5;
+          }
+          else if(data.umidade_media_soja >= 19 && data.umidade_media_soja < 20){
+            taxa_op_unidade_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.61 )  / 3.5;
+          }
+          else if(data.umidade_media_soja >= 20 && data.umidade_media_soja < 26){
+            taxa_op_unidade_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.64 )  / 3.5;
+          }
+          else if (data.umidade_media_soja == 26.5){
+            taxa_op_unidade_soja = 0.8  / 3.5;
+          }
+          else if (data.umidade_media_soja == 27){
+            taxa_op_unidade_soja = 0.82  / 3.5;
+          }
+          else if (data.umidade_media_soja == 27.5){
+            taxa_op_unidade_soja = 0.84  / 3.5;
+          }
+          else if(data.umidade_media_soja >= 28){
+            taxa_op_unidade_soja = ((((data.umidade_media_soja - 14.5) / 0.5 ) * 0.75 ) + 0.86 ) / 3.5;
+          }
+
+          const receitaSafraSoja_armazenagem = ((data.producao_soja) - (data.producao_soja * desconto_unidade_soja) - (data.producao_soja * taxa_op_unidade_soja)) * 100.0;
+
+          // Milho - Armazenagem
+
+          let desconto_unidade_milho = 0;
+            if (data.umidade_media_soja <= 14){
+              desconto_unidade_milho = 0;
+            }
+            else{
+              desconto_unidade_milho = (data.umidade_media_milho - 14.0);
+            }
+
+            let taxa_op_unidade_milho = 0;
+          if (data.umidade_media_milho == 14){
+            taxa_op_unidade_milho = 0.3  / 3.5;
+          }
+          else if(data.umidade_media_milho >= 14.5 && data.umidade_media_milho < 18){
+            taxa_op_unidade_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.43 )  / 3.5;
+          }
+          else if(data.umidade_media_milho >= 18 && data.umidade_media_milho < 19){
+            taxa_op_unidade_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.56 )  / 3.5;
+          }
+          else if(data.umidade_media_milho >= 19 && data.umidade_media_milho < 20){
+            taxa_op_unidade_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.61 )  / 3.5;
+          }
+          else if(data.umidade_media_milho >= 20 && data.umidade_media_milho < 26){
+            taxa_op_unidade_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.64 )  / 3.5;
+          }
+          else if (data.umidade_media_milho == 26.5){
+            taxa_op_unidade_milho = 0.8  / 3.5;
+          }
+          else if (data.umidade_media_milho == 27){
+            taxa_op_unidade_milho = 0.82  / 3.5;
+          }
+          else if (data.umidade_media_milho == 27.5){
+            taxa_op_unidade_milho = 0.84  / 3.5;
+          }
+          else if(data.umidade_media_milho >= 28){
+            taxa_op_unidade_milho = ((((data.umidade_media_milho - 14.5) / 0.5 ) * 0.75 ) + 0.86 ) / 3.5;
+          }
+
+          const receitaSafraMilho_armazenagem = ((data.producao_milho) - (data.producao_milho * desconto_unidade_milho) - (data.producao_milho * taxa_op_unidade_milho)) * 100.0;
+      return (data.producao_soja, desconto_prestador_soja, taxa_operacional_soja, receitaSafraSoja, data.producao_milho, desconto_prestador_milho, taxa_operacional_milho, receitaSafraMilho,
+        desconto_unidade_soja, taxa_op_unidade_soja, receitaSafraSoja_armazenagem, desconto_unidade_milho, taxa_op_unidade_milho, receitaSafraMilho_armazenagem);
+    }
+
     const getDadosPropriedade = useCallback(async (id:number) => {
       const {data: propriedadeData, error } = await supabase
         .from("propriedade")
@@ -62,6 +215,7 @@ export default function OrcamentoPage(){
         .returns<Propriedades>();
         if (propriedadeData) {
           setPropriedades(propriedadeData);
+          geraDadosArquivo(propriedades);
         }
         if (error) console.log(error);
       }, [supabase]);
