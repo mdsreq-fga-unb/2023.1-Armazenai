@@ -166,7 +166,7 @@ A ser realizada.
 | Sprint 5 | 26/06/2023 | 09/07/2023 | Desenvolvimento das US16 e desenvolvimento dos testes do MVP1 |
 | Sprint 6 | 10/07/2023 | 17/07/2023 | Desenvolvimento das US02, US05, US08, US10, US11 e desenvolvimentod dos testes|
 
-## Histórico de revisões
+## Histórico de revisõess
 
 | Data | Versão | Descrição | Autor |
 |---|---|---|---|
