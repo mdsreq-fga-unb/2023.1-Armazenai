@@ -189,7 +189,7 @@ export default function PropriedadeFormulario({
             fullWidth
             disabled={carregando}
           >
-            {propriedade ? "Atualizar" : "Cadastrar"}
+            Salvar
           </Button>
         </Box>
       </Grid>
