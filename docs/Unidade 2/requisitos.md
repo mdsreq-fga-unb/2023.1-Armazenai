@@ -124,10 +124,10 @@
 | US13 | Kaio Melo |  ✅ |  ✅ |
 | US16 | Lara Giuliana |  ✅ |  🚧 |
 | US10 | Lucas Meireles e Lara Giuliana  |  🚧 |  ⏳ |
-| US11 | Kaio Melo e Lara Giuliana  |  🚧 |  ⏳ |
-| US08 | Kaio Melo e Mateus  | 🚧 |  ⏳ |
+| US11 | Kaio Melo e Lara Giuliana  |  ✅ |  ⏳ |
+| US08 | Kaio Melo e Mateus  | ✅ |  ⏳ |
 | US02 | Jheniffer Castro  |  🚧 |  ⏳ |
-| US05 | Kaio Melo e Mateus  |  🚧 |  ⏳ |
+| US05 | Kaio Melo e Mateus  |  ✅ |  ⏳ |
 | US03 | Não atribuído  |  ⏳ |  ⏳ |
 | US07 | Não atribuído  |  ⏳ |  ⏳ |
 
