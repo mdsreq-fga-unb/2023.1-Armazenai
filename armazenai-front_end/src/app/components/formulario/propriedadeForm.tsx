@@ -35,7 +35,6 @@ export default function PropriedadeFormulario({
   carregando,
   propriedade,
 }: PropriedadeFormularioProps) {
-  console.log(propriedade);
   // O useForm é um hook da biblioteca react-hook-form. Esse hook retorna algumas propriedades.
   // FormState - Esse formState é onde acessamos o estado do formulário para checarmos se há erros, e pegar as mensagens de error.
   // HandleSubmit - É uma função que o hook form cria, essa função é chamada quando nosso formulário é submetido (pelo botao).
